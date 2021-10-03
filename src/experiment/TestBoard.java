@@ -1,11 +1,15 @@
 package experiment;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class TestBoard {
-	private Set<TestBoardCell> cells;
+	// Creating test set and TestBoardCell object to avoid errors
+	public Set<TestBoardCell> testCells = new HashSet<>();
+	public TestBoardCell testCell = new TestBoardCell(-1, -1);
+	
 	public TestBoard() {
-	//	 this.cells = new Set<TestBoardCell>(22, 26);
+		
 	}
 	
 	public void calcTargets(TestBoardCell startCell, int pathlength) {
@@ -13,13 +17,14 @@ public class TestBoard {
 	}
 	
 	public Set<TestBoardCell> getTargets() {
-		
-		return null;
+		// Adding incorrect cell to set
+		testCells.add(testCell);
+		return testCells;
 		
 	}
 	
 	public TestBoardCell getCell(int row, int col) {
-		TestBoardCell cell = new TestBoardCell(row,col);
-		return cell;
+		// Returning incorrect cell
+		return testCell;
 	}
 }

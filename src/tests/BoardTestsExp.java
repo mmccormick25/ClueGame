@@ -3,6 +3,7 @@ package tests;
 import java.util.Set;
 
 import org.junit.Assert;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
@@ -13,16 +14,18 @@ import experiment.TestBoardCell;
 public class BoardTestsExp {
 	TestBoard board;
 	
+	@BeforeEach
 	public void setUp() {
 		this.board = new TestBoard();
 	}
+	
 	@Test
 	public void testAdjacency() {
 		TestBoardCell cell = board.getCell(0,0);
-		Set<TestBoardCell> testList =cell.getAdjList();
+		Set<TestBoardCell> testList = cell.getAdjList();
 		Assert.assertTrue(testList.contains(board.getCell(1,0)));
 		Assert.assertTrue(testList.contains(board.getCell(0,1)));
-		junit.framework.Assert.assertEquals(2, testList.size());
+		Assert.assertEquals(2, testList.size());
 		
 }
 	@Test
@@ -50,6 +53,20 @@ public class BoardTestsExp {
 		Assert.assertTrue(targets.contains(board.getCell(1, 2)));
 		Assert.assertTrue(targets.contains(board.getCell(0, 3)));
 		Assert.assertTrue(targets.contains(board.getCell(1, 0)));
+	}
+	
+	@Test
+	public void testInRoom() {
+		TestBoardCell cell = board.getCell(0,0);
+		cell.setIsRoom(true);
+		Assert.assertTrue(cell.isRoom());
+	}
+	
+	@Test
+	public void testIsOccupied() {
+		TestBoardCell cell = board.getCell(0,0);
+		cell.setOccupied(true);
+		Assert.assertTrue(cell.getOccupied());
 	}
 }
 

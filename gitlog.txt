@@ -1,0 +1,35 @@
+commit ac84122998347573a76df566d321933b8a6b054c
+Author: Zhen Liu <zliu1@mines.edu>
+Date:   Sun Oct 3 16:24:42 2021 -0600
+
+    changed some locations of the board.
+
+commit 2ef0a4878e8326c2f05caa676d78d4290d0eef52
+Author: mmccormick <mmccormick@mines.edu>
+Date:   Sun Oct 3 16:23:07 2021 -0600
+
+    Driver: Matthew McCormick, Navigator: Zhen Liu - Finished tests, made them fail without errors
+
+commit d76894e22124f88e126ae1acdeb9a9882b49f957
+Author: Zhen Liu <zliu1@mines.edu>
+Date:   Sun Oct 3 15:56:53 2021 -0600
+
+    Zhen Shan Liu is the driver, Matthew McCormick is the navigator. we add the Junit Tests
+
+commit 7b56d11e90cad9260ea905eb535611262c8de9ad
+Author: mmccormick <mmccormick@mines.edu>
+Date:   Sun Oct 3 15:24:05 2021 -0600
+
+    Driver: Matthew McCormick, Navigator: Zhen Liu - Finshed TestBoardCell and added mostly blank methods to TestBoard
+
+commit 36b42c49eeb1ea086445ee92b0c6ec550ebe5ea9
+Author: mmccormick <mmccormick@mines.edu>
+Date:   Sun Oct 3 15:07:00 2021 -0600
+
+    Blank classes created
+
+commit 2be0547bf1a0d8e9d1abdafc24b5961a1f102c88
+Author: mmccormick21 <90218425+mmccormick21@users.noreply.github.com>
+Date:   Sun Oct 3 14:41:47 2021 -0600
+
+    Initial commit

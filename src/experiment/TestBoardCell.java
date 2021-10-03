@@ -17,7 +17,7 @@ public class TestBoardCell {
 		return adjacent;
 	}
 	
-	public void setRoom(boolean room) {
+	public void setIsRoom(boolean room) {
 		inRoom = room;
 	}
 	
@@ -32,5 +32,6 @@ public class TestBoardCell {
 	public boolean getOccupied( ) {
 		return isOccupied;
 	}
+
 	
 }

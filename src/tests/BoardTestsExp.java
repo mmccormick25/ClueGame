@@ -21,10 +21,10 @@ public class BoardTestsExp {
 	
 	@Test
 	public void testAdjacency() {
-		TestBoardCell cell = board.getCell(0,0);
+		TestBoardCell cell = board.getCell(1,0);
 		Set<TestBoardCell> testList = cell.getAdjList();
-		Assert.assertTrue(testList.contains(board.getCell(1,0)));
-		Assert.assertTrue(testList.contains(board.getCell(0,1)));
+		Assert.assertTrue(testList.contains(board.getCell(2,0)));
+		Assert.assertTrue(testList.contains(board.getCell(0,4)));
 		Assert.assertEquals(2, testList.size());
 		
 }
@@ -32,7 +32,7 @@ public class BoardTestsExp {
 	public void testTargetsMixed() {
 		board.getCell(0, 2).setOccupied(true);
 		board.getCell(1, 2).setIsRoom(true);
-		TestBoardCell cell = board.getCell(0, 3);
+		TestBoardCell cell = board.getCell(2, 3);
 		board.calcTargets(cell, 3);
 		Set<TestBoardCell> targets = board.getTargets();
 		Assert.assertEquals(3, targets.size());
@@ -43,7 +43,7 @@ public class BoardTestsExp {
 }
 	@Test
 	public void testTargetsNormal() {
-		TestBoardCell cell = board.getCell(0, 0);
+		TestBoardCell cell = board.getCell(1, 4);
 		board.calcTargets(cell, 3);
 		Set<TestBoardCell> targets = board.getTargets();
 		Assert.assertEquals(6, targets.size());
@@ -51,20 +51,20 @@ public class BoardTestsExp {
 		Assert.assertTrue(targets.contains(board.getCell(2, 1)));
 		Assert.assertTrue(targets.contains(board.getCell(0, 1)));
 		Assert.assertTrue(targets.contains(board.getCell(1, 2)));
-		Assert.assertTrue(targets.contains(board.getCell(0, 3)));
+		Assert.assertTrue(targets.contains(board.getCell(6, 3)));
 		Assert.assertTrue(targets.contains(board.getCell(1, 0)));
 	}
 	
 	@Test
 	public void testInRoom() {
-		TestBoardCell cell = board.getCell(0,0);
+		TestBoardCell cell = board.getCell(4,4);
 		cell.setIsRoom(true);
 		Assert.assertTrue(cell.isRoom());
 	}
 	
 	@Test
 	public void testIsOccupied() {
-		TestBoardCell cell = board.getCell(0,0);
+		TestBoardCell cell = board.getCell(2,1);
 		cell.setOccupied(true);
 		Assert.assertTrue(cell.getOccupied());
 	}

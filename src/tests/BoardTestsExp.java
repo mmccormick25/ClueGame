@@ -21,10 +21,11 @@ public class BoardTestsExp {
 	
 	@Test
 	public void testAdjacency() {
-		TestBoardCell cell = board.getCell(1,0);
-		Set<TestBoardCell> testList = cell.getAdjList();
-		Assert.assertTrue(testList.contains(board.getCell(2,0)));
-		Assert.assertTrue(testList.contains(board.getCell(0,4)));
+		board.printBoard();
+		TestBoardCell cell = board.getCell(0,0);
+		Set<TestBoardCell> testList = cell.getAdjList(board);
+		Assert.assertTrue(testList.contains(board.getCell(1,0)));
+		Assert.assertTrue(testList.contains(board.getCell(0,1)));
 		Assert.assertEquals(2, testList.size());
 		
 }

@@ -4,8 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class TestBoardCell {
-	private int row;
-	private int col;
+	public int row;
+	public int col;
 	// Creating test set to avoid errors
 	public Set<TestBoardCell> testAdjacent = new HashSet<>();
 	private boolean inRoom = false;
@@ -15,14 +15,25 @@ public class TestBoardCell {
 		this.col = col;
 	}
 	
-	public Set<TestBoardCell> getAdjList() {
-		// Adding incorrect TestBoardCell to set
-		testAdjacent.add(new TestBoardCell(-1, -1));
+	public Set<TestBoardCell> getAdjList(TestBoard board) {
+		testAdjacent.clear();
+		if (row > 0) {
+			testAdjacent.add(board.getCell(row - 1, col));
+		}
+		if (row < TestBoard.ROWS - 1) {
+			testAdjacent.add(board.getCell(row + 1, col));
+		}
+		if (col > 0) {
+			testAdjacent.add(board.getCell(row, col - 1));
+		}
+		if (col < TestBoard.COLS - 1) {
+			testAdjacent.add(board.getCell(row, col + 1));
+		}
 		return testAdjacent;
 	}
 	
 	public void setIsRoom(boolean room) {
-		
+		inRoom = room;
 	}
 	
 	public boolean isRoom( ) {
@@ -30,7 +41,7 @@ public class TestBoardCell {
 	}
 	
 	public void setOccupied(boolean occupied) {
-
+		isOccupied = occupied;
 	}
 	
 	public boolean getOccupied( ) {

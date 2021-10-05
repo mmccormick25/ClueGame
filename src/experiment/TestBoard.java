@@ -4,14 +4,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class TestBoard {
-	public Set<TestBoardCell> testCells = new HashSet<>();
 	TestBoardCell testCell = new TestBoardCell(-1, -1);
 	final static int COLS = 4;
 	final static int ROWS = 4;
+	public TestBoardCell[][] testCells = new TestBoardCell[COLS][ROWS];
+	public Set<TestBoardCell> targets = new HashSet<>();
 	public TestBoard() {
 		for (int c = 0; c < COLS; c++) {
 			for (int r = 0; r < ROWS; r++) {
-				testCells.add(new TestBoardCell(r, c));
+				testCells[r][c] = new TestBoardCell(r, c);
 			}
 		}
 	}
@@ -21,25 +22,11 @@ public class TestBoard {
 	}
 	
 	public Set<TestBoardCell> getTargets() {
-		// Adding incorrect cell to set
-		testCells.add(testCell);
-		return testCells;
+		return targets;
 		
 	}
 	
 	public TestBoardCell getCell(int row, int col) {
-		TestBoardCell cell = testCell;
-		for (TestBoardCell c : testCells) {
-			if (c.col == col && c.row == row) {
-				cell = c;
-			}
-		}
-		return cell;
-	}
-	
-	public void printBoard() {
-		for (TestBoardCell c : testCells) {
-			System.out.println(c.row + " " + c.col);
-		}
+		return testCells[row][col];
 	}
 }

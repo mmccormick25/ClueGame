@@ -21,7 +21,6 @@ public class BoardTestsExp {
 	
 	@Test
 	public void testAdjacency() {
-		board.printBoard();
 		TestBoardCell cell = board.getCell(0,0);
 		Set<TestBoardCell> testList = cell.getAdjList(board);
 		Assert.assertTrue(testList.contains(board.getCell(1,0)));
@@ -58,7 +57,7 @@ public class BoardTestsExp {
 	
 	@Test
 	public void testInRoom() {
-		TestBoardCell cell = board.getCell(4,4);
+		TestBoardCell cell = board.getCell(3,3);
 		cell.setIsRoom(true);
 		Assert.assertTrue(cell.isRoom());
 	}

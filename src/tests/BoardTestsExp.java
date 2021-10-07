@@ -23,14 +23,6 @@ public class BoardTestsExp {
 	
 	@Test
 	public void testAdjacency() {
-<<<<<<< HEAD
-		TestBoardCell cell = board.getCell(1,1);
-		Set<TestBoardCell> testList = cell.getAdjList(board);
-		Assert.assertTrue(testList.contains(board.getCell(1,0)));
-		Assert.assertTrue(testList.contains(board.getCell(0,1)));
-		Assert.assertTrue(testList.contains(board.getCell(1,2)));
-		Assert.assertTrue(testList.contains(board.getCell(2,1)));
-=======
 		// Testing adjacency for top left corner
 		TestBoardCell cell = board.getCell(0,0);
 		Set<TestBoardCell> testList = cell.getAdjList(board);
@@ -64,9 +56,7 @@ public class BoardTestsExp {
 		Assert.assertTrue(testList.contains(board.getCell(1,1)));
 		Assert.assertTrue(testList.contains(board.getCell(3,1)));
 		Assert.assertTrue(testList.contains(board.getCell(2,2)));
->>>>>>> b81b5328fcc0205e3a7b2aa28973f1ddd7488532
 		Assert.assertEquals(4, testList.size());
-		
 	}
 	
 	@Test
@@ -74,10 +64,8 @@ public class BoardTestsExp {
 		// Setting up occupied cells
 		board.getCell(0, 2).setOccupied(true);
 		board.getCell(1, 2).setIsRoom(true);
-<<<<<<< HEAD
-=======
+
 		// Testing from cell (0, 3) with roll of 3
->>>>>>> b81b5328fcc0205e3a7b2aa28973f1ddd7488532
 		TestBoardCell cell = board.getCell(0, 3);
 		board.calcTargets(cell, 3);
 		Set<TestBoardCell> targets = board.getTargets();
@@ -85,8 +73,6 @@ public class BoardTestsExp {
 		Assert.assertEquals(3, targets.size());
 		Assert.assertTrue(targets.contains(board.getCell(2, 2)));
 		Assert.assertTrue(targets.contains(board.getCell(3, 3)));
-<<<<<<< HEAD
-=======
 		Assert.assertTrue(targets.contains(board.getCell(1, 2)));
 		// Testing from cell (0, 0) with roll of 2
 		cell = board.getCell(0, 0);
@@ -107,20 +93,19 @@ public class BoardTestsExp {
 		Assert.assertTrue(targets.contains(board.getCell(2, 3)));
 		Assert.assertTrue(targets.contains(board.getCell(1, 0)));
 		Assert.assertTrue(targets.contains(board.getCell(3, 0)));
->>>>>>> b81b5328fcc0205e3a7b2aa28973f1ddd7488532
+
 
 	}
 	@Test
 	public void testTargetsNormal() {
-<<<<<<< HEAD
-		TestBoardCell cell = board.getCell(0, 0);
-=======
+
 		// Testing from cell (1, 4) with roll of 3
-		TestBoardCell cell = board.getCell(1, 4);
->>>>>>> b81b5328fcc0205e3a7b2aa28973f1ddd7488532
+		// (1,4) is out of bound, just changed to (1,3)
+		
+		TestBoardCell cell = board.getCell(1, 3);
 		board.calcTargets(cell, 3);
 		Set<TestBoardCell> targets = board.getTargets();
-		System.out.println("target in Normal:" + targets.size());
+		// System.out.println("target in Normal:" + targets.size());
 		Assert.assertEquals(6, targets.size());
 		Assert.assertTrue(targets.contains(board.getCell(3, 0)));
 		Assert.assertTrue(targets.contains(board.getCell(2, 1)));
@@ -141,7 +126,8 @@ public class BoardTestsExp {
 	@Test
 	public void testInRoom() {
 		// Testing if set room and get room functions work properly
-		TestBoardCell cell = board.getCell(4,4);
+		// (4,4) is out of bound, just changed to (3,3)
+		TestBoardCell cell = board.getCell(3,3);
 		cell.setIsRoom(true);
 		Assert.assertTrue(cell.isRoom());
 	}

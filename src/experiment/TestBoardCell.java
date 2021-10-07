@@ -47,6 +47,15 @@ public class TestBoardCell {
 	public boolean getOccupied( ) {
 		return isOccupied;
 	}
+	
+	public void addAdjacency(TestBoardCell cell) {
+		testAdjacent.add(cell);
+	}
+
+	@Override
+	public String toString() {
+		return "TestCell [" + row + "][" + col + "]";
+	}
 
 	
 }

@@ -4,10 +4,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class TestBoardCell {
-	public int row;
-	public int col;
+	private int row;
+	private int col;
 	// Creating test set to avoid errors
-	public Set<TestBoardCell> testAdjacent = new HashSet<>();
+	private Set<TestBoardCell> testAdjacent = new HashSet<>();
 	private boolean inRoom = false;
 	private boolean isOccupied = false;
 	public TestBoardCell(int row, int col) {

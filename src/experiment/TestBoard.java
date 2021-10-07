@@ -4,11 +4,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class TestBoard {
-	TestBoardCell testCell = new TestBoardCell(-1, -1);
 	final static int COLS = 4;
 	final static int ROWS = 4;
-	public TestBoardCell[][] testCells = new TestBoardCell[ROWS][COLS];
-	public Set<TestBoardCell> targets = new HashSet<>();
+	private TestBoardCell[][] testCells = new TestBoardCell[ROWS][COLS];
+	private Set<TestBoardCell> targets = new HashSet<>();
 	HashSet<TestBoardCell> visitedList = new HashSet<TestBoardCell>();
 	
 	public TestBoard() {
@@ -21,7 +20,7 @@ public class TestBoard {
 	public void findAllTargets(TestBoardCell cell, int length) {
 		for (TestBoardCell adjCell: cell.getAdjList(this)) {
 			if(visitedList.contains(adjCell)) {
-				break;
+				continue;
 			}
 			
 				visitedList.add(adjCell);

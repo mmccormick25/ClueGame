@@ -10,6 +10,7 @@ public class TestBoard {
 	public TestBoardCell[][] testCells = new TestBoardCell[ROWS][COLS];
 	public Set<TestBoardCell> targets = new HashSet<>();
 	HashSet<TestBoardCell> visitedList = new HashSet<TestBoardCell>();
+	
 	public TestBoard() {
 		for (int r = 0; r < ROWS; r++) {
 			for (int c = 0; c < COLS; c++) {
@@ -43,10 +44,12 @@ public class TestBoard {
 	}
 	
 	public Set<TestBoardCell> getTargets() {
+		
 		for(TestBoardCell test:targets) {
 			System.out.print(test);
 		}
 		System.out.println();
+		
 		return targets;
 		
 	}

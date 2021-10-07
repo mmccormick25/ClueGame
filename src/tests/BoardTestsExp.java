@@ -66,21 +66,32 @@ public class BoardTestsExp {
 		board.getCell(1, 2).setIsRoom(true);
 
 		// Testing from cell (0, 3) with roll of 3
+		
 		TestBoardCell cell = board.getCell(0, 3);
-		board.calcTargets(cell, 3);
 		Set<TestBoardCell> targets = board.getTargets();
-		System.out.println("target in Mixed:" + targets.size());
-		Assert.assertEquals(3, targets.size());
+		board.calcTargets(cell, 3);
+	
+		System.out.println("targets size for(0,3) with roll of 3:   " + targets.size());
+		Assert.assertEquals(6, targets.size());
 		Assert.assertTrue(targets.contains(board.getCell(2, 2)));
 		Assert.assertTrue(targets.contains(board.getCell(3, 3)));
-		Assert.assertTrue(targets.contains(board.getCell(1, 2)));
-		// Testing from cell (0, 0) with roll of 2
-		cell = board.getCell(0, 0);
-		board.calcTargets(cell, 3);
-		targets = board.getTargets();
-		Assert.assertEquals(2, targets.size());
+		Assert.assertTrue(targets.contains(board.getCell(0, 0)));
 		Assert.assertTrue(targets.contains(board.getCell(1, 1)));
+		Assert.assertTrue(targets.contains(board.getCell(0, 2)));
+		Assert.assertTrue(targets.contains(board.getCell(1, 3)));
+		
+		// Testing from cell (0, 0) with roll of 2
+		
+		cell = board.getCell(0, 0);
+		board.calcTargets(cell, 2);
+		System.out.println("targets size for (0,0) with roll of 2:   " + targets.size());
+		targets = board.getTargets();
+		Assert.assertEquals(3, targets.size());
 		Assert.assertTrue(targets.contains(board.getCell(2, 0)));
+		Assert.assertTrue(targets.contains(board.getCell(0, 2)));
+		Assert.assertTrue(targets.contains(board.getCell(1, 1)));
+
+
 		// Testing from cell (3, 2) with roll of 4
 		cell = board.getCell(3, 2);
 		board.calcTargets(cell, 4);

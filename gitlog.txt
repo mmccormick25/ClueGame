@@ -33,3 +33,111 @@ Author: mmccormick21 <90218425+mmccormick21@users.noreply.github.com>
 Date:   Sun Oct 3 14:41:47 2021 -0600
 
     Initial commit
+commit fb8ae40479df4086b024cf1616e037990202ac10
+Author: Zhen Liu <zliu1@mines.edu>
+Date:   Fri Oct 8 15:19:14 2021 -0600
+
+    add comments
+
+commit a2c6d0a5de9086943e769ad1ba06ec606dd5fd78
+Author: mmccormick <mmccormick@mines.edu>
+Date:   Fri Oct 8 15:01:16 2021 -0600
+
+    Reverted to old tests for calculating movement with rooms and occupied spaces, all tests pass
+
+commit 4df7ce4ac68929c932d5e38f4f5d96f4c2251fda
+Author: Zhen Liu <zliu1@mines.edu>
+Date:   Thu Oct 7 13:54:14 2021 -0600
+
+    fix the error in the function of findAllTarget(), make changes in the tests to get different tests pass
+
+commit ce20d176fd50e3925b897d8e0bdf5dae36dfc32c
+Author: Zhen Liu <zliu1@mines.edu>
+Date:   Thu Oct 7 12:14:29 2021 -0600
+
+    update the test for cell(0,3)with roll of 3 ,cell(0,) with roll of 2
+
+commit f70e0d8d4e6c72ed30309e91c487023588996335
+Author: Zhen Liu <zliu1@mines.edu>
+Date:   Thu Oct 7 11:36:04 2021 -0600
+
+    fixed the out of bound for 4X4 gameboard
+
+commit aedabb5800845894d9a7f80333c22733cb3fbea8
+Merge: fcaaaa7 b81b532
+Author: Zhen Liu <zliu1@mines.edu>
+Date:   Thu Oct 7 11:14:31 2021 -0600
+
+    from github
+
+commit fcaaaa73f243bab4456e20d461f9ef44e0385bc6
+Author: Zhen Liu <zliu1@mines.edu>
+Date:   Thu Oct 7 11:06:32 2021 -0600
+
+    finished the recusive function,add the function of  addAdjacency in testboardcell, add print statements and toString for debugging, add different cell to test the adjcent list
+
+commit b81b5328fcc0205e3a7b2aa28973f1ddd7488532
+Author: mmccormick <mmccormick@mines.edu>
+Date:   Thu Oct 7 10:39:39 2021 -0600
+
+    Updated tests
+
+commit 8cc30df52a96c28e7f30f7ac46efb7ab67399fd4
+Author: Zhen Shan Liu <zliu1@mines.edu>
+Date:   Tue Oct 5 15:16:34 2021 -0600
+
+    implement the function of findAllTargets
+
+commit fa308123ddfc13c246481ef590e579342562ae43
+Author: Matthew McCormick <mmccormick@mines.edu>
+Date:   Tue Oct 5 14:58:12 2021 -0600
+
+    Changed cells in board from set to 2d array
+
+commit 43a00b8d0323ad7ef3ce9c3f6fc4b51120ae6713
+Author: Matthew McCormick <mmccormick@mines.edu>
+Date:   Tue Oct 5 14:42:11 2021 -0600
+
+    Adjacency function now workng
+
+commit d810b356cd22efe1583c91991909575b2d30d54e
+Author: Zhen Liu <zliu1@mines.edu>
+Date:   Sun Oct 3 16:26:26 2021 -0600
+
+     add gitlog.txt
+
+commit ac84122998347573a76df566d321933b8a6b054c
+Author: Zhen Liu <zliu1@mines.edu>
+Date:   Sun Oct 3 16:24:42 2021 -0600
+
+    changed some locations of the board.
+
+commit 2ef0a4878e8326c2f05caa676d78d4290d0eef52
+Author: mmccormick <mmccormick@mines.edu>
+Date:   Sun Oct 3 16:23:07 2021 -0600
+
+    Driver: Matthew McCormick, Navigator: Zhen Liu - Finished tests, made them fail without errors
+
+commit d76894e22124f88e126ae1acdeb9a9882b49f957
+Author: Zhen Liu <zliu1@mines.edu>
+Date:   Sun Oct 3 15:56:53 2021 -0600
+
+    Zhen Shan Liu is the driver, Matthew McCormick is the navigator. we add the Junit Tests
+
+commit 7b56d11e90cad9260ea905eb535611262c8de9ad
+Author: mmccormick <mmccormick@mines.edu>
+Date:   Sun Oct 3 15:24:05 2021 -0600
+
+    Driver: Matthew McCormick, Navigator: Zhen Liu - Finshed TestBoardCell and added mostly blank methods to TestBoard
+
+commit 36b42c49eeb1ea086445ee92b0c6ec550ebe5ea9
+Author: mmccormick <mmccormick@mines.edu>
+Date:   Sun Oct 3 15:07:00 2021 -0600
+
+    Blank classes created
+
+commit 2be0547bf1a0d8e9d1abdafc24b5961a1f102c88
+Author: mmccormick21 <90218425+mmccormick21@users.noreply.github.com>
+Date:   Sun Oct 3 14:41:47 2021 -0600
+
+    Initial commit

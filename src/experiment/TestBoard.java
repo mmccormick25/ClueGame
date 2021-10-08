@@ -1,3 +1,5 @@
+// Authors: Matthew McCormick and Zhen Liu
+
 package experiment;
 
 import java.util.HashSet;
@@ -17,6 +19,12 @@ public class TestBoard {
 			}
 		}
 	}
+	
+	// based on the algorithm in the slides, this is a recursive function.For each cell in the adjacent
+	// list, have to check if the cell is occupied and we don't go backwards. If not, add the cell to adjacent list.
+	// then if the pathway length is equal to 1, then add to the target list.If not, call the recursive function.
+	// finally remove that adjacent cell. 
+
 	public void findAllTargets(TestBoardCell cell, int length) {
 		for (TestBoardCell adjCell: cell.getAdjList(this)) {
 			if(visitedList.contains(adjCell) || adjCell.getOccupied()) {
@@ -36,6 +44,7 @@ public class TestBoard {
 		
 	}
 	
+	// clear the visited list before call the findAllTargets()function each time. 
 	public void calcTargets(TestBoardCell startCell, int pathlength) {
 		visitedList.clear();
 		visitedList.add(startCell);
@@ -44,16 +53,17 @@ public class TestBoard {
 	}
 	
 	public Set<TestBoardCell> getTargets() {
-		
+	/*	debug use only, print out the list of targets. 
 		for(TestBoardCell test:targets) {
 			System.out.print(test);
 		}
 		System.out.println();
-		
+*/		
 		return targets;
 		
 	}
 	
+	// get the exact cell with row and column
 	public TestBoardCell getCell(int row, int col) {
 		return testCells[row][col];
 	}

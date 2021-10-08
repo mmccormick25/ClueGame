@@ -1,3 +1,4 @@
+// Authors: Matthew McCormick and Zhen Liu
 package experiment;
 
 import java.util.HashSet;
@@ -14,7 +15,7 @@ public class TestBoardCell {
 		this.row = row;
 		this.col = col;
 	}
-	
+	// check the boundaries of the testboard and return the adjacent list. 
 	public Set<TestBoardCell> getAdjList(TestBoard board) {
 		testAdjacent.clear();
 		if (row > 0) {
@@ -31,19 +32,19 @@ public class TestBoardCell {
 		}
 		return testAdjacent;
 	}
-	
+	// set the boolean value to room.
 	public void setIsRoom(boolean room) {
 		inRoom = room;
 	}
-	
+	// get the value of inRoom
 	public boolean isRoom( ) {
 		return inRoom;
 	}
-	
+	// set the boolean value to occupied
 	public void setOccupied(boolean occupied) {
 		isOccupied = occupied;
 	}
-	
+	// get the value of occupied
 	public boolean getOccupied( ) {
 		return isOccupied;
 	}
@@ -51,11 +52,11 @@ public class TestBoardCell {
 	public void addAdjacency(TestBoardCell cell) {
 		testAdjacent.add(cell);
 	}
-
+/* for debugging use.
 	@Override
 	public String toString() {
 		return "TestCell [" + row + "][" + col + "]";
 	}
 
-	
+	*/
 }

@@ -19,13 +19,13 @@ public class TestBoard {
 	}
 	public void findAllTargets(TestBoardCell cell, int length) {
 		for (TestBoardCell adjCell: cell.getAdjList(this)) {
-			if(visitedList.contains(adjCell)) {
+			if(visitedList.contains(adjCell) || adjCell.getOccupied()) {
 				continue;
 			}
 			
 				visitedList.add(adjCell);
 				
-			if(length == 1) {
+			if(length == 1 || adjCell.isRoom()) {
 				targets.add(adjCell);
 				}else {
 					findAllTargets(adjCell,length-1);
@@ -36,7 +36,8 @@ public class TestBoard {
 		
 	}
 	
-	public void calcTargets(TestBoardCell startCell, int pathlength) {		
+	public void calcTargets(TestBoardCell startCell, int pathlength) {
+		visitedList.clear();
 		visitedList.add(startCell);
 		findAllTargets(startCell,pathlength);
 		

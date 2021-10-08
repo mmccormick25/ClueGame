@@ -57,6 +57,7 @@ public class BoardTestsExp {
 		Assert.assertTrue(testList.contains(board.getCell(3,1)));
 		Assert.assertTrue(testList.contains(board.getCell(2,2)));
 		Assert.assertEquals(4, testList.size());
+		
 	}
 	
 	@Test
@@ -64,12 +65,27 @@ public class BoardTestsExp {
 		// Setting up occupied cells
 		board.getCell(0, 2).setOccupied(true);
 		board.getCell(1, 2).setIsRoom(true);
-		// Testing from cell (3, 2) with roll of 4
-		
-		TestBoardCell cell = board.getCell(3, 2);
-		board.calcTargets(cell, 4);
+		// Testing from cell (0, 3) with roll of 3
+		TestBoardCell cell = board.getCell(0, 3);
+		board.calcTargets(cell, 3);
 		Set<TestBoardCell> targets = board.getTargets();
-		System.out.println("targets size for(3,2) with roll of 4:   " + targets.size());
+		Assert.assertEquals(3, targets.size());
+		Assert.assertTrue(targets.contains(board.getCell(2, 2)));
+		Assert.assertTrue(targets.contains(board.getCell(3, 3)));
+		Assert.assertTrue(targets.contains(board.getCell(1, 2)));
+		// Testing from cell (0, 0) with roll of 2
+		targets.clear();
+		cell = board.getCell(0, 0);
+		board.calcTargets(cell, 2);
+		targets = board.getTargets();
+		Assert.assertEquals(2, targets.size());
+		Assert.assertTrue(targets.contains(board.getCell(1, 1)));
+		Assert.assertTrue(targets.contains(board.getCell(2, 0)));
+		// Testing from cell (3, 2) with roll of 4
+		targets.clear();
+		cell = board.getCell(3, 2);
+		board.calcTargets(cell, 4);
+		targets = board.getTargets();
 		Assert.assertEquals(7, targets.size());
 		Assert.assertTrue(targets.contains(board.getCell(1, 2)));
 		Assert.assertTrue(targets.contains(board.getCell(0, 1)));
@@ -79,59 +95,21 @@ public class BoardTestsExp {
 		Assert.assertTrue(targets.contains(board.getCell(1, 0)));
 		Assert.assertTrue(targets.contains(board.getCell(3, 0)));
 
-		// Testing from cell (0, 3) with roll of 3
-		targets.clear();
-		cell = board.getCell(0, 3);
-		targets = board.getTargets();
-		
-		board.calcTargets(cell, 3);
-	
-	//	System.out.println("targets size for(0,3) with roll of 3:   " + targets.size());
-		Assert.assertEquals(6, targets.size());
-		Assert.assertTrue(targets.contains(board.getCell(2, 2)));
-		Assert.assertTrue(targets.contains(board.getCell(3, 3)));
-		Assert.assertTrue(targets.contains(board.getCell(0, 0)));
-		Assert.assertTrue(targets.contains(board.getCell(1, 1)));
-		Assert.assertTrue(targets.contains(board.getCell(0, 2)));
-		Assert.assertTrue(targets.contains(board.getCell(1, 3)));
-		
-		// Testing from cell (0, 0) with roll of 2
-		// duplicate in testTargetsNormal();
-		/*
-		targets.clear();
-		cell = board.getCell(0, 0);
-		System.out.println(cell);
-		board.calcTargets(cell, 2);
-		
-	//	System.out.println("targets size for (0,0) with roll of 2:   " + targets.size());
-		targets= board.getTargets();
-		Assert.assertEquals(3, targets.size());
-		Assert.assertTrue(targets.contains(board.getCell(2, 0)));
-		Assert.assertTrue(targets.contains(board.getCell(0, 2)));
-		Assert.assertTrue(targets.contains(board.getCell(1, 1)));
-*/
-
-
-
 	}
 	@Test
 	public void testTargetsNormal() {
-
-		// Testing from cell (1, 4) with roll of 3
-		// (1,4) is out of bound, just changed to (1,3)
-		
+		// Testing from cell (1, 3) with roll of 3
 		TestBoardCell cell = board.getCell(1, 3);
 		board.calcTargets(cell, 3);
 		Set<TestBoardCell> targets = board.getTargets();
-	 System.out.println("target in Normal:" + targets.size());
 		Assert.assertEquals(7, targets.size());
-		Assert.assertTrue(targets.contains(board.getCell(3, 2)));
-		Assert.assertTrue(targets.contains(board.getCell(2, 1)));
 		Assert.assertTrue(targets.contains(board.getCell(0, 1)));
-		Assert.assertTrue(targets.contains(board.getCell(1, 2)));
 		Assert.assertTrue(targets.contains(board.getCell(0, 3)));
 		Assert.assertTrue(targets.contains(board.getCell(1, 0)));
+		Assert.assertTrue(targets.contains(board.getCell(1, 2)));
+		Assert.assertTrue(targets.contains(board.getCell(2, 1)));
 		Assert.assertTrue(targets.contains(board.getCell(2, 3)));
+		Assert.assertTrue(targets.contains(board.getCell(3, 2)));
 		// Testing from cell (0, 0) with roll of 2
 		targets.clear();
 		cell = board.getCell(0, 0);
@@ -146,7 +124,6 @@ public class BoardTestsExp {
 	@Test
 	public void testInRoom() {
 		// Testing if set room and get room functions work properly
-		// (4,4) is out of bound, just changed to (3,3)
 		TestBoardCell cell = board.getCell(3,3);
 		cell.setIsRoom(true);
 		Assert.assertTrue(cell.isRoom());

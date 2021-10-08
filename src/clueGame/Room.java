@@ -1,3 +1,5 @@
+// Authors: Matthew McCormick and Zhen Liu
+
 package clueGame;
 
 public class Room {
@@ -12,7 +14,7 @@ public class Room {
 		
 	}
 	public String getName() {
-		return this.name;
+		return "hi";
 	}
 	public BoardCell getLabelCell() {
 		return centerCell;

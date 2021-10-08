@@ -1,3 +1,5 @@
+// Authors: Matthew McCormick and Zhen Liu
+
 package clueGame;
 
 import java.util.HashSet;

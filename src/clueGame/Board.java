@@ -6,17 +6,32 @@ import java.util.Set;
 public class Board {
 	final static int COLS = 4;
 	final static int ROWS = 4;
-	private BoardCell[][] testCells = new BoardCell[ROWS][COLS];
+	private BoardCell[][] cells = new BoardCell[ROWS][COLS];
 	private Set<BoardCell> targets = new HashSet<>();
 	HashSet<BoardCell> visitedList = new HashSet<BoardCell>();
-	
-	public Board() {
-		for (int r = 0; r < ROWS; r++) {
-			for (int c = 0; c < COLS; c++) {
-				testCells[r][c] = new BoardCell(r, c);
+	 private static Board theInstance = new Board();
+	    // constructor is private to ensure only one can be created
+	    private Board() {
+	           super() ;
+	    }
+	    // this method returns the only Board
+	    public static Board getInstance() {
+	           return theInstance;
+	    }
+	    /*
+	     * initialize the board (since we are using singleton pattern)
+	     */
+	    public void initialize()
+	    {
+			for (int r = 0; r < ROWS; r++) {
+				for (int c = 0; c < COLS; c++) {
+					cells[r][c] = new BoardCell(r, c);
+				}
 			}
-		}
-	}
+	    }
+		
+	
+	
 	public void findAllTargets(BoardCell cell, int length) {
 		for (BoardCell adjCell: cell.getAdjList(this)) {
 			if(visitedList.contains(adjCell) || adjCell.getOccupied()) {
@@ -55,8 +70,35 @@ public class Board {
 	}
 	
 	public BoardCell getCell(int row, int col) {
-		return testCells[row][col];
+		return cells[row][col];
 	}
+	public void setConfigFiles(String fileName1,String fileName2) {
+		
+	}
+	public Room getRoom(char x) {
+		
+		return null;
+		
+	}
+	public int getNumRows() {
+		return ROWS;
+	
+	}
+	public int getNumColumns() {
+		return COLS;
+	
+	}
+	public Room getRoom(BoardCell cell) {
+		Room room = new Room(cell);
+		return room;
+	}
+	public void loadSetupConfig() {
+
+	}
+	public void loadLayoutConfig() {
+		
+	}
+
 	
 
 }

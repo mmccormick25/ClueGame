@@ -56,7 +56,22 @@ public class BoardCell {
 	public String toString() {
 		return "TestCell [" + row + "][" + col + "]";
 	}
-
+	
+	public boolean isDoorway() {
+		return true;
+	}
+	public DoorDirection getDoorDirection() {
+		return null;
+	}
+	public boolean isLabel() {		
+		return false;		
+	}
+	public boolean isRoomCenter() {
+		return false;
+	}
+	public char getSecretPassage() {
+		return 'a';
+	}
 	
 }
 

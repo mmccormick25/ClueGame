@@ -9,5 +9,5 @@ Room, Storage, S
 Room, Lab, L
 Room, Bathroom, B
 // other spaces on board
-Space, walkway, W
+Space, Walkway, W
 Space, Unused, X

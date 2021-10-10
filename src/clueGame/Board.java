@@ -5,7 +5,9 @@ package clueGame;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -21,10 +23,14 @@ public class Board {
 	private static File setupFile;
 	private static File layoutFile;
 	
+	public BoardCell blankCell = new BoardCell(0, 0);
+	
 	// Creating 2d array list of strings that will represent layout
 	ArrayList<ArrayList<String>> layoutStrings = new ArrayList<ArrayList<String>>(0);
 	// Creating 2d array list of strings that will hold info about tile types
 	ArrayList<ArrayList<String>> setupStrings = new ArrayList<ArrayList<String>>(0);
+	// Array list that holds rooms
+	Map<Character, Room> rooms = new HashMap<Character, Room>();
 
 	// Singleton object
 	// constructor is private to ensure only one can be created
@@ -50,6 +56,15 @@ public class Board {
 		
 		// Initializing 2d list of cells to be same size as board
 		cells = new BoardCell[numRows][numCols];
+		
+		for (ArrayList<String> r : setupStrings) {
+			Character c = r.get(2).charAt(0);
+			rooms.put(c, new Room(r.get(1), blankCell, blankCell));
+		}
+		
+		for (Room r : rooms) {
+			
+		}
 		
 		for (int r = 0; r < numRows; r++) {
 			for (int c = 0; c < numCols; c++) {
@@ -98,7 +113,7 @@ public class Board {
 	
 	public Room getRoom(char x) {
 
-		return new Room(null);
+		return rooms.get(x);
 
 	}
 	
@@ -113,8 +128,7 @@ public class Board {
 	}
 	
 	public Room getRoom(BoardCell cell) {
-		Room room = new Room(cell);
-		return room;
+		return rooms.get('x');
 	}
 	
 	public void setConfigFiles(String fileName1,String fileName2) {

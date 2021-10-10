@@ -1,38 +1,41 @@
-commit ac84122998347573a76df566d321933b8a6b054c
+commit c53566d14008befefa63ac13ab03cf4a85f4ecd7
+Author: mmccormick <mmccormick@mines.edu>
+Date:   Fri Oct 8 16:34:11 2021 -0600
+
+    Added and removed comments as well as Tests.txt file
+
+commit 4c3414f9b0adc5ba32ed3ddb0bbb37c7e48e0b2f
+Author: mmccormick <mmccormick@mines.edu>
+Date:   Fri Oct 8 16:19:01 2021 -0600
+
+    FileInitTests finished
+
+commit 8c9e71770fc7d4291faba5d37e15afb09ca8196a
 Author: Zhen Liu <zliu1@mines.edu>
-Date:   Sun Oct 3 16:24:42 2021 -0600
+Date:   Fri Oct 8 16:15:56 2021 -0600
 
-    changed some locations of the board.
+    implement method.
 
-commit 2ef0a4878e8326c2f05caa676d78d4290d0eef52
+commit 2020051353e66938742e4397c7392df280e69be5
+Merge: 12f33d1 0c11812
 Author: mmccormick <mmccormick@mines.edu>
-Date:   Sun Oct 3 16:23:07 2021 -0600
+Date:   Fri Oct 8 15:23:31 2021 -0600
 
-    Driver: Matthew McCormick, Navigator: Zhen Liu - Finished tests, made them fail without errors
+    Merge branch 'main' of https://github.com/mmccormick21/ClueGame
+    Added new classes
 
-commit d76894e22124f88e126ae1acdeb9a9882b49f957
+commit 12f33d1bfd89219d9b25c148cc149201783c6da0
+Author: mmccormick <mmccormick@mines.edu>
+Date:   Fri Oct 8 15:22:58 2021 -0600
+
+    Initialization of clueGame package with unfinished classes
+
+commit 0c118124132abea81041f154ab6cfe0526797b55
 Author: Zhen Liu <zliu1@mines.edu>
-Date:   Sun Oct 3 15:56:53 2021 -0600
+Date:   Fri Oct 8 15:20:15 2021 -0600
 
-    Zhen Shan Liu is the driver, Matthew McCormick is the navigator. we add the Junit Tests
+    gitlog.txt added
 
-commit 7b56d11e90cad9260ea905eb535611262c8de9ad
-Author: mmccormick <mmccormick@mines.edu>
-Date:   Sun Oct 3 15:24:05 2021 -0600
-
-    Driver: Matthew McCormick, Navigator: Zhen Liu - Finshed TestBoardCell and added mostly blank methods to TestBoard
-
-commit 36b42c49eeb1ea086445ee92b0c6ec550ebe5ea9
-Author: mmccormick <mmccormick@mines.edu>
-Date:   Sun Oct 3 15:07:00 2021 -0600
-
-    Blank classes created
-
-commit 2be0547bf1a0d8e9d1abdafc24b5961a1f102c88
-Author: mmccormick21 <90218425+mmccormick21@users.noreply.github.com>
-Date:   Sun Oct 3 14:41:47 2021 -0600
-
-    Initial commit
 commit fb8ae40479df4086b024cf1616e037990202ac10
 Author: Zhen Liu <zliu1@mines.edu>
 Date:   Fri Oct 8 15:19:14 2021 -0600

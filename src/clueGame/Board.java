@@ -59,11 +59,16 @@ public class Board {
 		
 		for (ArrayList<String> r : setupStrings) {
 			Character c = r.get(2).charAt(0);
-			rooms.put(c, new Room(r.get(1), blankCell, blankCell));
+			Room room= new Room(r.get(1), blankCell, blankCell);
+			System.out.println(room.getName());
+			rooms.put(c, room);
+			for (Map.Entry<Character, Room> entry : rooms.entrySet()) {
+				System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue());
+			}
 		}
 		
-		for (Room r : rooms) {
-			
+		for (Map.Entry<Character, Room> entry : rooms.entrySet()) {
+			System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue().getName());
 		}
 		
 		for (int r = 0; r < numRows; r++) {

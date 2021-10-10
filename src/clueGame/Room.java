@@ -15,7 +15,7 @@ public class Room {
 	}
 	
 	public String getName() {
-		return name;
+		return this.name;
 	}
 	
 	public BoardCell getLabelCell() {

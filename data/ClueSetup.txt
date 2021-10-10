@@ -1,5 +1,4 @@
 // Rooms and roomcards
-
 Room, Green House, G
 Room, Mine, M
 Room, Infirmary, I
@@ -9,8 +8,6 @@ Room, Quarters, Q
 Room, Storage, S
 Room, Lab, L
 Room, Bathroom, B
-
 // other spaces on board
-
 Space, walkway, W
 Space, Unused, X

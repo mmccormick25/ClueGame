@@ -138,6 +138,12 @@ public class Board {
 	        // Adding row to 2d array
 	        layoutStrings.add(row);
 	    }
+		for (ArrayList<String> i : layoutStrings) {
+			for (String n : i) {
+				System.out.print(n + " ");
+			}
+			System.out.println("");
+		}
 	}
 	
 	public void loadLayoutConfig() throws FileNotFoundException {

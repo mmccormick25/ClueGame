@@ -16,11 +16,13 @@ public class BoardCell {
 	private boolean isDoorway = false;
 	// String that represents cell in layoutStrings 2d array
 	private String layoutString;
+	private int layoutStringLength;
 	
 	public BoardCell(int row, int col, String layoutString) {
 		this.row = row;
 		this.col = col;
 		this.layoutString = layoutString;
+		this.layoutStringLength = layoutString.length();
 	}
 	
 	public int getRow() {
@@ -86,20 +88,21 @@ public class BoardCell {
 	
 	// Returning door direction based on what character is at second position of layoutString
 	public DoorDirection getDoorDirection() {
-		if (layoutString.charAt(1) == '<') {
+		char secondChar = layoutString.charAt(1);
+		if (secondChar == '<') {
 			return DoorDirection.LEFT;
-		} else if (layoutString.charAt(1) == '>') {
+		} else if (secondChar == '>') {
 			return DoorDirection.RIGHT;
-		} else if (layoutString.charAt(1) == '^') {
+		} else if (secondChar == '^') {
 			return DoorDirection.UP;
-		} else if (layoutString.charAt(1) == 'v') {
+		} else if (secondChar == 'v') {
 			return DoorDirection.DOWN;
 		}
 		return null;
 	}
 	
 	public boolean isLabel() {	
-		if (layoutString.length() > 1) {
+		if (layoutStringLength > 1) {
 			if (layoutString.charAt(1) == '#') {
 				return true;
 			}
@@ -108,7 +111,7 @@ public class BoardCell {
 	}
 	
 	public boolean isRoomCenter() {
-		if (layoutString.length() > 1) {
+		if (layoutStringLength > 1) {
 			if (layoutString.charAt(1) == '*') {
 				return true;
 			}
@@ -117,10 +120,10 @@ public class BoardCell {
 	}
 
 	public char getSecretPassage() {
-		if(layoutString.length()> 1) {
+		if(layoutStringLength> 1) {
 			return layoutString.charAt(1);
 		}
-		return 'a';
+		return (Character) null;
 	}
 	
 	public String getLayoutString() {

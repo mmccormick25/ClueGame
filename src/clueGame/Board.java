@@ -86,11 +86,12 @@ public class Board {
 					// Getting room object using first character in layoutString
 					Room room = this.getRoom(layoutString.charAt(0));
 					// Changing things about cell depending on what second char is
-					if (layoutString.charAt(1) == '#') {
+					char secondChar = layoutString.charAt(1);
+					if (secondChar == '#') {
 						room.setLabelCell(cells[r][c]);
-					} else if (layoutString.charAt(1) == '*') {
+					} else if (secondChar == '*') {
 						room.setCenterCell(cells[r][c]);
-					} else if (layoutString.charAt(1) == '<' || layoutString.charAt(1) == '>' || layoutString.charAt(1) == '^' || layoutString.charAt(1) == 'v') {
+					} else if (secondChar == '<' || secondChar == '>' || secondChar == '^' || secondChar == 'v') {
 						cells[r][c].setDoorway();					
 					}
 				}

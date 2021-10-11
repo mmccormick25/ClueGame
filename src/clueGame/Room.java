@@ -11,19 +11,17 @@ public class Room {
 	private Character label;
 	private ArrayList<BoardCell> doorCell;
 	
-	public Room(String na, BoardCell centerCell, BoardCell labelCell,Character label) {
+	public Room(String name) {
 		super();
-		this.name = na;
-		this.centerCell = centerCell;
-		this.labelCell = labelCell;
-		this.label = label;
+		this.name = name;
+
 	}
-	public Room(String na,Character label) {
+/* public  Room(String na,Character label) {
 		this.name = na;
 		this.label = label;
 	}
 	
-
+*/
 	
 	public String getName() {
 		return this.name;

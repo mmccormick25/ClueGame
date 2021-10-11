@@ -113,7 +113,7 @@ public class FileInitTests306 {
 		assertEquals( room.getName(), "Lounge" ) ;
 		assertTrue( cell.isLabel() );
 		// not pass here.
-//		assertTrue( room.getLabelCell() == cell );
+		assertTrue( room.getLabelCell() == cell );
 		
 		// this is a room center cell to test
 		cell = board.getCell(20, 11);

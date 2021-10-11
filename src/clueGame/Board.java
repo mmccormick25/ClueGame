@@ -89,8 +89,13 @@ public class Board {
 					} else if (layoutString.charAt(1) == '*') {
 						room.setCenterCell(cells[r][c]);
 					} else if (layoutString.charAt(1) == '<' || layoutString.charAt(1) == '>' || layoutString.charAt(1) == '^' || layoutString.charAt(1) == 'v') {
+<<<<<<< HEAD
 						cells[r][c].setDoorway();					
 					}
+=======
+						cells[r][c].setDoorway();					}
+				
+>>>>>>> f2be6dffae41e3de5d753e0a27109ccc8a62798f
 				}
 			}
 		}
@@ -150,6 +155,7 @@ public class Board {
 
 	public Room getRoom(BoardCell cell) {
 		Character c = layoutStrings.get(cell.getRow()).get(cell.getCol()).charAt(0);
+<<<<<<< HEAD
 		return getRoom(c);
 		/*
 		if((cell.getRow() > 0 && cell.getRow()<= 3 && cell.getCol()>=0 && cell.getCol() <7) || 
@@ -181,6 +187,9 @@ public class Board {
 		}
 		 */
 
+=======
+		return getRoom(c);	
+>>>>>>> f2be6dffae41e3de5d753e0a27109ccc8a62798f
 
 	}
 

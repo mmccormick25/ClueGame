@@ -14,6 +14,7 @@ public class BoardCell {
 	private boolean inRoom = false;
 	private boolean isOccupied = false;
 	private boolean isDoorway = false;
+
 	private String layoutString;
 	public BoardCell(int row, int col, String layoutString) {
 		this.row = row;
@@ -114,6 +115,9 @@ public class BoardCell {
 	}
 
 	public char getSecretPassage() {
+		if(layoutString.length()> 1) {
+			return layoutString.charAt(1);
+		}
 		return 'a';
 	}
 	

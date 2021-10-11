@@ -16,12 +16,7 @@ public class Room {
 		this.name = name;
 	}
 	
-/* public  Room(String na,Character label) {
-		this.name = na;
-		this.label = label;
-	}
-	
-*/
+
 	
 	public String getName() {
 		return this.name;

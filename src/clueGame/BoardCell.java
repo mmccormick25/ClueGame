@@ -14,8 +14,9 @@ public class BoardCell {
 	private boolean inRoom = false;
 	private boolean isOccupied = false;
 	private boolean isDoorway = false;
-
+	// String that represents cell in layoutStrings 2d array
 	private String layoutString;
+	
 	public BoardCell(int row, int col, String layoutString) {
 		this.row = row;
 		this.col = col;
@@ -83,6 +84,7 @@ public class BoardCell {
 		return isDoorway;
 	}
 	
+	// Returning door direction based on what character is at second position of layoutString
 	public DoorDirection getDoorDirection() {
 		if (layoutString.charAt(1) == '<') {
 			return DoorDirection.LEFT;
@@ -119,6 +121,10 @@ public class BoardCell {
 			return layoutString.charAt(1);
 		}
 		return 'a';
+	}
+	
+	public String getLayoutString() {
+		return layoutString;
 	}
 	
 	@Override

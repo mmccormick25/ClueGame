@@ -2,21 +2,15 @@
 
 package clueGame;
 
-import java.util.ArrayList;
-
 public class Room {
 	private String name;
 	private BoardCell centerCell;
 	private BoardCell labelCell;
-	private Character label;
-	private ArrayList<BoardCell> doorCell;
 	
 	public Room(String name) {
 		super();
 		this.name = name;
 	}
-	
-
 	
 	public String getName() {
 		return this.name;

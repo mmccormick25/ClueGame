@@ -1,3 +1,0 @@
-The Green House has a door that opens UP. The Office has a door that opens DOWN. The rooms have
-different labels than the ones in 306. The map has 14 doors total. The tile 2, 2 has the label
-for the Green House. The tile 10, 1 has a secret passage to the Bathroom. The tile 8, 7 is a walkway.

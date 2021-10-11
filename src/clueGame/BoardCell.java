@@ -3,6 +3,7 @@
 package clueGame;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class BoardCell {
@@ -17,18 +18,34 @@ public class BoardCell {
 		this.col = col;
 	}
 	
+	public int getRow() {
+		return row;
+	}
+
+	public int getCol() {
+		return col;
+	}
+
+	public void setRow(int row) {
+		this.row = row;
+	}
+
+	public void setCol(int col) {
+		this.col = col;
+	}
+
 	public Set<BoardCell> getAdjList(Board board) {
 		testAdjacent.clear();
 		if (row > 0) {
 			testAdjacent.add(board.getCell(row - 1, col));
 		}
-		if (row < Board.ROWS - 1) {
+		if (row < Board.getNumRows() - 1) {
 			testAdjacent.add(board.getCell(row + 1, col));
 		}
 		if (col > 0) {
 			testAdjacent.add(board.getCell(row, col - 1));
 		}
-		if (col < Board.COLS - 1) {
+		if (col < Board.getNumColumns() - 1) {
 			testAdjacent.add(board.getCell(row, col + 1));
 		}
 		return testAdjacent;
@@ -60,17 +77,68 @@ public class BoardCell {
 	}
 	
 	public boolean isDoorway() {
-		return true;
+		return false;
 	}
 	public DoorDirection getDoorDirection() {
 		return null;
 	}
-	public boolean isLabel() {		
-		return false;		
+	public boolean isLabel() {	
+		boolean result = false;
+		try {
+			if(this.toString().equals(Board.rooms.get('C').getLabelCell().toString()) &&  Board.getInstance().getRoom(this) ==Board.rooms.get('C') ) {
+				result = true;
+			}else if(this.toString().equals(Board.rooms.get('K').getLabelCell().toString()) &&  Board.getInstance().getRoom(this) ==Board.rooms.get('K') ) {
+				result = true;
+			}else if(this.toString().equals(Board.rooms.get('B').getLabelCell().toString()) &&  Board.getInstance().getRoom(this) ==Board.rooms.get('B') ) {
+				result = true;
+			}else if(this.toString().equals(Board.rooms.get('R').getLabelCell().toString()) &&  Board.getInstance().getRoom(this) ==Board.rooms.get('R') ) {
+				result = true;
+			}else if(this.toString().equals(Board.rooms.get('L').getLabelCell().toString()) &&  Board.getInstance().getRoom(this) ==Board.rooms.get('L') ) {
+				result = true;
+			}else if(this.toString().equals(Board.rooms.get('S').getLabelCell().toString()) &&  Board.getInstance().getRoom(this) ==Board.rooms.get('S') ) {
+				result = true;
+			}else if(this.toString().equals(Board.rooms.get('D').getLabelCell().toString()) &&  Board.getInstance().getRoom(this) ==Board.rooms.get('D') ) {
+				result = true;
+			}else if((this.toString().equals(Board.rooms.get('O').getLabelCell().toString())) &&  (Board.getInstance().getRoom(this) ==Board.rooms.get('O')) ) {
+				result = true;
+			}else if(this.toString().equals(Board.rooms.get('H').getLabelCell().toString()) &&  Board.getInstance().getRoom(this) ==Board.rooms.get('H') ) {
+				result = true;
+			}
+		} catch (Exception e) {
+			System.out.println("Error message.");
+		}
+				
+			return result;			
 	}
 	public boolean isRoomCenter() {
-		return false;
+		boolean result = false;
+		try {
+			if(this.toString().equals(Board.rooms.get('C').getCenterCell().toString()) &&  Board.getInstance().getRoom(this) ==Board.rooms.get('C') ) {
+				result = true;
+			}else if(this.toString().equals(Board.rooms.get('K').getCenterCell().toString()) &&  Board.getInstance().getRoom(this) ==Board.rooms.get('K') ) {
+				result = true;
+			}else if(this.toString().equals(Board.rooms.get('B').getCenterCell().toString()) &&  Board.getInstance().getRoom(this) ==Board.rooms.get('B') ) {
+				result = true;
+			}else if(this.toString().equals(Board.rooms.get('R').getCenterCell().toString()) &&  Board.getInstance().getRoom(this) ==Board.rooms.get('R') ) {
+				result = true;
+			}else if(this.toString().equals(Board.rooms.get('L').getCenterCell().toString()) &&  Board.getInstance().getRoom(this) ==Board.rooms.get('L') ) {
+				result = true;
+			}else if(this.toString().equals(Board.rooms.get('S').getCenterCell().toString()) &&  Board.getInstance().getRoom(this) ==Board.rooms.get('S') ) {
+				result = true;
+			}else if(this.toString().equals(Board.rooms.get('D').getCenterCell().toString()) &&  Board.getInstance().getRoom(this) ==Board.rooms.get('D') ) {
+				result = true;
+			}else if((this.toString().equals(Board.rooms.get('O').getCenterCell().toString())) &&  (Board.getInstance().getRoom(this) ==Board.rooms.get('O')) ) {
+				result = true;
+			}else if(this.toString().equals(Board.rooms.get('H').getCenterCell().toString()) &&  Board.getInstance().getRoom(this) ==Board.rooms.get('H') ) {
+				result = true;
+			}
+		} catch (Exception e) {
+			System.out.println("Error message.");
+		}
+			
+		return result;		
 	}
+
 	public char getSecretPassage() {
 		return 'a';
 	}

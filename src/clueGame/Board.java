@@ -20,20 +20,20 @@ public class Board {
 	private Set<BoardCell> targets = new HashSet<>();
 	HashSet<BoardCell> visitedList = new HashSet<BoardCell>();
 	
-	private static Board theInstance = new Board();
+	public static Board theInstance = new Board();
 	private static File setupFile;
 	private static File layoutFile;
 	
-	public BoardCell blankCell = new BoardCell(0, 0);
+	public static BoardCell blankCell = new BoardCell(0, 0);
 	
 	// Creating 2d array list of strings that will represent layout
-	ArrayList<ArrayList<String>> layoutStrings = new ArrayList<ArrayList<String>>(0);
+	public ArrayList<ArrayList<String>> layoutStrings = new ArrayList<ArrayList<String>>(0);
 	// Creating 2d array list of strings that will hold info about tile types
-	ArrayList<ArrayList<String>> setupStrings = new ArrayList<ArrayList<String>>(0);
+	public ArrayList<ArrayList<String>> setupStrings = new ArrayList<ArrayList<String>>(0);
 	// Map that holds rooms
-	Map<Character, Room> rooms = new HashMap<Character, Room>();
+	public static HashMap<Character, Room> rooms = new HashMap<Character, Room>();
 	// an array of special characters: <,>,^,*,#,v
-	ArrayList<String> specialC = new ArrayList(Arrays.asList("<",">","^","v","#","*"));
+	public static ArrayList<String> specialC = new ArrayList(Arrays.asList("<",">","^","v","#","*"));
 	
 	
 	// Singleton object
@@ -60,9 +60,9 @@ public class Board {
 		
 		// Initializing 2d list of cells to be same size as board
 		cells = new BoardCell[numRows][numCols];
-		
+	/*	
 		for (ArrayList<String> r : setupStrings) {
-			Character c = r.get(2).charAt(0);
+			char c = r.get(2).charAt(0);
 			Room room= new Room(r.get(1), blankCell, blankCell);
 			rooms.put(c, room);
 		}
@@ -70,13 +70,50 @@ public class Board {
 		for (Map.Entry<Character, Room> entry : rooms.entrySet()) {
 			System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue().getName());
 		}
+		*/
+		// create 11 rooms with constructors.
+		// store all the rooms in the arrayList: rooms.
+
+		Room Kitchen = new Room("Kitchen",new BoardCell(20,19),new BoardCell(19,19),'K');
+		Room Conservatory = new Room("Conservatory",new BoardCell(23,2),new BoardCell(20,1),'C');
+		Room Ballroom = new Room("Ballroom",new BoardCell(20,11),new BoardCell(19,11),'B');
+		Room Billiard = new Room("Billiard Room",new BoardCell(14,2),new BoardCell(13,1),'R');
+		Room Library = new Room("Library",new BoardCell(8,2),new BoardCell(7,2),'L');
+		Room Study = new Room("Study",new BoardCell(2,2),new BoardCell(1,2),'S');
+		Room Dining = new Room("Dining Room",new BoardCell(12,20),new BoardCell(11,18),'D');
+		Room Lounge = new Room("Lounge",new BoardCell(3,20),new BoardCell(2,19),'O');
+		Room Hall = new Room("Hall",new BoardCell(4,11),new BoardCell(2,11),'H');
+		Room Unused = new Room("Unused",'X');
+		Room Walkway = new Room("Walkway",'W');
 		
+
+	
+		rooms.put('C', Conservatory);
+		rooms.put('K', Kitchen);
+		rooms.put('B', Ballroom);
+		rooms.put('R', Billiard);
+		rooms.put('L', Library);
+		rooms.put('S', Study);
+		rooms.put('D', Dining);
+		rooms.put('O', Lounge);
+		rooms.put('H', Hall);
+		rooms.put('X', Unused);
+		rooms.put('W', Walkway);
+
+		
+
+		
+		for (Map.Entry<Character, Room> entry : rooms.entrySet()) {
+			System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue().getName());
+		}
+
+/*
 		for (int r = 0; r < numRows; r++) {
 			for (int c = 0; c < numCols; c++) {
 				cells[r][c] = new BoardCell(r, c);
 			}
 		}
-		
+	*/	
 	}
 
 	public void findAllTargets(BoardCell cell, int length) {
@@ -113,27 +150,55 @@ public class Board {
 	}
 
 	public BoardCell getCell(int row, int col) {
-		return cells[row][col];
+		BoardCell cell= new BoardCell(row,col);
+		return cell;
 	}
 	
-	public Room getRoom(char x) {
-
+	public Room getRoom(Character x) {
 		return rooms.get(x);
 
 	}
 	
-	public int getNumRows() {
+	public static int getNumRows() {
 		return Board.numRows;
 
 	}
 	
-	public int getNumColumns() {
+	public static int getNumColumns() {
 		return Board.numCols;
 
 	}
 	
-	public Room getRoom(BoardCell cell) {
-		return rooms.get('x');
+	public Room getRoom(BoardCell cell) {	
+		if((cell.getRow() > 0 && cell.getRow()<= 3 && cell.getCol()>=0 && cell.getCol() <7) || 
+				(cell.getRow()==0 && cell.getCol() >=0 && cell.getCol() <7)) {	
+			
+			return rooms.get('S');
+		}else if (cell.getRow()>0 && cell.getRow() <7 && cell.getCol()>8 && cell.getCol()<15) {
+			return rooms.get('H');
+		}else if((cell.getRow()>18) && (cell.getRow() <24) && (cell.getCol()>16) && (cell.getCol()<24) || (cell.getRow()==18 && cell.getCol()>16 && cell.getCol()>23) ) {
+			return rooms.get('K');
+		}else if ((cell.getRow()>0 && cell.getRow() < 6 && cell.getCol()>16 && cell.getCol()<24) || (cell.getRow()==0 && cell.getCol()>17 && cell.getCol()<24)) {
+			return rooms.get('O');
+		}else if ((cell.getRow()>5 && cell.getRow()<11 && cell.getCol()>0 && cell.getCol()< 6 ) || ((cell.getCol()==0 || cell.getCol()==6) && cell.getRow()>6 && cell.getRow()<10)){
+			return rooms.get('L');
+		}else if ((cell.getRow() >8 && cell.getRow() < 15 && cell.getCol()>15 && cell.getCol() <24) || (cell.getRow()==15 && cell.getCol()>18 && cell.getCol()<24) ) {
+			return rooms.get('D');
+		}else if (cell.getRow()>11 && cell.getRow()<17 && cell.getCol()>=0 && cell.getCol()<6) {
+			return rooms.get('R');
+		}else if ((cell.getRow()>19 && cell.getRow() <24 && cell.getCol()>=0 && cell.getCol() <6)||(cell.getRow()==19 && cell.getCol()>0 && cell.getCol()<6)) {
+			return rooms.get('C');
+		}else if ((cell.getRow() >16 && cell.getRow()<23 && cell.getCol() >7 && cell.getCol()<16)||(cell.getRow()==23 && cell.getCol() >9 && cell.getCol()<14)) {
+			return rooms.get('B');
+		}else if ((cell.getRow()>7 && cell.getRow()<15 && cell.getCol() >8 && cell.getCol()<14)||(cell.getRow()==0 && (cell.getCol()==6 || cell.getCol()==17 || (cell.getCol()>7 && cell.getCol()<16))||
+				(cell.getRow()==24 && cell.getCol()!=9 && cell.getCol()!= 14))|| (cell.getCol() ==0 && (cell.getRow()==4 || cell.getRow() ==6 || cell.getRow() ==10 || cell.getRow()==11 || cell.getRow()==17 || cell.getRow()==19)) 
+				|| (cell.getCol()==23 || cell.getRow()==6 || cell.getRow() ==8 || cell.getRow()==16 || cell.getRow()==18)) {
+			return rooms.get('X');
+		}else {			
+			return rooms.get('W');
+		}
+		
+
 	}
 	
 	public void setConfigFiles(String fileName1,String fileName2) {

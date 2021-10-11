@@ -10,6 +10,7 @@ import org.junit.Assert;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import clueGame.BadConfigFormatException;
 import clueGame.Board;
 import clueGame.BoardCell;
 import clueGame.DoorDirection;
@@ -23,7 +24,7 @@ public class FileInitTests {
 	private static Board board;
 
 	@BeforeAll
-	public static void setUp() throws FileNotFoundException{
+	public static void setUp() throws FileNotFoundException, BadConfigFormatException{
 		// Setting up board for testing
 		board = Board.getInstance();
 		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");

@@ -90,6 +90,7 @@ public class Board {
 						room.setCenterCell(cells[r][c]);
 					} else if (layoutString.charAt(1) == '<' || layoutString.charAt(1) == '>' || layoutString.charAt(1) == '^' || layoutString.charAt(1) == 'v') {
 						cells[r][c].setDoorway();					}
+				
 				}
 			}
 		}
@@ -149,37 +150,7 @@ public class Board {
 
 	public Room getRoom(BoardCell cell) {
 		Character c = layoutStrings.get(cell.getRow()).get(cell.getCol()).charAt(0);
-		return getRoom(c);
-		/*
-		if((cell.getRow() > 0 && cell.getRow()<= 3 && cell.getCol()>=0 && cell.getCol() <7) || 
-				(cell.getRow()==0 && cell.getCol() >=0 && cell.getCol() <7)) {	
-
-			return rooms.get('S');
-		}else if (cell.getRow()>0 && cell.getRow() <7 && cell.getCol()>8 && cell.getCol()<15) {
-			return rooms.get('H');
-		}else if((cell.getRow()>18) && (cell.getRow() <24) && (cell.getCol()>16) && (cell.getCol()<24) || (cell.getRow()==18 && cell.getCol()>16 && cell.getCol()>23) ) {
-			return rooms.get('K');
-		}else if ((cell.getRow()>0 && cell.getRow() < 6 && cell.getCol()>16 && cell.getCol()<24) || (cell.getRow()==0 && cell.getCol()>17 && cell.getCol()<24)) {
-			return rooms.get('O');
-		}else if ((cell.getRow()>5 && cell.getRow()<11 && cell.getCol()>0 && cell.getCol()< 6 ) || ((cell.getCol()==0 || cell.getCol()==6) && cell.getRow()>6 && cell.getRow()<10)){
-			return rooms.get('L');
-		}else if ((cell.getRow() >8 && cell.getRow() < 15 && cell.getCol()>15 && cell.getCol() <24) || (cell.getRow()==15 && cell.getCol()>18 && cell.getCol()<24) ) {
-			return rooms.get('D');
-		}else if (cell.getRow()>11 && cell.getRow()<17 && cell.getCol()>=0 && cell.getCol()<6) {
-			return rooms.get('R');
-		}else if ((cell.getRow()>19 && cell.getRow() <24 && cell.getCol()>=0 && cell.getCol() <6)||(cell.getRow()==19 && cell.getCol()>0 && cell.getCol()<6)) {
-			return rooms.get('C');
-		}else if ((cell.getRow() >16 && cell.getRow()<23 && cell.getCol() >7 && cell.getCol()<16)||(cell.getRow()==23 && cell.getCol() >9 && cell.getCol()<14)) {
-			return rooms.get('B');
-		}else if ((cell.getRow()>7 && cell.getRow()<15 && cell.getCol() >8 && cell.getCol()<14)||(cell.getRow()==0 && (cell.getCol()==6 || cell.getCol()==17 || (cell.getCol()>7 && cell.getCol()<16))||
-				(cell.getRow()==24 && cell.getCol()!=9 && cell.getCol()!= 14))|| (cell.getCol() ==0 && (cell.getRow()==4 || cell.getRow() ==6 || cell.getRow() ==10 || cell.getRow()==11 || cell.getRow()==17 || cell.getRow()==19)) 
-				|| (cell.getCol()==23 || cell.getRow()==6 || cell.getRow() ==8 || cell.getRow()==16 || cell.getRow()==18)) {
-			return rooms.get('X');
-		}else {			
-			return rooms.get('W');
-		}
-*/
-		
+		return getRoom(c);	
 
 	}
 

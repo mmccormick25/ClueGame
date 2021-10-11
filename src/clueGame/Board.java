@@ -5,6 +5,7 @@ package clueGame;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -29,9 +30,12 @@ public class Board {
 	ArrayList<ArrayList<String>> layoutStrings = new ArrayList<ArrayList<String>>(0);
 	// Creating 2d array list of strings that will hold info about tile types
 	ArrayList<ArrayList<String>> setupStrings = new ArrayList<ArrayList<String>>(0);
-	// Array list that holds rooms
+	// Map that holds rooms
 	Map<Character, Room> rooms = new HashMap<Character, Room>();
-
+	// an array of special characters: <,>,^,*,#,v
+	ArrayList<String> specialC = new ArrayList(Arrays.asList("<",">","^","v","#","*"));
+	
+	
 	// Singleton object
 	// constructor is private to ensure only one can be created
 	private Board() {
@@ -44,7 +48,7 @@ public class Board {
 	/*
 	 * initialize the board (since we are using singleton pattern)
 	 */
-	public void initialize() throws FileNotFoundException
+	public void initialize() throws FileNotFoundException, BadConfigFormatException
 	{
 		loadSetupConfig();
 		loadLayoutConfig();
@@ -60,11 +64,7 @@ public class Board {
 		for (ArrayList<String> r : setupStrings) {
 			Character c = r.get(2).charAt(0);
 			Room room= new Room(r.get(1), blankCell, blankCell);
-			System.out.println(room.getName());
 			rooms.put(c, room);
-			for (Map.Entry<Character, Room> entry : rooms.entrySet()) {
-				System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue());
-			}
 		}
 		
 		for (Map.Entry<Character, Room> entry : rooms.entrySet()) {
@@ -123,12 +123,12 @@ public class Board {
 	}
 	
 	public int getNumRows() {
-		return numRows;
+		return Board.numRows;
 
 	}
 	
 	public int getNumColumns() {
-		return numCols;
+		return Board.numCols;
 
 	}
 	
@@ -138,51 +138,101 @@ public class Board {
 	
 	public void setConfigFiles(String fileName1,String fileName2) {
 		// Creating new file objects to hold source files for board
-		setupFile = new File("data/" + fileName1);
-		layoutFile = new File("data/" + fileName2);
+		layoutFile = new File("data/" + fileName1);
+		setupFile = new File("data/" + fileName2);
 	}
 	
-	public void loadSetupConfig() throws FileNotFoundException {
-		Scanner setupReader = new Scanner(setupFile);
-		while (setupReader.hasNextLine()) {
-			// Creating array list of strings that represents a row in the board
-			ArrayList<String> row = new ArrayList<String>(0);
-			// Getting list of strings by splitting line at commas
-	        String data = setupReader.nextLine();
-	        String[] splitData = data.split(",");
-	        // Adding strings to row
-	        for (String s : splitData) {
-	        	row.add(s);
-	        }
-	        // Adding row to 2d array
-	        layoutStrings.add(row);
-	    }
+	public void loadLayoutConfig() throws FileNotFoundException,BadConfigFormatException {
+		try {
+			Scanner setupReader = new Scanner(layoutFile);
+			while (setupReader.hasNextLine()) {
+				// Creating array list of strings that represents a row in the board
+				ArrayList<String> row = new ArrayList<String>(0);
+				// Getting list of strings by splitting line at commas
+		        String data = setupReader.nextLine();
+		        String[] splitData = data.split(",");
+		        // Adding strings to row
+		        for (String s : splitData) {
+		        	row.add(s);
+		        }
+		        // Adding row to 2d array
+		        layoutStrings.add(row);
+		    }
+			setupReader.close();
+		}
+	catch (FileNotFoundException e) {
+			System.out.println("File not exists.");
+		}	
+		
+		// handle the exception if the length of each isn't the same. 
+		int num = layoutStrings.get(0).size();
+		int temp1 = 0;
+		int temp2 = 0;
 		for (ArrayList<String> i : layoutStrings) {
 			for (String n : i) {
+				try {
+					if (num != i.size()) {
+						throw new BadConfigFormatException("The gameboard doesn't have the same length in each row.");
+						
+					}
+					if(true) {
+
+						for(ArrayList<String> j : setupStrings) {
+							if (!j.contains(n.substring(0,1)) ) {	// possible error
+								temp1++;
+							}
+							if (n.length() >1) {
+								if(!j.contains(n.substring(1)) && !specialC.contains(n.substring(1)) ){
+									temp2++;
+								}
+							}
+							}
+						}
+						if(temp1 == setupStrings.size() || n.length()>2 || temp2 == setupStrings.size()) {
+							throw new BadConfigFormatException("Game board doesn't have such a room.");
+						}
+
+					
+				}catch (BadConfigFormatException e) {
+					System.out.println(e);
+					System.out.println(e.getMessage());
+				} 
+				
+				
 				System.out.print(n + " ");
 			}
 			System.out.println("");
 		}
+		
 	}
 	
-	public void loadLayoutConfig() throws FileNotFoundException {
-		Scanner layoutReader = new Scanner(layoutFile);
-		while (layoutReader.hasNextLine()) {
-			// Creating array list of strings that will hold each tile info entry
-			ArrayList<String> row = new ArrayList<String>(0);
-			// Getting list of strings by splitting line at commas with a space after
-	        String data = layoutReader.nextLine();
-	        String[] splitData = data.split(", ");
-	        // Adding strings to row
-	        for (String s : splitData) {
-	        	row.add(s);
-	        }
-	        // Checking if row starts with '//', if so it is not added to the 2d array
-	        if (!row.get(0).substring(0, 2).equals("//")) {
-	        	setupStrings.add(row);
-        	}
-	    }
+	public void loadSetupConfig() throws FileNotFoundException,BadConfigFormatException  {
+		try {
+			Scanner layoutReader = new Scanner(setupFile);
+			while (layoutReader.hasNextLine()) {
+				// Creating array list of strings that will hold each tile info entry
+				ArrayList<String> row = new ArrayList<String>(0);
+				// Getting list of strings by splitting line at commas with a space after
+		        String data = layoutReader.nextLine();
+		        String[] splitData = data.split(", ");
+		        // Adding strings to row
+		        for (String s : splitData) {
+		        	row.add(s);
+		        }
+		        // Checking if row starts with '//', if so it is not added to the 2d array
+		        if (!row.get(0).substring(0, 2).equals("//")) {
+		        	setupStrings.add(row);
+	        	}
+		    }
+			layoutReader.close();
+			
+		}
+		catch (FileNotFoundException e) {
+			System.out.println("file can't be found.");
+		}
+		
 		// Testing file was read properly
+
 		for (ArrayList<String> i : setupStrings) {
 			for (String n : i) {
 				System.out.print(n + " ");

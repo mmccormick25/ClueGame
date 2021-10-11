@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -34,7 +33,7 @@ public class Board {
 	// Map that holds rooms
 	public static HashMap<Character, Room> rooms = new HashMap<Character, Room>();
 	// an array of special characters: <,>,^,*,#,v
-	public static ArrayList<String> specialC = new ArrayList(Arrays.asList("<",">","^","v","#","*"));
+	public static ArrayList<String> specialC = new ArrayList<String>(Arrays.asList("<",">","^","v","#","*"));
 
 
 	// Singleton object
@@ -100,14 +99,13 @@ public class Board {
 	}
 
 	// Pathfinding methods
+	
 	public void findAllTargets(BoardCell cell, int length) {
 		for (BoardCell adjCell: cell.getAdjList(this)) {
 			if(visitedList.contains(adjCell) || adjCell.getOccupied()) {
 				continue;
 			}
-
 			visitedList.add(adjCell);
-
 			if(length == 1 || adjCell.isRoom()) {
 				targets.add(adjCell);
 			} else {
@@ -124,6 +122,7 @@ public class Board {
 	}
 
 	// File init methods
+	
 	public void setConfigFiles(String fileName1,String fileName2) {
 		// Creating new file objects to hold source files for board
 		layoutFile = new File("data/" + fileName1);
@@ -204,6 +203,8 @@ public class Board {
 		}
 
 	}
+	
+	// Getters
 
 	public Set<BoardCell> getTargets() {
 		for(BoardCell test:targets) {

@@ -14,8 +14,8 @@ public class Room {
 	public Room(String name) {
 		super();
 		this.name = name;
-
 	}
+	
 /* public  Room(String na,Character label) {
 		this.name = na;
 		this.label = label;
@@ -34,6 +34,15 @@ public class Room {
 	public BoardCell getCenterCell() {
 		return this.centerCell;
 	}
+	
+	public void setLabelCell(BoardCell cell) {
+		this.labelCell = cell;
+	}
+	
+	public void setCenterCell(BoardCell cell) {
+		this.centerCell = cell;
+	}
+	
 	@Override
 	public String toString() {
 		return "Room [" + name + "]";

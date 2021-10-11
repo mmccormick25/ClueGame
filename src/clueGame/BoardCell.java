@@ -13,9 +13,12 @@ public class BoardCell {
 	private Set<BoardCell> testAdjacent = new HashSet<>();
 	private boolean inRoom = false;
 	private boolean isOccupied = false;
-	public BoardCell(int row, int col) {
+	private boolean isDoorway = false;
+	private String layoutString;
+	public BoardCell(int row, int col, String layoutString) {
 		this.row = row;
 		this.col = col;
+		this.layoutString = layoutString;
 	}
 	
 	public int getRow() {
@@ -70,77 +73,53 @@ public class BoardCell {
 	public void addAdjacency(BoardCell cell) {
 		testAdjacent.add(cell);
 	}
-
-	@Override
-	public String toString() {
-		return "TestCell [" + row + "][" + col + "]";
+	
+	public void setDoorway() {
+		this.isDoorway = true;
 	}
 	
 	public boolean isDoorway() {
-		return false;
+		return isDoorway;
 	}
+	
 	public DoorDirection getDoorDirection() {
+		if (layoutString.charAt(1) == '<') {
+			return DoorDirection.LEFT;
+		} else if (layoutString.charAt(1) == '>') {
+			return DoorDirection.RIGHT;
+		} else if (layoutString.charAt(1) == '^') {
+			return DoorDirection.UP;
+		} else if (layoutString.charAt(1) == 'v') {
+			return DoorDirection.DOWN;
+		}
 		return null;
 	}
+	
 	public boolean isLabel() {	
-		boolean result = false;
-		try {
-			if(this.toString().equals(Board.rooms.get('C').getLabelCell().toString()) &&  Board.getInstance().getRoom(this) ==Board.rooms.get('C') ) {
-				result = true;
-			}else if(this.toString().equals(Board.rooms.get('K').getLabelCell().toString()) &&  Board.getInstance().getRoom(this) ==Board.rooms.get('K') ) {
-				result = true;
-			}else if(this.toString().equals(Board.rooms.get('B').getLabelCell().toString()) &&  Board.getInstance().getRoom(this) ==Board.rooms.get('B') ) {
-				result = true;
-			}else if(this.toString().equals(Board.rooms.get('R').getLabelCell().toString()) &&  Board.getInstance().getRoom(this) ==Board.rooms.get('R') ) {
-				result = true;
-			}else if(this.toString().equals(Board.rooms.get('L').getLabelCell().toString()) &&  Board.getInstance().getRoom(this) ==Board.rooms.get('L') ) {
-				result = true;
-			}else if(this.toString().equals(Board.rooms.get('S').getLabelCell().toString()) &&  Board.getInstance().getRoom(this) ==Board.rooms.get('S') ) {
-				result = true;
-			}else if(this.toString().equals(Board.rooms.get('D').getLabelCell().toString()) &&  Board.getInstance().getRoom(this) ==Board.rooms.get('D') ) {
-				result = true;
-			}else if((this.toString().equals(Board.rooms.get('O').getLabelCell().toString())) &&  (Board.getInstance().getRoom(this) ==Board.rooms.get('O')) ) {
-				result = true;
-			}else if(this.toString().equals(Board.rooms.get('H').getLabelCell().toString()) &&  Board.getInstance().getRoom(this) ==Board.rooms.get('H') ) {
-				result = true;
+		if (layoutString.length() > 1) {
+			if (layoutString.charAt(1) == '#') {
+				return true;
 			}
-		} catch (Exception e) {
-			System.out.println("Error message.");
 		}
-				
-			return result;			
+		return false;
 	}
+	
 	public boolean isRoomCenter() {
-		boolean result = false;
-		try {
-			if(this.toString().equals(Board.rooms.get('C').getCenterCell().toString()) &&  Board.getInstance().getRoom(this) ==Board.rooms.get('C') ) {
-				result = true;
-			}else if(this.toString().equals(Board.rooms.get('K').getCenterCell().toString()) &&  Board.getInstance().getRoom(this) ==Board.rooms.get('K') ) {
-				result = true;
-			}else if(this.toString().equals(Board.rooms.get('B').getCenterCell().toString()) &&  Board.getInstance().getRoom(this) ==Board.rooms.get('B') ) {
-				result = true;
-			}else if(this.toString().equals(Board.rooms.get('R').getCenterCell().toString()) &&  Board.getInstance().getRoom(this) ==Board.rooms.get('R') ) {
-				result = true;
-			}else if(this.toString().equals(Board.rooms.get('L').getCenterCell().toString()) &&  Board.getInstance().getRoom(this) ==Board.rooms.get('L') ) {
-				result = true;
-			}else if(this.toString().equals(Board.rooms.get('S').getCenterCell().toString()) &&  Board.getInstance().getRoom(this) ==Board.rooms.get('S') ) {
-				result = true;
-			}else if(this.toString().equals(Board.rooms.get('D').getCenterCell().toString()) &&  Board.getInstance().getRoom(this) ==Board.rooms.get('D') ) {
-				result = true;
-			}else if((this.toString().equals(Board.rooms.get('O').getCenterCell().toString())) &&  (Board.getInstance().getRoom(this) ==Board.rooms.get('O')) ) {
-				result = true;
-			}else if(this.toString().equals(Board.rooms.get('H').getCenterCell().toString()) &&  Board.getInstance().getRoom(this) ==Board.rooms.get('H') ) {
-				result = true;
+		if (layoutString.length() > 1) {
+			if (layoutString.charAt(1) == '*') {
+				return true;
 			}
-		} catch (Exception e) {
-			System.out.println("Error message.");
 		}
-			
-		return result;		
+		return false;		
 	}
 
 	public char getSecretPassage() {
 		return 'a';
+	}
+	
+	@Override
+	public String toString() {
+		return "TestCell [" + row + "][" + col + "]";
 	}
 	
 }

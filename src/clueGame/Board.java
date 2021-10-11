@@ -24,7 +24,7 @@ public class Board {
 	private static File setupFile;
 	private static File layoutFile;
 
-	public static BoardCell blankCell = new BoardCell(0, 0);
+	public static BoardCell blankCell = new BoardCell(0, 0, "X");
 
 	// Creating 2d array list of strings that will represent layout
 	public ArrayList<ArrayList<String>> layoutStrings = new ArrayList<ArrayList<String>>(0);
@@ -65,18 +65,9 @@ public class Board {
 	
 		
 		for (ArrayList<String> r : setupStrings) {
-		
-			if (r.size() ==3 ) {
-				char c = r.get(2).charAt(0);
-				Room room= new Room(r.get(1));
-				rooms.put(c, room);
-			
-			} else if (r.size() == 4) {
-				char c = r.get(3).charAt(0);
-				Room room= new Room(r.get(1) + r.get(2));
-				rooms.put(c, room);
-			}
-			
+			char c = r.get(2).charAt(0);
+			Room room= new Room(r.get(1));
+			rooms.put(c, room);
 		}
 
 
@@ -89,7 +80,17 @@ public class Board {
 		
 		for (int r = 0; r < numRows; r++) {
 			for (int c = 0; c < numCols; c++) {
-				cells[r][c] = new BoardCell(r, c);
+				String layoutString = layoutStrings.get(r).get(c);
+				cells[r][c] = new BoardCell(r, c, layoutString);
+				if (layoutString.length() > 1) {
+					Room room = this.getRoom(layoutString.charAt(0));
+					if (layoutString.charAt(1) == '#') {
+						room.setLabelCell(cells[r][c]);
+					} else if (layoutString.charAt(1) == '*') {
+						room.setCenterCell(cells[r][c]);
+					} else if (layoutString.charAt(1) == '<' || layoutString.charAt(1) == '>' || layoutString.charAt(1) == '^' || layoutString.charAt(1) == 'v') {
+						cells[r][c].setDoorway();					}
+				}
 			}
 		}
 		 	
@@ -129,13 +130,11 @@ public class Board {
 	}
 
 	public BoardCell getCell(int row, int col) {
-		BoardCell cell= new BoardCell(row,col);
-		return cell;
+		return cells[row][col];
 	}
 
 	public Room getRoom(Character x) {
 		return rooms.get(x);
-
 	}
 
 	public static int getNumRows() {
@@ -148,7 +147,9 @@ public class Board {
 
 	}
 
-	public Room getRoom(BoardCell cell) {	
+	public Room getRoom(BoardCell cell) {
+		Character c = layoutStrings.get(cell.getRow()).get(cell.getCol()).charAt(0);
+		return getRoom(c);
 		/*
 		if((cell.getRow() > 0 && cell.getRow()<= 3 && cell.getCol()>=0 && cell.getCol() <7) || 
 				(cell.getRow()==0 && cell.getCol() >=0 && cell.getCol() <7)) {	

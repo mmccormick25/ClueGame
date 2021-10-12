@@ -131,6 +131,7 @@ public class Board {
 	}
 
 	public void loadLayoutConfig() throws FileNotFoundException,BadConfigFormatException {
+		layoutStrings.clear();
 		Scanner setupReader = new Scanner(layoutFile);
 		while (setupReader.hasNextLine()) {
 			// Creating array list of strings that represents a row in the board
@@ -177,6 +178,7 @@ public class Board {
 	}
 
 	public void loadSetupConfig() throws FileNotFoundException,BadConfigFormatException  {
+		setupStrings.clear();
 		Scanner layoutReader = new Scanner(setupFile);
 		while (layoutReader.hasNextLine()) {
 			// Creating array list of strings that will hold each tile info entry
@@ -191,6 +193,11 @@ public class Board {
 			// Checking if row starts with '//', if so it is not added to the 2d array
 			if (!row.get(0).substring(0, 2).equals("//")) {
 				setupStrings.add(row);
+			}
+			if (row.size() > 1) {
+				if (!row.get(0).equals("Room") && !row.get(0).equals("Space")) {
+					throw new BadConfigFormatException("Incorrect setup file format.");
+				}
 			}
 		}
 		layoutReader.close();

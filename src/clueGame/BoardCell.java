@@ -43,18 +43,42 @@ public class BoardCell {
 
 	public Set<BoardCell> getAdjList(Board board) {
 		testAdjacent.clear();
+		BoardCell up = null;
+		BoardCell down = null;
+		BoardCell left = null;
+		BoardCell right = null;
 		if (row > 0) {
-			testAdjacent.add(board.getCell(row - 1, col));
+			up = board.getCell(row - 1, col);
 		}
 		if (row < Board.getNumRows() - 1) {
-			testAdjacent.add(board.getCell(row + 1, col));
+			down = board.getCell(row + 1, col);
 		}
 		if (col > 0) {
-			testAdjacent.add(board.getCell(row, col - 1));
+			left = board.getCell(row, col - 1);
 		}
 		if (col < Board.getNumColumns() - 1) {
-			testAdjacent.add(board.getCell(row, col + 1));
+			right = board.getCell(row, col + 1);
 		}
+		
+		if (isDoorway) { 
+			if (up != null && !up.isOccupied) {
+				testAdjacent.add(board.getCell(row - 1, col));
+			}
+			if (down != null && !down.isOccupied) {
+				testAdjacent.add(board.getCell(row + 1, col));
+			}
+			if (left != null && !left.isOccupied) {
+				testAdjacent.add(board.getCell(row, col - 1));
+			}
+			if (right != null && !right.isOccupied) {
+				testAdjacent.add(board.getCell(row, col + 1));
+			}
+		} else if (inRoom) {
+			
+		} else {
+			
+		}
+		
 		return testAdjacent;
 	}
 	

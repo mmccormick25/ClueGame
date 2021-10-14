@@ -10,7 +10,7 @@ public class BoardCell {
 	private int row;
 	private int col;
 	// Creating test set to avoid errors
-	private Set<BoardCell> testAdjacent = new HashSet<>();
+	private Set<BoardCell> adjacent = new HashSet<>();
 	private boolean inRoom = false;
 	private boolean isOccupied = false;
 	private boolean isDoorway = false;
@@ -42,44 +42,102 @@ public class BoardCell {
 	}
 
 	public Set<BoardCell> getAdjList(Board board) {
-		testAdjacent.clear();
+		if (!this.inRoom) {
+			adjacent.clear();
+		}
+		
 		BoardCell up = null;
 		BoardCell down = null;
 		BoardCell left = null;
 		BoardCell right = null;
+		
+		Character blockChar = 'X';
+		
+		// Checking if directions are valid based on if they are on edge of the board or are in closet
 		if (row > 0) {
 			up = board.getCell(row - 1, col);
+			if (up.getLayoutString().charAt(0) == blockChar || up.getOccupied()) {
+				up = null;
+			}
 		}
 		if (row < Board.getNumRows() - 1) {
 			down = board.getCell(row + 1, col);
+			if (down.getLayoutString().charAt(0) == blockChar || down.getOccupied()) {
+				down = null;
+			}
 		}
 		if (col > 0) {
 			left = board.getCell(row, col - 1);
+			if (left.getLayoutString().charAt(0) == blockChar || left.getOccupied()) {
+				left = null;
+			}
 		}
 		if (col < Board.getNumColumns() - 1) {
 			right = board.getCell(row, col + 1);
+			if (right.getLayoutString().charAt(0) == blockChar ||  right.getOccupied()) {
+				right = null;
+			}
 		}
 		
+		// Logic for doorways, only adds room to adjacency list if door is facing that room
 		if (isDoorway) { 
-			if (up != null && !up.isOccupied) {
-				testAdjacent.add(board.getCell(row - 1, col));
+			if (up != null) {
+				if (up.inRoom && this.getDoorDirection() == DoorDirection.UP) {
+					Room room = board.getRoom(up);
+					BoardCell center = room.getCenterCell();
+					center.addAdjacency(this);
+					adjacent.add(center);
+				} else if (!up.inRoom) {
+					adjacent.add(up);
+				}
 			}
-			if (down != null && !down.isOccupied) {
-				testAdjacent.add(board.getCell(row + 1, col));
+			if (down != null) {
+				if (down.inRoom && this.getDoorDirection() == DoorDirection.DOWN) {
+					Room room = board.getRoom(down);
+					BoardCell center = room.getCenterCell();
+					center.addAdjacency(this);
+					adjacent.add(center);
+				} else if (!down.inRoom) {
+					adjacent.add(down);
+				}
 			}
-			if (left != null && !left.isOccupied) {
-				testAdjacent.add(board.getCell(row, col - 1));
+			if (left != null) {
+				if (left.inRoom && this.getDoorDirection() == DoorDirection.LEFT) {
+					Room room = board.getRoom(left);
+					BoardCell center = room.getCenterCell();
+					center.addAdjacency(this);
+					adjacent.add(center);
+				} else if (!left.inRoom) {
+					adjacent.add(left);
+				}
 			}
-			if (right != null && !right.isOccupied) {
-				testAdjacent.add(board.getCell(row, col + 1));
+			if (right != null) {
+				if (right.inRoom && this.getDoorDirection() == DoorDirection.RIGHT) {
+					Room room = board.getRoom(right);
+					BoardCell center = room.getCenterCell();
+					center.addAdjacency(this);
+					adjacent.add(center);
+				} else if (!right.inRoom) {
+					adjacent.add(right);
+				}
 			}
-		} else if (inRoom) {
-			
-		} else {
-			
+		// Logic for regular pathways
+		} else if (!inRoom){
+			if (up != null && !up.inRoom) {
+				adjacent.add(up);
+			}
+			if (down != null && !down.inRoom) {
+				adjacent.add(down);
+			}
+			if (left != null && !left.inRoom) {
+				adjacent.add(left);
+			}
+			if (right != null && !right.inRoom) {
+				adjacent.add(right);
+			}
 		}
 		
-		return testAdjacent;
+		return adjacent;
 	}
 	
 	public void setIsRoom(boolean room) {
@@ -99,7 +157,7 @@ public class BoardCell {
 	}
 	
 	public void addAdjacency(BoardCell cell) {
-		testAdjacent.add(cell);
+		adjacent.add(cell);
 	}
 	
 	public void setDoorway() {

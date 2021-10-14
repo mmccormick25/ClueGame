@@ -69,7 +69,11 @@ public class Board {
 			// Looking for character that represents room in layout file
 			char c = r.get(2).charAt(0);
 			// Creating new room with name in constructor
-			Room room= new Room(r.get(1));
+			Room room = new Room(r.get(1));
+			// Checking if room is of room with door or regular space
+			if (r.get(0).equals("Room")) {
+				room.setDoorRoom();
+			}
 			// Adding room to map with key of character that represents it in layout file
 			rooms.put(c, room);
 		}
@@ -81,6 +85,10 @@ public class Board {
 				String layoutString = layoutStrings.get(r).get(c);
 				// Creating new cell at specified row and column with its own string that represents it in the layout
 				cells[r][c] = new BoardCell(r, c, layoutString);
+				// Setting cell to be in room based on first char in layout board
+				if (this.getRoom(layoutString.charAt(0)).getDoorRoom()) {
+					cells[r][c].setIsRoom(true);
+				}
 				// Checking if there is a special character after room character to set attributes of cell
 				if (layoutString.length() > 1) {
 					// Getting room object using first character in layoutString
@@ -92,15 +100,22 @@ public class Board {
 					} else if (secondChar == '*') {
 						room.setCenterCell(cells[r][c]);
 					} else if (secondChar == '<' || secondChar == '>' || secondChar == '^' || secondChar == 'v') {
-						cells[r][c].setDoorway();					
+						cells[r][c].setDoorway();
 					}
+				}
+			}
+		}
+		for (BoardCell[] r : cells) {
+			for (BoardCell c : r) {
+				if (c.isDoorway()) {
+					c.getAdjList(theInstance);
 				}
 			}
 		}
 	}
 
 	// Pathfinding methods
-	
+
 	public void findAllTargets(BoardCell cell, int length) {
 		for (BoardCell adjCell: cell.getAdjList(this)) {
 			if(visitedList.contains(adjCell) || adjCell.getOccupied()) {
@@ -123,7 +138,7 @@ public class Board {
 	}
 
 	// File init methods
-	
+
 	public void setConfigFiles(String fileName1,String fileName2) {
 		// Creating new file objects to hold source files for board
 		layoutFile = new File("data/" + fileName1);
@@ -211,7 +226,7 @@ public class Board {
 		}
 
 	}
-	
+
 	// Getters
 
 	public Set<BoardCell> getTargets() {

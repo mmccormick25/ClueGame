@@ -64,8 +64,11 @@ public class BoardAdjTargetTest {
 	public void testAdjacencyDoor()
 	{
 		Set<BoardCell> testList = board.getCell(14,5).getAdjList(board);
+		for (BoardCell c : testList) {
+			System.out.println(c.toString());
+		}
 		assertEquals(4, testList.size());
-		assertTrue(testList.contains(board.getCell(16, 1)));
+		assertTrue(testList.contains(board.getCell(17, 2)));
 		assertTrue(testList.contains(board.getCell(13, 5)));
 		assertTrue(testList.contains(board.getCell(15, 5)));
 		assertTrue(testList.contains(board.getCell(14, 6)));
@@ -99,8 +102,8 @@ public class BoardAdjTargetTest {
 		testList = board.getCell(6,5).getAdjList(board);
 		assertEquals(4, testList.size());
 		assertTrue(testList.contains(board.getCell(6, 4)));
-		assertTrue(testList.contains(board.getCell(5, 4)));
-		assertTrue(testList.contains(board.getCell(6, 7)));
+		assertTrue(testList.contains(board.getCell(5, 5)));
+		assertTrue(testList.contains(board.getCell(7, 5)));
 
 		// Test adjacent to walkways
 		testList = board.getCell(9,6).getAdjList(board);

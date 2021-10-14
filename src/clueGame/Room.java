@@ -6,6 +6,7 @@ public class Room {
 	private String name;
 	private BoardCell centerCell;
 	private BoardCell labelCell;
+	private boolean doorRoom;
 	
 	public Room(String name) {
 		super();
@@ -22,6 +23,14 @@ public class Room {
 	
 	public BoardCell getCenterCell() {
 		return this.centerCell;
+	}
+	
+	public boolean getDoorRoom() {
+		return this.doorRoom;
+	}
+	
+	public void setDoorRoom() {
+		this.doorRoom = true;
 	}
 	
 	public void setLabelCell(BoardCell cell) {

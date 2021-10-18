@@ -7,6 +7,8 @@ public class Room {
 	private BoardCell centerCell;
 	private BoardCell labelCell;
 	private boolean doorRoom;
+	private BoardCell secretCell;
+	private boolean hasSecretPath;
 	
 	public Room(String name) {
 		super();
@@ -39,6 +41,17 @@ public class Room {
 	
 	public void setCenterCell(BoardCell cell) {
 		this.centerCell = cell;
+	}
+	public void setSecretPath(BoardCell cell) {
+		this.hasSecretPath = true;
+		this.secretCell = cell;
+	}
+	
+	public boolean getSecretPath() {
+		return this.hasSecretPath;
+	}
+	public BoardCell getSecretCell() {
+		return this.secretCell;
 	}
 	
 	@Override

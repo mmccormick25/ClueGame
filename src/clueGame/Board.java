@@ -101,6 +101,8 @@ public class Board {
 						room.setCenterCell(cells[r][c]);
 					} else if (secondChar == '<' || secondChar == '>' || secondChar == '^' || secondChar == 'v') {
 						cells[r][c].setDoorway();
+					} else {
+						room.setSecretPath(cells[r][c]);
 					}
 				}
 			}
@@ -118,7 +120,7 @@ public class Board {
 
 	public void findAllTargets(BoardCell cell, int length) {
 		for (BoardCell adjCell: cell.getAdjList(this)) {
-			if(visitedList.contains(adjCell) || adjCell.getOccupied()) {
+			if(visitedList.contains(adjCell) || (adjCell.getOccupied() && (!adjCell.isRoom()))) {
 				continue;
 			}
 			visitedList.add(adjCell);
@@ -133,6 +135,7 @@ public class Board {
 
 	public void calcTargets(BoardCell startCell, int pathlength) {
 		visitedList.clear();
+		targets.clear();
 		visitedList.add(startCell);
 		findAllTargets(startCell,pathlength);
 	}

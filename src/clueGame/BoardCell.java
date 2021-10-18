@@ -135,6 +135,15 @@ public class BoardCell {
 			if (right != null && !right.inRoom) {
 				adjacent.add(right);
 			}
+			// check the cell in the room.
+		} else if (inRoom) {
+			Room room = board.getRoom(this.layoutString.charAt(0));
+			if(room.getSecretPath()) {
+				char temp = room.getSecretCell().layoutString.charAt(1);
+				Room transferRoom = board.getRoom(temp);
+				BoardCell center = transferRoom.getCenterCell();
+				adjacent.add(center);
+			}
 		}
 		
 		return adjacent;

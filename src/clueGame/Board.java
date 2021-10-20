@@ -219,6 +219,7 @@ public class Board {
 			}
 		}
 		layoutReader.close();
+		
 
 		// Testing file was read properly
 		for (ArrayList<String> i : setupStrings) {
@@ -233,10 +234,11 @@ public class Board {
 	// Getters
 
 	public Set<BoardCell> getTargets() {
-		for(BoardCell test:targets) {
+	/*	for(BoardCell test:targets) {
 			System.out.print(test);
 		}
 		System.out.println();
+		*/
 		return targets;
 	}
 

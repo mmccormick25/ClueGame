@@ -1,53 +1,25 @@
-commit 948a1c519afea6a1bca7321c9a699a73bcaa912e
+commit cd0bcce9533d38b5cf46101c7e35b6b42cb6647e
 Author: mmccormick21 <mmccormick@mymail.mines.edu>
-Date:   Mon Oct 11 16:01:15 2021 -0600
+Date:   Mon Oct 11 17:57:23 2021 -0600
 
-    Driver: Matthew McCormick, Navigator: Zhen Liu - Refactoring and comments added
+    Driver: Zhen Liu, Navigator: Matthew McCormick - add comments and commits
 
-commit d662ea6ebbb733ce990ea2cdc120ffe3acae5743
+commit 859ba8d86eb95c69cb412b2478b47393f1ff4f1a
+Author: Zhen Liu <zliu1@mines.edu>
+Date:   Mon Oct 11 17:34:04 2021 -0600
+
+    Driver: Matthew McCormick, Navigator: Zhen Liu  - fixed 2 failures
+
+commit 09e170f7a983260a11f5cfe2f9ef35f20c9063a4
 Author: mmccormick21 <mmccormick@mymail.mines.edu>
-Date:   Mon Oct 11 15:33:58 2021 -0600
+Date:   Mon Oct 17 17:28:02 2021 -0600
 
-    Driver: Matthew McCormick, Navigator: Zhen Liu - Exception tests now all pass due to removed try catch
+    Driver: Zhen Liu, Navigator: Matthew McCormick - add secret pathway for adjacent method
 
-commit f2be6dffae41e3de5d753e0a27109ccc8a62798f
+
+commit f7c341b5cd2a91830a028e3c6c8f81a4a52fccca
 Author: Zhen Liu <zliu1@mines.edu>
-Date:   Mon Oct 11 15:29:46 2021 -0600
+Date:   Mon Oct 14 15:16:59 2021 -0600
 
-    Driver: Zhen Liu, Navigator: Matthew McCormick - secret passage function added
+	Driver: Matthew McCormick, Navigator: Zhen Liu - Add adjacent method for not in room and isDoorWay().
 
-commit 998b12122acace59b23cbd3f5a0d4bd1ab586f65
-Author: mmccormick21 <mmccormick@mymail.mines.edu>
-Date:   Mon Oct 11 15:05:06 2021 -0600
-
-    Driver: Matthew McCormick, Navigator: Zhen Liu - Got majority of init tests passing by getting rid of hard coding
-
-commit ab2624b76cce278bab3e9add7b1b81512c8ee985
-Author: Zhen Liu <zliu1@mines.edu>
-Date:   Sun Oct 10 18:23:30 2021 -0600
-
-    Driver: Zhen Liu, Navigator: Matthew McCormick - add the 3 exceptions in the methods of loadlayout and loadsetup
-
-commit ed3325e6125c904f0ac63a32b31a5988780475cc
-Author: Zhen Liu <zliu1@mines.edu>
-Date:   Sun Oct 10 14:30:16 2021 -0600
-0
-    Driver: Zhen Liu, Navigator: Matthew McCormick - Map holding rooms added
-
-commit 8cb6bca73abb805303729e3ea87c093571616367
-Author: mmccormick <mmccormick@mines.edu>
-Date:   Sun Oct 10 14:03:52 2021 -0600
-
-    Driver: Zhen Liu, Navigator: Matthew McCormick - Started working on getRoom
-
-commit 50ee67dfe66ebf0d18c411073a605ed2294d05a0
-Author: mmccormick <mmccormick@mines.edu>
-Date:   Sun Oct 10 13:40:23 2021 -0600
-
-    Driver: Matthew McCormick, Navigator: Zhen Liu - Fixed incorrectly formatted csv file
-
-commit d2d98bace587fe593ffa83eb20e91f66b717f48c
-Author: mmccormick <mmccormick@mines.edu>
-Date:   Sun Oct 10 12:38:10 2021 -0600
-
-    Driver: Matthew McCormick, Navigator: Zhen Liu - Got file input working to create 2d arraylists of strings

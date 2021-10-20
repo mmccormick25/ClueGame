@@ -64,9 +64,6 @@ public class BoardAdjTargetTest {
 	public void testAdjacencyDoor()
 	{
 		Set<BoardCell> testList = board.getCell(14,5).getAdjList(board);
-		for (BoardCell c : testList) {
-			System.out.println(c.toString());
-		}
 		assertEquals(4, testList.size());
 		assertTrue(testList.contains(board.getCell(17, 2)));
 		assertTrue(testList.contains(board.getCell(13, 5)));

@@ -36,20 +36,20 @@ public class BoardAdjTargetTest {
 	{
 		// we want to test a couple of different rooms.
 		// First, the green house that has two doors
-		Set<BoardCell> testList = board.getCell(3,3).getAdjList(board);
+		Set<BoardCell> testList = board.getAdjList(board.getCell(3,3));
 		assertEquals(2, testList.size());
 		assertTrue(testList.contains(board.getCell(5, 7)));
 		assertTrue(testList.contains(board.getCell(5, 8)));
 		
 		// now test the lab which has secret passage
-		testList = board.getCell(9,2).getAdjList(board);
+		testList = board.getAdjList(board.getCell(9,2));
 		assertEquals(2, testList.size());
 		assertFalse(testList.contains(board.getCell(11, 5)));
 		assertTrue(testList.contains(board.getCell(13, 25)));
 
 		
 		// one more room, 
-		testList = board.getCell(19,9).getAdjList(board);
+		testList = board.getAdjList(board.getCell(19,9));
 		assertEquals(3, testList.size());
 		assertTrue(testList.contains(board.getCell(15, 9)));
 		assertTrue(testList.contains(board.getCell(15, 10)));
@@ -63,7 +63,7 @@ public class BoardAdjTargetTest {
 	@Test
 	public void testAdjacencyDoor()
 	{
-		Set<BoardCell> testList = board.getCell(14,5).getAdjList(board);
+		Set<BoardCell> testList = board.getAdjList(board.getCell(14,5));
 		assertEquals(4, testList.size());
 		assertTrue(testList.contains(board.getCell(17, 2)));
 		assertTrue(testList.contains(board.getCell(13, 5)));
@@ -72,13 +72,13 @@ public class BoardAdjTargetTest {
 
 
 
-		testList = board.getCell(17,23).getAdjList(board);
+		testList = board.getAdjList(board.getCell(17,23));
 		assertEquals(3, testList.size());
 		assertTrue(testList.contains(board.getCell(17, 22)));
 		assertTrue(testList.contains(board.getCell(16, 23)));
 		assertTrue(testList.contains(board.getCell(19, 25)));
 		
-		testList = board.getCell(15,9).getAdjList(board);
+		testList = board.getAdjList(board.getCell(15,9));
 		assertEquals(4, testList.size());
 		assertTrue(testList.contains(board.getCell(15, 8)));
 		assertTrue(testList.contains(board.getCell(15, 10)));
@@ -91,19 +91,19 @@ public class BoardAdjTargetTest {
 	public void testAdjacencyWalkways()
 	{
 		// 
-		Set<BoardCell> testList = board.getCell(21,5).getAdjList(board);
+		Set<BoardCell> testList = board.getAdjList(board.getCell(21,5));
 		assertEquals(1, testList.size());
 		assertTrue(testList.contains(board.getCell(20, 5)));
 		
 		// 
-		testList = board.getCell(6,5).getAdjList(board);
+		testList = board.getAdjList(board.getCell(6,5));
 		assertEquals(4, testList.size());
 		assertTrue(testList.contains(board.getCell(6, 4)));
 		assertTrue(testList.contains(board.getCell(5, 5)));
 		assertTrue(testList.contains(board.getCell(7, 5)));
 
 		// Test adjacent to walkways
-		testList = board.getCell(9,6).getAdjList(board);
+		testList = board.getAdjList(board.getCell(9,6));
 		assertEquals(4, testList.size());
 		assertTrue(testList.contains(board.getCell(9, 5)));
 		assertTrue(testList.contains(board.getCell(9, 7)));
@@ -111,7 +111,7 @@ public class BoardAdjTargetTest {
 		assertTrue(testList.contains(board.getCell(8, 6)));
 
 		// Test next to closet
-		testList = board.getCell(9,15).getAdjList(board);
+		testList = board.getAdjList(board.getCell(9,15));
 		assertEquals(3, testList.size());
 		assertTrue(testList.contains(board.getCell(9, 14)));
 		assertTrue(testList.contains(board.getCell(9, 16)));

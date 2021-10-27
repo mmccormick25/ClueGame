@@ -71,14 +71,13 @@ public class BoardCell {
 	
 	// Returning door direction based on what character is at second position of layoutString
 	public DoorDirection getDoorDirection() {
-		char secondChar = layoutString.charAt(1);
-		if (secondChar == '<') {
+		if(layoutString.contains("<")) {	
 			return DoorDirection.LEFT;
-		} else if (secondChar == '>') {
+		} else if (layoutString.contains(">")) {
 			return DoorDirection.RIGHT;
-		} else if (secondChar == '^') {
+		} else if (layoutString.contains("^")) {
 			return DoorDirection.UP;
-		} else if (secondChar == 'v') {
+		} else if (layoutString.contains("v")) {
 			return DoorDirection.DOWN;
 		}
 		return null;
@@ -86,7 +85,7 @@ public class BoardCell {
 	
 	public boolean isLabel() {	
 		if (layoutStringLength > 1) {
-			if (layoutString.charAt(1) == '#') {
+			if (layoutString.contains("#")) {
 				return true;
 			}
 		}
@@ -95,7 +94,7 @@ public class BoardCell {
 	
 	public boolean isRoomCenter() {
 		if (layoutStringLength > 1) {
-			if (layoutString.charAt(1) == '*') {
+			if (layoutString.contains("*")) {
 				return true;
 			}
 		}
@@ -112,11 +111,6 @@ public class BoardCell {
 	public String getLayoutString() {
 		return layoutString;
 	}
-	
-	@Override
-	public String toString() {
-		return "TestCell [" + row + "][" + col + "]";
-	}
-	
+
 }
 

@@ -21,7 +21,7 @@ public class Board {
 	// Board single instance creation
 	public static Board theInstance = new Board();
 	// Blank array that will hold cells
-	private BoardCell[][] cells;
+	private BoardCell[][] grid;
 	// Config files
 	private static File setupFile;
 	private static File layoutFile;
@@ -65,61 +65,80 @@ public class Board {
 		numCols = layoutStrings.get(0).size();
 
 		// Initializing 2d list of cells to be same size as board
-		cells = new BoardCell[numRows][numCols];
-
-		// create 11 rooms with constructors.
-		// store all the rooms in the map rooms.
-		// r is a single line in the setup file, split into words
-		for (ArrayList<String> r : setupStrings) {
-			// Looking for character that represents room in layout file
-			char c = r.get(2).charAt(0);
-			// Creating new room with name in constructor
-			Room room = new Room(r.get(1));
-			// Checking if room is of room with door or regular space
-			if (r.get(0).equals("Room")) {
-				room.setDoorRoom();
-			}
-			// Adding room to map with key of character that represents it in layout file
-			rooms.put(c, room);
-		}
-
-		// Running through layoutStrings 2d array list to create 2d array of cells based on entries
-		for (int r = 0; r < numRows; r++) {
-			for (int c = 0; c < numCols; c++) {
-				// Getting string that will be used to construct cell
-				String layoutString = layoutStrings.get(r).get(c);
-				// Creating new cell at specified row and column with its own string that represents it in the layout
-				cells[r][c] = new BoardCell(r, c, layoutString);
-				// Setting cell to be in room based on first char in layout board
-				if (this.getRoom(layoutString.charAt(0)).getDoorRoom()) {
-					cells[r][c].setIsRoom(true);
+		grid = new BoardCell[numRows][numCols];
+		initialRooms();
+		initialCells();
+		doorAdjList();
+		
+		
+	}
+		public void initialRooms() {
+			// create 11 rooms with constructors.
+			// store all the rooms in the map rooms.
+			// r is a single line in the setup file, split into words
+			for (ArrayList<String> r : setupStrings) {
+				// Looking for character that represents room in layout file
+				char c = r.get(2).charAt(0);
+				// Creating new room with name in constructor
+				Room room = new Room(r.get(1));
+				// Checking if room is of room with door or regular space
+				if (r.get(0).equals("Room")) {
+					room.setDoorRoom();
 				}
-				// Checking if there is a special character after room character to set attributes of cell
-				if (layoutString.length() > 1) {
-					// Getting room object using first character in layoutString
-					Room room = this.getRoom(layoutString.charAt(0));
-					// Changing things about cell depending on what second char is
-					char secondChar = layoutString.charAt(1);
-					if (secondChar == '#') {
-						room.setLabelCell(cells[r][c]);
-					} else if (secondChar == '*') {
-						room.setCenterCell(cells[r][c]);
-					} else if (secondChar == '<' || secondChar == '>' || secondChar == '^' || secondChar == 'v') {
-						cells[r][c].setDoorway();
-					} else {
-						room.setSecretPath(cells[r][c]);
+				// Adding room to map with key of character that represents it in layout file
+				rooms.put(c, room);
+			}
+		}
+		
+public void initialCells() {
+	// Running through layoutStrings 2d array list to create 2d array of cells based on entries
+			for (int r = 0; r < numRows; r++) {
+				for (int c = 0; c < numCols; c++) {
+					// Getting string that will be used to construct cell
+					String layoutString = layoutStrings.get(r).get(c);
+					// Creating new cell at specified row and column with its own string that represents it in the layout
+					grid[r][c] = new BoardCell(r, c, layoutString);
+					// Setting cell to be in room based on first char in layout board
+					if (this.getRoom(layoutString.charAt(0)).getDoorRoom()) {
+						grid[r][c].setIsRoom(true);
+					}
+					// Checking if there is a special character after room character to set attributes of cell
+					if (layoutString.length() > 1) {
+						// Getting room object using first character in layoutString
+						Room room = this.getRoom(layoutString.charAt(0));
+						// Changing things about cell depending on what second char is
+						char secondChar = layoutString.charAt(1);
+						if (secondChar == '#') {
+							room.setLabelCell(grid[r][c]);
+							// set the as the Center cell of the room 
+						} else if (secondChar == '*') {
+							room.setCenterCell(grid[r][c]);
+							// set cell of door way to be true. 
+						} else if (secondChar == '<' || secondChar == '>' || secondChar == '^' || secondChar == 'v') {
+							grid[r][c].setDoorway();
+							// set the cell as the secret path for the room.
+						} else {
+							room.setSecretPath(grid[r][c]);
+						}
 					}
 				}
 			}
-		}
-		for (BoardCell[] r : cells) {
-			for (BoardCell c : r) {
-				if (c.isDoorway()) {
-					theInstance.getAdjList(c);
+
+}
+// get the adjacent list for rooms by getting the adjacent list for the doors.
+		public void doorAdjList() {
+			for (BoardCell[] r : grid) {
+				for (BoardCell c : r) {
+					if (c.isDoorway()) {
+						theInstance.getAdjList(c);
+					}
+
 				}
 			}
 		}
-	}
+	
+		
+	
 
 	// Pathfinding methods
 
@@ -229,16 +248,11 @@ public class Board {
 	// Getters
 
 	public Set<BoardCell> getTargets() {
-	/*	for(BoardCell test:targets) {
-			System.out.print(test);
-		}
-		System.out.println();
-		*/
 		return targets;
 	}
 
 	public BoardCell getCell(int row, int col) {
-		return cells[row][col];
+		return grid[row][col];
 	}
 
 	public Room getRoom(Character x) {

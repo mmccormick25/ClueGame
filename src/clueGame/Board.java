@@ -257,107 +257,83 @@ public class Board {
 			boardCell.adjacent.clear();
 		}
 		
-		BoardCell up = null;
-		BoardCell down = null;
-		BoardCell left = null;
-		BoardCell right = null;
-		
-		Character blockChar = 'X';
-		
-		// Checking if directions are valid based on if they are on edge of the board or are in closet
-		if (boardCell.row > 0) {
-			up = getCell(boardCell.row - 1, boardCell.col);
-			if (up.getLayoutString().charAt(0) == blockChar || up.getOccupied()) {
-				up = null;
-			}
-		}
-		if (boardCell.row < Board.getNumRows() - 1) {
-			down = getCell(boardCell.row + 1, boardCell.col);
-			if (down.getLayoutString().charAt(0) == blockChar || down.getOccupied()) {
-				down = null;
-			}
-		}
-		if (boardCell.col > 0) {
-			left = getCell(boardCell.row, boardCell.col - 1);
-			if (left.getLayoutString().charAt(0) == blockChar || left.getOccupied()) {
-				left = null;
-			}
-		}
-		if (boardCell.col < Board.getNumColumns() - 1) {
-			right = getCell(boardCell.row, boardCell.col + 1);
-			if (right.getLayoutString().charAt(0) == blockChar ||  right.getOccupied()) {
-				right = null;
-			}
-		}
-		
-		// Logic for doorways, only adds room to adjacency list if door is facing that room
-		if (boardCell.isDoorway) { 
-			if (up != null) {
-				if (up.inRoom && boardCell.getDoorDirection() == DoorDirection.UP) {
-					Room room = getRoom(up);
-					BoardCell center = room.getCenterCell();
-					center.addAdjacency(boardCell);
-					boardCell.adjacent.add(center);
-				} else if (!up.inRoom) {
-					boardCell.adjacent.add(up);
+		BoardCell[] orthoCells = getValidCells(boardCell);
+
+		for (int n = 0; n < orthoCells.length; n++) {
+			// Logic for doorways, only adds room to adjacency list if door is facing that room
+
+			if (boardCell.isDoorway) { 
+				
+				DoorDirection rightDir = DoorDirection.UP;
+				if (n == 1) {
+					rightDir = DoorDirection.DOWN;
+				} else if (n == 2) {
+					rightDir = DoorDirection.LEFT;
+				} else if (n == 3) {
+					rightDir = DoorDirection.RIGHT;
 				}
-			}
-			if (down != null) {
-				if (down.inRoom && boardCell.getDoorDirection() == DoorDirection.DOWN) {
-					Room room = getRoom(down);
-					BoardCell center = room.getCenterCell();
-					center.addAdjacency(boardCell);
-					boardCell.adjacent.add(center);
-				} else if (!down.inRoom) {
-					boardCell.adjacent.add(down);
+
+				if (orthoCells[n] != null) {
+					if (orthoCells[n].inRoom && boardCell.getDoorDirection() == rightDir) {
+						Room room = getRoom(orthoCells[n]);
+						BoardCell center = room.getCenterCell();
+						center.addAdjacency(boardCell);
+						boardCell.adjacent.add(center);
+					} else if (!orthoCells[n].inRoom) {
+						boardCell.adjacent.add(orthoCells[n]);
+					}
 				}
-			}
-			if (left != null) {
-				if (left.inRoom && boardCell.getDoorDirection() == DoorDirection.LEFT) {
-					Room room = getRoom(left);
-					BoardCell center = room.getCenterCell();
-					center.addAdjacency(boardCell);
-					boardCell.adjacent.add(center);
-				} else if (!left.inRoom) {
-					boardCell.adjacent.add(left);
+				
+				// Logic for regular pathways
+			} else if (!boardCell.inRoom){
+				if (orthoCells[n] != null && !orthoCells[n].inRoom) {
+					boardCell.adjacent.add(orthoCells[n]);
 				}
-			}
-			if (right != null) {
-				if (right.inRoom && boardCell.getDoorDirection() == DoorDirection.RIGHT) {
-					Room room = getRoom(right);
-					BoardCell center = room.getCenterCell();
-					center.addAdjacency(boardCell);
-					boardCell.adjacent.add(center);
-				} else if (!right.inRoom) {
-					boardCell.adjacent.add(right);
-				}
-			}
-		// Logic for regular pathways
-		} else if (!boardCell.inRoom){
-			if (up != null && !up.inRoom) {
-				boardCell.adjacent.add(up);
-			}
-			if (down != null && !down.inRoom) {
-				boardCell.adjacent.add(down);
-			}
-			if (left != null && !left.inRoom) {
-				boardCell.adjacent.add(left);
-			}
-			if (right != null && !right.inRoom) {
-				boardCell.adjacent.add(right);
-			}
 			// check the cell in the room.
-		} else if (boardCell.inRoom) {
-			Room room = getRoom(boardCell.layoutString.charAt(0));
-			if(room.getSecretPath()) {
-				char temp = room.getSecretCell().layoutString.charAt(1);
-				Room transferRoom = getRoom(temp);
-				BoardCell center = transferRoom.getCenterCell();
-				boardCell.adjacent.add(center);
+			} else if (boardCell.inRoom) {
+				Room room = getRoom(boardCell.layoutString.charAt(0));
+				if(room.getSecretPath()) {
+					char temp = room.getSecretCell().layoutString.charAt(1);
+					Room transferRoom = getRoom(temp);
+					BoardCell center = transferRoom.getCenterCell();
+					boardCell.adjacent.add(center);
+				}
 			}
 		}
 		
 		return boardCell.adjacent;
+	}
+	
+	public BoardCell[] getValidCells(BoardCell boardCell) {
+		
+		BoardCell[] orthoCells = {null, null, null, null};
+		
+		// Checking if directions are valid based on if they are on edge of the board or are in closet
+		if (boardCell.row > 0) {
+			orthoCells[0] = getCell(boardCell.row - 1, boardCell.col);
+			orthoCells[0] = checkTileValidity(orthoCells[0]);
+		}
+		if (boardCell.row < Board.getNumRows() - 1) {
+			orthoCells[1] = getCell(boardCell.row + 1, boardCell.col);
+			orthoCells[1] = checkTileValidity(orthoCells[1]);
+		}
+		if (boardCell.col > 0) {
+			orthoCells[2] = getCell(boardCell.row, boardCell.col - 1);
+			orthoCells[2] = checkTileValidity(orthoCells[2]);
+		}
+		if (boardCell.col < Board.getNumColumns() - 1) {
+			orthoCells[3] = getCell(boardCell.row, boardCell.col + 1);
+			orthoCells[3] = checkTileValidity(orthoCells[3]);
+		}
+		
+		return orthoCells;
+	}
+	
+	private BoardCell checkTileValidity(BoardCell boardCell) {
+		if (boardCell.getLayoutString().charAt(0) == 'X' || boardCell.getOccupied()) {
+			boardCell = null;
+		}
+		return boardCell;
 	}
 	
 	public static int getNumRows() {

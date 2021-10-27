@@ -71,14 +71,13 @@ public class BoardCell {
 	
 	// Returning door direction based on what character is at second position of layoutString
 	public DoorDirection getDoorDirection() {
-		char secondChar = layoutString.charAt(1);
-		if (secondChar == '<') {
+		if(layoutString.contains("<")) {	
 			return DoorDirection.LEFT;
-		} else if (secondChar == '>') {
+		} else if (layoutString.contains(">")) {
 			return DoorDirection.RIGHT;
-		} else if (secondChar == '^') {
+		} else if (layoutString.contains("^")) {
 			return DoorDirection.UP;
-		} else if (secondChar == 'v') {
+		} else if (layoutString.contains("v")) {
 			return DoorDirection.DOWN;
 		}
 		return null;

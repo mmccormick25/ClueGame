@@ -48,11 +48,16 @@ public class Board {
 	/*
 	 * initialize the board (since we are using singleton pattern)
 	 */
-	public void initialize() throws FileNotFoundException, BadConfigFormatException
-	{
-		// Calling functions to get data from config files
-		loadSetupConfig();
-		loadLayoutConfig();
+	public void initialize() {
+		// Using try catch to handle exceptions from loadSetupConfig and loadLayoutConfig
+		try {
+			loadSetupConfig();
+			loadLayoutConfig();
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		} catch (BadConfigFormatException e) {
+			System.out.println(e.getMessage());
+		}
 
 		// Getting number of rows which is num of arrayLists in layoutStrings
 		numRows = layoutStrings.size();
@@ -219,16 +224,6 @@ public class Board {
 			}
 		}
 		layoutReader.close();
-		
-
-		// Testing file was read properly
-		for (ArrayList<String> i : setupStrings) {
-			for (String n : i) {
-				System.out.print(n + " ");
-			}
-			System.out.println("");
-		}
-
 	}
 
 	// Getters

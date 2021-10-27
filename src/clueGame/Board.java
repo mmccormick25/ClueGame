@@ -248,11 +248,6 @@ public void initialCells() {
 	// Getters
 
 	public Set<BoardCell> getTargets() {
-	/*	for(BoardCell test:targets) {
-			System.out.print(test);
-		}
-		System.out.println();
-		*/
 		return targets;
 	}
 

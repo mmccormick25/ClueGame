@@ -111,11 +111,6 @@ public class BoardCell {
 	public String getLayoutString() {
 		return layoutString;
 	}
-	
-	@Override
-	public String toString() {
-		return "TestCell [" + row + "][" + col + "]";
-	}
-	
+
 }
 

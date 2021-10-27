@@ -85,7 +85,7 @@ public class BoardCell {
 	
 	public boolean isLabel() {	
 		if (layoutStringLength > 1) {
-			if (layoutString.charAt(1) == '#') {
+			if (layoutString.contains("#")) {
 				return true;
 			}
 		}
@@ -94,7 +94,7 @@ public class BoardCell {
 	
 	public boolean isRoomCenter() {
 		if (layoutStringLength > 1) {
-			if (layoutString.charAt(1) == '*') {
+			if (layoutString.contains("*")) {
 				return true;
 			}
 		}

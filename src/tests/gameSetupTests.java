@@ -25,7 +25,7 @@ public class gameSetupTests {
 	}
 	
 	@Test
-	public void testPlayerSetup() {
+	public void testWeaponSetup() {
 		
 	}
 }

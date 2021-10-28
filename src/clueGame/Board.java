@@ -34,6 +34,8 @@ public class Board {
 	public static HashMap<Character, Room> rooms = new HashMap<Character, Room>();
 	// an array of special characters: <,>,^,*,#,v
 	public static ArrayList<String> specialC = new ArrayList<String>(Arrays.asList("<",">","^","v","#","*"));
+	// list of weapons
+	public static ArrayList<String> weapons = new ArrayList<String>();
 	
 	public static Character closetChar;
 
@@ -67,35 +69,52 @@ public class Board {
 		numCols = layoutStrings.get(0).size();
 
 		// Initializing 2d list of cells to be same size as board
-		grid = new BoardCell[numRows][numCols];
-		initialRooms();
+		grid = new BoardCell[numRows][numCols]; 
+		
+		for (ArrayList<String> row : setupStrings) {
+			String type = row.get(0);
+			if(type == "Room" || type == "Space") {
+				initialRoom(row);
+			} else if (type == "Weapon") {
+				initialWeapon(row);
+			} else if (type == "Player") {
+				initialPlayer(row);
+			}
+		}
+		
 		initialCells();
 		doorAdjList();
 
 
 	}
-	public void initialRooms() {
+	public void initialRoom(ArrayList<String> row) {
 		// create 11 rooms with constructors.
 		// store all the rooms in the map rooms.
 		// r is a single line in the setup file, split into words
-		for (ArrayList<String> r : setupStrings) {
-			// Looking for character that represents room in layout file
-			char c = r.get(2).charAt(0);
-			// Creating new room with name in constructor
-			Room room = new Room(r.get(1));
-			
-			// Getting character that represents closet
-			if (room.getName().equals("Unused")) {
-				closetChar = r.get(2).charAt(0);
-			}
-			
-			// Checking if room is of room with door or regular space
-			if (r.get(0).equals("Room")) {
-				room.setDoorRoom();
-			}
-			// Adding room to map with key of character that represents it in layout file
-			rooms.put(c, room);
+		// Looking for character that represents room in layout file
+		char c = row.get(2).charAt(0);
+		// Creating new room with name in constructor
+		Room room = new Room(row.get(1));
+
+		// Getting character that represents closet
+		if (room.getName().equals("Unused")) {
+			closetChar = row.get(2).charAt(0);
 		}
+
+		// Checking if room is of room with door or regular space
+		if (row.get(0).equals("Room")) {
+			room.setDoorRoom();
+		}
+		// Adding room to map with key of character that represents it in layout file
+		rooms.put(c, room);
+	}
+	
+	public void initialWeapon(ArrayList<String> row) {
+		weapons.add(row.get(1));
+	}
+	
+	public void initialPlayer(ArrayList<String> row) {
+		
 	}
 
 	public void initialCells() {
@@ -241,11 +260,15 @@ public class Board {
 				row.add(s);
 			}
 			// Checking if row starts with '//', if so it is not added to the 2d array
-			if (!row.get(0).substring(0, 2).equals("//")) {
+			ArrayList<String> validTypes = new ArrayList<String>(Arrays.asList("Room", "Space", "Weapon", "Player"));			
+			String type = row.get(0);
+			
+			if (!type.substring(0, 2).equals("//")) {
 				setupStrings.add(row);
 			}
+			
 			if (row.size() > 1) {
-				if (!row.get(0).equals("Room") && !row.get(0).equals("Space")) {
+				if (!validTypes.contains(type)) {
 					throw new BadConfigFormatException("Incorrect setup file format.");
 				}
 			}

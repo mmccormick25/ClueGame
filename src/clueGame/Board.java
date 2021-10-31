@@ -38,6 +38,10 @@ public class Board {
 	public static ArrayList<String> weapons = new ArrayList<String>();
 	
 	public static Character closetChar;
+	// create 6 players;
+	private  Player[] players= new Player[6];
+	// create the answer for the game;
+	
 
 
 	// Singleton object

@@ -36,11 +36,14 @@ public class Board {
 	public static ArrayList<String> specialC = new ArrayList<String>(Arrays.asList("<",">","^","v","#","*"));
 	// list of weapons
 	public static ArrayList<String> weapons = new ArrayList<String>();
+	// deck of all cards
+	public static ArrayList<Card> deck = new ArrayList<Card>();
 	
 	public static Character closetChar;
 	// create 6 players;
 	public static ArrayList<Player> players = new ArrayList<Player>();
 	// create the answer for the game;
+	
 	
 
 
@@ -78,6 +81,9 @@ public class Board {
 		for (ArrayList<String> row : setupStrings) {
 			String type = row.get(0);
 			System.out.println(type);
+			if (!type.equals("Space")) {
+				deck.add(new Card(row.get(1)));
+			}
 			if(type.equals("Room") || type.equals("Space")) {
 				initialRoom(row);
 			} else if (type.equals("Weapon")) {
@@ -91,8 +97,13 @@ public class Board {
 		
 		initialCells();
 		doorAdjList();
+		dealCards();
 
-
+	}
+	
+	public void dealCards() {
+		// TODO Auto-generated method stub
+		
 	}
 	public void initialRoom(ArrayList<String> row) {
 		// create 11 rooms with constructors.

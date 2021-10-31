@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import clueGame.BadConfigFormatException;
 import clueGame.Board;
+import clueGame.Card;
 
 public class gameSetupTests {
 	
@@ -38,6 +39,28 @@ public class gameSetupTests {
 		assert board.players.get(0).getName().equals("Dr. Dandelion");
 		assert board.players.get(2).getColor().equals("Gray");
 		assert board.players.get(5).getRow() == 0;
+	}
+	
+	@Test
+	public void testDeckSetup() {
+		assert board.deck.size() == 21;
+		boolean foundWrench = false;
+		boolean foundMine = false;
+		boolean foundOfficerOrange = false;
+		for (Card card : board.deck) {
+			if (card.getCardName().equals("Wrench")) {
+				foundWrench = true;
+			}
+			if (card.getCardName().equals("Mine")) {
+				foundMine = true;
+			}
+			if (card.getCardName().equals("Officer Orange")) {
+				foundOfficerOrange = true;
+			}
+		}
+		assert foundWrench;
+		assert foundMine;
+		assert foundOfficerOrange;
 	}
 	
 }

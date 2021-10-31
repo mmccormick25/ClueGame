@@ -32,4 +32,12 @@ public class gameSetupTests {
 		assert board.weapons.contains("Knife");
 	}
 	
+	@Test
+	public void testPlayerSetup() {
+		assert board.players.size() == 6;
+		assert board.players.get(0).getName().equals("Dr. Dandelion");
+		assert board.players.get(2).getColor().equals("Gray");
+		assert board.players.get(5).getRow() == 0;
+	}
+	
 }

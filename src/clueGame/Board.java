@@ -39,7 +39,7 @@ public class Board {
 	
 	public static Character closetChar;
 	// create 6 players;
-	private  Player[] players= new Player[6];
+	public static ArrayList<Player> players = new ArrayList<Player>();
 	// create the answer for the game;
 	
 
@@ -121,11 +121,19 @@ public class Board {
 	}
 	
 	public void initialPlayer(ArrayList<String> row) {
-		
+		String[] coords = row.get(3).split("-");
+		Integer y = Integer.valueOf(coords[0]);
+		Integer x = Integer.valueOf(coords[1]);
+		HumanPlayer player = new HumanPlayer(row.get(1), row.get(2),  y, x);
+		players.add(player);
 	}
 	
 	public void initialComputer(ArrayList<String> row) {
-		
+		String[] coords = row.get(3).split("-");
+		Integer y = Integer.valueOf(coords[0]);
+		Integer x = Integer.valueOf(coords[1]);
+		ComputerPlayer player = new ComputerPlayer(row.get(1), row.get(2),  y, x);
+		players.add(player);
 	}
 
 	public void initialCells() {

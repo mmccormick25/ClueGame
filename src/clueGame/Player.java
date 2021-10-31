@@ -8,7 +8,46 @@ abstract public class Player {
 	private int row, column;
 	private ArrayList<Card> cards;
 	
+	public Player(String name, String color, int row, int column) {
+		this.name = name;
+		this.setColor(color);
+		this.row = row;
+		this.column = column;
+	}
+	
 	abstract public void updatehand(Card card);
+	
+	public String getName() {
+		return name;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public int getRow() {
+		return row;
+	}
+
+	public void setRow(int row) {
+		this.row = row;
+	}
+
+	public ArrayList<Card> getCards() {
+		return cards;
+	}
+
+	public void setCards(ArrayList<Card> cards) {
+		this.cards = cards;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
 	
 	
 	

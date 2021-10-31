@@ -26,6 +26,10 @@ public class gameSetupTests {
 	
 	@Test
 	public void testWeaponSetup() {
-		
+		assert board.weapons.size() == 6;
+		assert board.weapons.contains("Wrench");
+		assert board.weapons.contains("Laser Gun");
+		assert board.weapons.contains("Knife");
 	}
+	
 }

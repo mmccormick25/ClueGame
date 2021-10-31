@@ -124,7 +124,7 @@ public class Board {
 		
 	}
 	
-public void initialComputer(ArrayList<String> row) {
+	public void initialComputer(ArrayList<String> row) {
 		
 	}
 

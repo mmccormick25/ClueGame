@@ -1,25 +1,54 @@
-commit cd0bcce9533d38b5cf46101c7e35b6b42cb6647e
-Author: mmccormick21 <mmccormick@mymail.mines.edu>
-Date:   Mon Oct 11 17:57:23 2021 -0600
+commit f3e3f960e0395c76bd4a41ccdf9a823e48d8465d
+Author: mmccormick <mmccormick@mines.edu>
+Date:   Tue Oct 26 20:29:03 2021 -0600
 
-    Driver: Zhen Liu, Navigator: Matthew McCormick - add comments and commits
+    Driver: Matthew McCormick, Navigator: Zhen Liu - Removed hardcoding of closet character for adjacency detection
 
-commit 859ba8d86eb95c69cb412b2478b47393f1ff4f1a
+commit 151eaff02cc08d50c15c106b16d07d5a749af52f
+Author: mmccormick <mmccormick@mines.edu>
+Date:   Tue Oct 26 20:15:22 2021 -0600
+
+    Driver: Matthew McCormick, Navigator: Zhen Liu - Rewrote cell adjacency function to reduce unecessary if statement chains
+
+commit f9c18281f803bfbc7adfc6f3fff9c4d1016e8b41
 Author: Zhen Liu <zliu1@mines.edu>
-Date:   Mon Oct 11 17:34:04 2021 -0600
+Date:   Tue Oct 26 20:08:20 2021 -0600
 
-    Driver: Matthew McCormick, Navigator: Zhen Liu  - fixed 2 failures
+    Driver: Zhen Liu, Navigator: Matthew McCormick - Deleted the print statements that were being used for debugging
 
-commit 09e170f7a983260a11f5cfe2f9ef35f20c9063a4
-Author: mmccormick21 <mmccormick@mymail.mines.edu>
-Date:   Mon Oct 17 17:28:02 2021 -0600
-
-    Driver: Zhen Liu, Navigator: Matthew McCormick - add secret pathway for adjacent method
-
-
-commit f7c341b5cd2a91830a028e3c6c8f81a4a52fccca
+commit 8e3523bcde80773595ff4f375de0e8d8170b4390
 Author: Zhen Liu <zliu1@mines.edu>
-Date:   Mon Oct 14 15:16:59 2021 -0600
+Date:   Tue Oct 26 20:06:59 2021 -0600
 
-	Driver: Matthew McCormick, Navigator: Zhen Liu - Add adjacent method for not in room and isDoorWay().
+    Driver: Zhen Liu, Navigator: Matthew McCormick - Fixed the hard code of isLabel and isRoomCenter
 
+commit 749cdfd5abc99281f5c467fbaefb4324664f261d
+Author: Zhen Liu <zliu1@mines.edu>
+Date:   Tue Oct 26 19:57:19 2021 -0600
+
+    Driver: Zhen Liu, Navigator: Matthew McCormick - Fixed the hard coding of door direction in the method of getDoorDirection.
+
+commit f1702d9cb4f2a5464d005358b6159e6b94dd2ddf
+Merge: d1759f5 361674c
+Author: Zhen Liu <zliu1@mines.edu>
+Date:   Tue Oct 26 19:48:47 2021 -0600
+
+     Driver: Zhen Liu, Navigator: Matthew McCormick - Changed the name of 2D boardCell from cells to grid.
+
+commit d1759f51fed54d7e9191e2af37875f4ae8a750a1
+Author: Zhen Liu <zliu1@mines.edu>
+Date:   Tue Oct 26 19:38:37 2021 -0600
+
+    Driver: Zhen Liu, Navigator: Matthew McCormick - Broke down the initialize function into 4 seperate smaller functions
+
+commit 361674c0a3d09bd5bf566ac5ff39e8eac1337bf5
+Author: mmccormick <mmccormick@mines.edu>
+Date:   Tue Oct 26 19:38:23 2021 -0600
+
+    Driver: Matthew McCormick, Navigator: Zhen Liu - Moved cell adjacency funciton to board class so board object doesn't need to be passed through function every time
+
+commit 7c884ecaf5492e3796aac37f204ed9901a6a251c
+Author: mmccormick <mmccormick@mines.edu>
+Date:   Tue Oct 26 19:30:58 2021 -0600
+
+    Driver: Matthew McCormick, Navigator: Zhen Liu - Initialize function now handles errors from setup and layout config functions using try catch

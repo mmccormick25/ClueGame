@@ -73,12 +73,15 @@ public class Board {
 		
 		for (ArrayList<String> row : setupStrings) {
 			String type = row.get(0);
-			if(type == "Room" || type == "Space") {
+			System.out.println(type);
+			if(type.equals("Room") || type.equals("Space")) {
 				initialRoom(row);
-			} else if (type == "Weapon") {
+			} else if (type.equals("Weapon")) {
 				initialWeapon(row);
-			} else if (type == "Player") {
+			} else if (type.equals("Player")) {
 				initialPlayer(row);
+			} else if (type.equals("Computer")) {
+				initialComputer(row);
 			}
 		}
 		
@@ -116,6 +119,10 @@ public class Board {
 	public void initialPlayer(ArrayList<String> row) {
 		
 	}
+	
+public void initialComputer(ArrayList<String> row) {
+		
+	}
 
 	public void initialCells() {
 		// Running through layoutStrings 2d array list to create 2d array of cells based on entries
@@ -126,6 +133,7 @@ public class Board {
 				// Creating new cell at specified row and column with its own string that represents it in the layout
 				grid[r][c] = new BoardCell(r, c, layoutString);
 				// Setting cell to be in room based on first char in layout board
+				System.out.println(this.getRoom(layoutString.charAt(0)));
 				if (this.getRoom(layoutString.charAt(0)).getDoorRoom()) {
 					grid[r][c].setIsRoom(true);
 				}
@@ -260,7 +268,7 @@ public class Board {
 				row.add(s);
 			}
 			// Checking if row starts with '//', if so it is not added to the 2d array
-			ArrayList<String> validTypes = new ArrayList<String>(Arrays.asList("Room", "Space", "Weapon", "Player"));			
+			ArrayList<String> validTypes = new ArrayList<String>(Arrays.asList("Room", "Space", "Weapon", "Player", "Computer"));			
 			String type = row.get(0);
 			
 			if (!type.substring(0, 2).equals("//")) {
@@ -269,6 +277,7 @@ public class Board {
 			
 			if (row.size() > 1) {
 				if (!validTypes.contains(type)) {
+					System.out.println(type);
 					throw new BadConfigFormatException("Incorrect setup file format.");
 				}
 			}

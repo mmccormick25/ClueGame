@@ -27,6 +27,8 @@ public class gameSetupTests {
 		board.initialize();
 	}
 	
+	
+	
 	@Test
 	public void testWeaponSetup() {
 		assert board.weapons.size() == 6;

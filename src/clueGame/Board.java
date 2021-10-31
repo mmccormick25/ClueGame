@@ -80,6 +80,10 @@ public class Board {
 		// Initializing 2d list of cells to be same size as board
 		grid = new BoardCell[numRows][numCols]; 
 		
+		// Making sure deck is empty for junit tests
+		deck.clear();
+		
+		// Initializing objects based on their type
 		for (ArrayList<String> row : setupStrings) {
 			String type = row.get(0);
 			System.out.println(type);
@@ -97,15 +101,22 @@ public class Board {
 			}
 		}
 		
+		// Creating board cells
 		initialCells();
+		// Running adjacenty on doors so rooms have proper adjacency
 		doorAdjList();
-		dealCards();
+		
+		// Only dealing cards if there are weapons in the setup file
+		if (weapons.size() > 0) {
+			dealCards();
+		}
 
 	}
 	
 	public void dealCards() {
 		Random r = new Random();
 		
+		// Getting random room string from map
 		int mapIndex = r.nextInt(rooms.size());
 		String roomString = null;
 		int i = 0;
@@ -123,6 +134,7 @@ public class Board {
 		Card weaponCard = null;
 		Card playerCard = null;
 		
+		// Looking for card names that match solution strings
 		for (Card card : deck) {
 			if (card.getCardName().equals(roomString)) {
 				roomCard = card;
@@ -135,14 +147,17 @@ public class Board {
 			}
 		}
 		
+		// Removing solution cards from deck so rest of deck can be dealed
 		deck.remove(roomCard);
 		deck.remove(weaponCard);
 		deck.remove(playerCard);
 		
 		soln = new Solution(roomCard, weaponCard, playerCard);
 		
+		// Shuffling deck
 		Collections.shuffle(deck);
 		
+		// Dealing cards one at a time to player
 		int playerIndex = 0;
 		for (Card card : deck) {
 			players.get(playerIndex).updatehand(card);
@@ -152,6 +167,7 @@ public class Board {
 			}
 		}
 		
+		// Readding solution cards to deck so deck setup test passes
 		deck.add(roomCard);
 		deck.add(weaponCard);
 		deck.add(playerCard);

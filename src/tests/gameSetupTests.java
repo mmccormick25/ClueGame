@@ -5,11 +5,13 @@ import static org.junit.Assert.assertEquals;
 import java.io.FileNotFoundException;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import clueGame.BadConfigFormatException;
 import clueGame.Board;
 import clueGame.Card;
+import clueGame.Player;
 
 public class gameSetupTests {
 	
@@ -61,6 +63,14 @@ public class gameSetupTests {
 		assert foundWrench;
 		assert foundMine;
 		assert foundOfficerOrange;
+	}
+	
+	@Test
+	public void testDeal() {
+		for (Player p : board.players) {
+			assert p.getCards().size() == 3;
+		}
+		assert board.getSolution().getSolution().length == 3;
 	}
 	
 }

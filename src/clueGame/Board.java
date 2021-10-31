@@ -6,8 +6,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -25,6 +27,8 @@ public class Board {
 	// Config files
 	private static File setupFile;
 	private static File layoutFile;
+	// Solution
+	private Solution soln;
 
 	// Creating 2d array list of strings that will represent layout
 	public ArrayList<ArrayList<String>> layoutStrings = new ArrayList<ArrayList<String>>(0);
@@ -43,8 +47,6 @@ public class Board {
 	// create 6 players;
 	public static ArrayList<Player> players = new ArrayList<Player>();
 	// create the answer for the game;
-	
-	
 
 
 	// Singleton object
@@ -102,7 +104,58 @@ public class Board {
 	}
 	
 	public void dealCards() {
-		// TODO Auto-generated method stub
+		Random r = new Random();
+		
+		int mapIndex = r.nextInt(rooms.size());
+		String roomString = null;
+		int i = 0;
+		for (Character key : rooms.keySet()) {
+			if (i == mapIndex) {
+				roomString = rooms.get(key).getName();
+			}
+			i++;
+		}
+
+		String weaponString = weapons.get(r.nextInt(weapons.size()));
+		String playerString = players.get(r.nextInt(players.size())).getName();
+		
+		Card roomCard = null;
+		Card weaponCard = null;
+		Card playerCard = null;
+		
+		for (Card card : deck) {
+			if (card.getCardName().equals(roomString)) {
+				roomCard = card;
+			}
+			if (card.getCardName().equals(weaponString)) {
+				weaponCard = card;
+			}
+			if (card.getCardName().equals(playerString)) {
+				playerCard = card;
+			}
+		}
+		
+		deck.remove(roomCard);
+		deck.remove(weaponCard);
+		deck.remove(playerCard);
+		
+		soln = new Solution(roomCard, weaponCard, playerCard);
+		
+		Collections.shuffle(deck);
+		
+		int playerIndex = 0;
+		for (Card card : deck) {
+			players.get(playerIndex).updatehand(card);
+			playerIndex++;
+			if (playerIndex >= players.size()) {
+				playerIndex = 0;
+			}
+		}
+		
+		deck.add(roomCard);
+		deck.add(weaponCard);
+		deck.add(playerCard);
+		
 		
 	}
 	public void initialRoom(ArrayList<String> row) {
@@ -420,6 +473,9 @@ public class Board {
 	public static int getNumColumns() {
 		return Board.numCols;
 
+	}
+	public Solution getSolution() {
+		return soln;
 	}
 
 

@@ -6,7 +6,7 @@ abstract public class Player {
 	private String name;
 	private String color;
 	private int row, column;
-	private ArrayList<Card> cards;
+	protected ArrayList<Card> cards = new ArrayList<Card>();
 	
 	public Player(String name, String color, int row, int column) {
 		this.name = name;
@@ -35,10 +35,6 @@ abstract public class Player {
 
 	public ArrayList<Card> getCards() {
 		return cards;
-	}
-
-	public void setCards(ArrayList<Card> cards) {
-		this.cards = cards;
 	}
 
 	public void setName(String name) {

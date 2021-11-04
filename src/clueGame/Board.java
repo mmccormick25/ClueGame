@@ -44,9 +44,9 @@ public class Board {
 	public static ArrayList<Card> deck = new ArrayList<Card>();
 	
 	public static Character closetChar;
+	
 	// create 6 players;
 	public static ArrayList<Player> players = new ArrayList<Player>();
-	// create the answer for the game;
 
 
 	// Singleton object
@@ -376,9 +376,39 @@ public class Board {
 		}
 		layoutReader.close();
 	}
+	
+	public boolean checkAccusation(Solution s) {
+		boolean result = false;
+		if(soln.getSolution()[0].getCardName().equals(s.getSolution()[0].getCardName()) && getSolution().getSolution()[1].getCardName().equals(s.getSolution()[1].getCardName()) && getSolution().getSolution()[2].getCardName().equals(s.getSolution()[2].getCardName()))
+		result = true;
+		
+		return result;
+	}
+	
+	public Card handleSuggestion(Player[] suggPlayers, Solution suggestion, Player suggestPlayer) {
+		ArrayList<Player> playerArray = new ArrayList<>(Arrays.asList(suggPlayers));
+		int startIndex = playerArray.indexOf(suggestPlayer);
+		int i;
+		if (startIndex != playerArray.size() - 1) {
+			i = startIndex + 1;
+		} else {
+			i = 0;
+		}
+		while (i != startIndex) {
+			Card suggestResult = playerArray.get(i).checkSuggestion(suggestion);
+			if (suggestResult != null) {
+				return suggestResult;
+			}
+			if (i != playerArray.size() - 1) {
+				i++;
+			} else {
+				i = 0;
+			}
+		}
+		return null;
+	}
 
 	// Getters
-
 	public Set<BoardCell> getTargets() {
 		return targets;
 	}
@@ -496,13 +526,6 @@ public class Board {
 	public void setSolution(Card room,Card weapon,Card player) {
 		soln = new Solution(room,weapon,player);
 		
-	}
-	public boolean checkAccusation(Solution s) {
-		boolean result = false;
-		if(soln.getSolution()[0].getCardName().equals(s.getSolution()[0].getCardName()) && getSolution().getSolution()[1].getCardName().equals(s.getSolution()[1].getCardName()) && getSolution().getSolution()[2].getCardName().equals(s.getSolution()[2].getCardName()))
-		result = true;
-		
-		return result;
 	}
 
 

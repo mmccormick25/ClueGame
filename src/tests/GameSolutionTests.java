@@ -12,6 +12,7 @@ import clueGame.BadConfigFormatException;
 import clueGame.Board;
 import clueGame.Card;
 import clueGame.ComputerPlayer;
+import clueGame.HumanPlayer;
 import clueGame.Player;
 import clueGame.Solution;
 
@@ -77,5 +78,27 @@ public class GameSolutionTests {
 		// Adding cards to player hand
 		testPlayer.updatehand(labCard);
 		assert (testPlayer.checkSuggestion(suggestion) == labCard);
+	}
+	
+	@Test
+	public void checkSuggestionHandling() {
+		// Creating suggestion
+		Solution suggestion = new Solution(labCard, laserGunCard, grayCard);
+		// Setting up players and their hands
+		HumanPlayer humanPlayer = new HumanPlayer("testPlayerOne", "Black", 10, 10);
+		humanPlayer.updatehand(grayCard);
+		ComputerPlayer compPlayerOne = new ComputerPlayer("testPlayerTwo", "Black", 10, 10);
+		compPlayerOne.updatehand(labCard);
+		ComputerPlayer compPlayerTwo = new ComputerPlayer("testPlayerTwo", "Black", 10, 10);
+		compPlayerTwo.updatehand(laserGunCard);
+		
+		Player[] players = {humanPlayer, compPlayerOne, compPlayerTwo};
+		
+		assert (board.handleSuggestion(players, suggestion, humanPlayer) == labCard);
+		assert (board.handleSuggestion(players, suggestion, compPlayerOne) == laserGunCard);
+		
+		// Suggestion containing cards that only compPlayerTwo has one has
+		Solution suggestionTwo = new Solution(mineCard, laserGunCard, orangeCard);
+		assert (board.handleSuggestion(players, suggestionTwo, compPlayerTwo) == null);
 	}
 }

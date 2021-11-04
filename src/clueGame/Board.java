@@ -493,6 +493,17 @@ public class Board {
 	public Solution getSolution() {
 		return soln;
 	}
+	public void setSolution(Card room,Card weapon,Card player) {
+		soln = new Solution(room,weapon,player);
+		
+	}
+	public boolean checkAccusation(Solution s) {
+		boolean result = false;
+		if(soln.getSolution()[0].getCardName().equals(s.getSolution()[0].getCardName()) && getSolution().getSolution()[1].getCardName().equals(s.getSolution()[1].getCardName()) && getSolution().getSolution()[2].getCardName().equals(s.getSolution()[2].getCardName()))
+		result = true;
+		
+		return result;
+	}
 
 
 

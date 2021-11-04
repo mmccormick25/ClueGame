@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 abstract public class Player {
 	private String name;
@@ -16,6 +17,20 @@ abstract public class Player {
 	}
 	
 	abstract public void updatehand(Card card);
+	
+	public Card checkSuggestion(Solution suggestion) {
+		// Shuffling cards so random matching card is returned
+		Collections.shuffle(cards);
+		for (Card playerCard : cards) {
+			for (Card suggestionCard : suggestion.getSolution()) {
+				if (playerCard == suggestionCard) {
+					return playerCard;
+				}
+			}
+		}
+		return null;
+		
+	}
 	
 	public String getName() {
 		return name;

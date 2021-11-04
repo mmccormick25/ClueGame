@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import clueGame.BadConfigFormatException;
 import clueGame.Board;
 import clueGame.Card;
+import clueGame.ComputerPlayer;
 import clueGame.Player;
 import clueGame.Solution;
 
@@ -58,11 +59,23 @@ public class GameSolutionTests {
 		
 	}
 	@Test
-	public void checkAccsationTests() {
+	public void checkAccusationTests() {
 		board.setSolution(bathroomCard, laserGunCard, grayCard);
 		assert board.checkAccusation(new Solution(labCard,laserGunCard, grayCard))==false;
 		assert board.checkAccusation(new Solution(bathroomCard,laserGunCard, blueCard))==false;
 		assert board.checkAccusation(new Solution(bathroomCard,knifeCard, grayCard))==false;
-		
+		assert board.checkAccusation(new Solution(bathroomCard,laserGunCard, grayCard))==true;
+	}
+	
+	@Test
+	public void checkDisproveSuggestion() {
+		// Creating suggestion to be tested
+		Solution suggestion = new Solution(labCard, laserGunCard, grayCard);
+		// Creating dummy player to add cards to hand
+		ComputerPlayer testPlayer = new ComputerPlayer("testPlayer", "Black", 10, 10);
+		assert (testPlayer.checkSuggestion(suggestion) == null);
+		// Adding cards to player hand
+		testPlayer.updatehand(labCard);
+		assert (testPlayer.checkSuggestion(suggestion) == labCard);
 	}
 }

@@ -65,13 +65,14 @@ public class ComputerAITest {
 	public void selectTargetsCheck() {
 		// test the situation of no room in the target list
 		ComputerPlayer aiOne = new ComputerPlayer("test player","red",7,9);
-		BoardCell targetCell = aiOne.selectTargets(board.getCell(7, 9), 2);
+		BoardCell targetCell = aiOne.selectTarget(board.getCell(7, 9), 2);
 		assert targetCell != board.getCell(3, 3);
 		assert targetCell != board.getCell(9, 3);
+		assert targetCell == board.getCell(6, 8);
 		
 		// test the situation of one room in the target list
 		ComputerPlayer aiTwo = new ComputerPlayer("test player","yello",5,19);
-		BoardCell targetCellTwo = aiTwo.selectTargets(board.getCell(5, 19), 3);
+		BoardCell targetCellTwo = aiTwo.selectTarget(board.getCell(5, 19), 3);
 		assert targetCellTwo == board.getCell(5, 24);
 		
 		// test the situation for room in the target list and has been seen. 
@@ -79,8 +80,52 @@ public class ComputerAITest {
 		ArrayList<Card> testSeenCards = new ArrayList<Card>();
 		aiThree.setSeenRooms(bathroomCard);
 		testSeenCards = aiThree.getSeenRooms();
-		BoardCell targetCellThree = aiThree.selectTargets(board.getCell(13, 20), 3);
+		BoardCell targetCellThree = aiThree.selectTarget(board.getCell(13, 20), 3);
 		assert targetCellThree != board.getCell(14, 19);
+		assert targetCellThree == board.getCell(13, 25);
+			
+	}
+	
+	@Test
+	public void creatSuggestionCheck() {
+		
+		// check if the room matches the current location
+		ComputerPlayer aiOne = new ComputerPlayer("Sir Silver","Gray",9,2);
+		Solution s = aiOne.createSuggestion(board.getCell(9, 2));
+		assert s.getSolution()[0]== labCard;
+		
+		//check if the card is selected, which is the only one weapon 		
+		aiOne.setSeenWeapons(laserGunCard);
+		aiOne.setSeenWeapons(knifeCard);
+		aiOne.setSeenWeapons(moonRockCard);
+		aiOne.setSeenWeapons(lightsaberCard);
+		aiOne.setSeenWeapons(wrenchCard);
+		Solution s1 = aiOne.createSuggestion(board.getCell(9, 2));
+		assert s1.getSolution()[1]== liveWireCard;
+		
+		
+		
+		//check if the card is selected, which is the only one person 	
+		aiOne.setSeenPersons(yellowCard);
+		aiOne.setSeenPersons(blueCard);
+		aiOne.setSeenPersons(maroonCard);
+		aiOne.setSeenPersons(brownCard);
+		Solution s2 = aiOne.createSuggestion(board.getCell(9, 2));
+		assert s1.getSolution()[2]== orangeCard;
+		
+				
+		//check if the card is randomly selected, when multiple weapons not seen
+		//check if the card is randomly selected, when multiple persons not seen 
+		
+		aiOne.getSeenPersons().clear();
+		aiOne.getSeenWeapons().clear();
+		aiOne.setSeenWeapons(liveWireCard);
+		aiOne.setSeenPersons(orangeCard);
+		assert s1.getSolution()[1] != liveWireCard;
+		assert s1.getSolution()[2] != orangeCard;
+		
+		
+		
 		
 		
 		

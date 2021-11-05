@@ -8,6 +8,22 @@ import java.util.Set;
 
 public class ComputerPlayer extends Player{
 	private ArrayList<Card> seenRooms = new ArrayList<Card>();
+	private ArrayList<Card> seenWeapons = new ArrayList<Card>();
+	private ArrayList<Card> seenPersons = new ArrayList<Card>();
+	public ArrayList<Card> getSeenWeapons() {
+		return seenWeapons;
+	}
+	public void setSeenWeapons(Card c) {
+		seenWeapons.add(c);
+	}
+	public ArrayList<Card> getSeenPersons() {
+		return seenPersons;
+	}
+	public void setSeenPersons(Card c) {
+		seenPersons.add(c);
+	}
+
+	
 	public void setSeenRooms(Card card) {
 		seenRooms.add(card);
 	}
@@ -24,7 +40,7 @@ public class ComputerPlayer extends Player{
 	public void updatehand(Card card) {
 		super.cards.add(card);
 	}
-	public BoardCell selectTargets(BoardCell currentLocation, int dice) {
+	public BoardCell selectTarget(BoardCell currentLocation, int dice) {
 		BoardCell target = null;
 		Board.getInstance().calcTargets(currentLocation, dice);
 		Set<BoardCell> targets = new HashSet<BoardCell>();
@@ -38,15 +54,24 @@ public class ComputerPlayer extends Player{
 				target = c;
 				break;
 			}else {
-				Random rdm = new Random();
+				Random rdm = new Random(123);
 				int index = rdm.nextInt(targetsList.size());
 				target = targetsList.get(index);
 			}
-		}
+		}	
 		
-		
-		
+		System.out.println(target);
 		return target;
+	}
+	
+	public Solution createSuggestion(BoardCell currentLocation) {
+		Room room = Board.getInstance().getRoom(currentLocation);
+		
+		if(currentLocation.inRoom) {
+			
+			
+		}
+		return new Solution(null,null,null);
 	}
 	
 }

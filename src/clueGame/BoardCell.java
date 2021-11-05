@@ -108,6 +108,11 @@ public class BoardCell {
 		return (Character) null;
 	}
 	
+	@Override
+	public String toString() {
+		return "BoardCell [row=" + row + ", col=" + col + "]";
+	}
+
 	public String getLayoutString() {
 		return layoutString;
 	}

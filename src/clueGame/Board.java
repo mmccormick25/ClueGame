@@ -41,7 +41,7 @@ public class Board {
 	// list of weapons
 	public static ArrayList<String> weapons = new ArrayList<String>();
 	// deck of all cards
-	public static ArrayList<Card> deck = new ArrayList<Card>();
+	public ArrayList<Card> deck = new ArrayList<Card>();
 	
 	public static Character closetChar;
 	
@@ -89,7 +89,6 @@ public class Board {
 		// Initializing objects based on their type
 		for (ArrayList<String> row : setupStrings) {
 			String type = row.get(0);
-			System.out.println(type);
 			if(type.equals("Room") || type.equals("Space")) {
 				if (!type.equals("Space")) {
 					deck.add(new Card(row.get(1), Card.CardType.ROOM));
@@ -237,7 +236,6 @@ public class Board {
 				// Creating new cell at specified row and column with its own string that represents it in the layout
 				grid[r][c] = new BoardCell(r, c, layoutString);
 				// Setting cell to be in room based on first char in layout board
-				System.out.println(this.getRoom(layoutString.charAt(0)));
 				if (this.getRoom(layoutString.charAt(0)).getDoorRoom()) {
 					grid[r][c].setIsRoom(true);
 				}
@@ -381,7 +379,6 @@ public class Board {
 			
 			if (row.size() > 1) {
 				if (!validTypes.contains(type)) {
-					System.out.println(type);
 					throw new BadConfigFormatException("Incorrect setup file format.");
 				}
 			}

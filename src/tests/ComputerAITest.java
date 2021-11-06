@@ -33,7 +33,7 @@ public class ComputerAITest {
 		// Initialize will load BOTH config files
 		board.initialize();
 		// cards for rooms 
-		greenHouseCard = new Card("Green Hourse",Card.CardType.ROOM);
+		greenHouseCard = new Card("Green House",Card.CardType.ROOM);
 		mineCard = new Card("Mine",Card.CardType.ROOM);
 		infirmaryCard = new Card("Infirmary",Card.CardType.ROOM);
 		cafeteriaCard = new Card("Cafeteria",Card.CardType.ROOM);

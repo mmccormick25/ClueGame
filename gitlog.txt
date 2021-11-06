@@ -1,3 +1,45 @@
+commit df26ffd2b287b5bd2d92eabf69cd8c33a3409a1e
+Author: mmccormick <mmccormick@mines.edu>
+Date:   Fri Nov 5 19:28:04 2021 -0600
+
+    Computer accusation test working, getting failures in other tests
+
+commit ef36a204507fba0c94a4691142b8d02343f60cda
+Author: Zhen Liu <zliu1@mines.edu>
+Date:   Thu Nov 4 21:51:26 2021 -0600
+
+    add the test for create sugguestion and haven't finished the method of create suggestion
+
+commit 9a05ab9e14d323ec65f596100ae272e4e536919b
+Author: Zhen Liu <zliu1@mines.edu>
+Date:   Thu Nov 4 21:06:48 2021 -0600
+
+    add method of select targets in computer player and passed the tests
+
+commit 8217943ab3a9a993005223b677cebf3ea301b60a
+Author: Matthew McCormick <mmccormick@mines.edu>
+Date:   Thu Nov 4 15:04:44 2021 -0600
+
+    Suggestion handling test created and passed
+
+commit 53d8941a49e078996f588402c7dfa917f9906162
+Author: Matthew McCormick <mmccormick@mines.edu>
+Date:   Thu Nov 4 14:23:42 2021 -0600
+
+    Disprove suggestion test created and passed
+
+commit 868b0c6497dea84290e2a82c48f4d6418545ea76
+Author: Zhen Liu <zliu1@mines.edu>
+Date:   Wed Nov 3 22:08:16 2021 -0600
+
+    add checkAccusation method and passed the test
+
+commit b3fb31ddc94b4c31ab4103970a3a60aa3a3effb9
+Author: mmccormick <mmccormick@mines.edu>
+Date:   Sun Oct 31 15:58:04 2021 -0600
+
+    Added comments
+
 commit 93a7b56560d2f039723e23db3d2ca5100953a907
 Author: mmccormick <mmccormick@mines.edu>
 Date:   Sun Oct 31 15:48:03 2021 -0600

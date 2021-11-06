@@ -69,12 +69,15 @@ public class ComputerPlayer extends Player{
 	
 	public Solution createSuggestion(BoardCell currentLocation) {
 		Room room = Board.getInstance().getRoom(currentLocation);
+		// Empty variables that will hold ai suggestion
 		Card roomCard = null;
 		Card weaponCard = null;
 		Card personCard = null;
+		
 		ArrayList<Card> unseenWeapons = new ArrayList<Card>();
 		ArrayList<Card> unseenPersons = new ArrayList<Card>();
 		
+		// List of all weapons and players from board
 		ArrayList<String> weapons = (ArrayList<String>) Board.getInstance().weapons.clone();
 		ArrayList<Player> players = (ArrayList<Player>) Board.getInstance().players.clone();
 		
@@ -82,6 +85,7 @@ public class ComputerPlayer extends Player{
 			roomCard = new Card(room.getName(), Card.CardType.ROOM);
 		}
 		
+		// Checking if each card in deck has been seen, if not it is added to unseen list to pick from for a suggestion
 		for (Card card : Board.getInstance().deck) {
 			if (card != null) {
 				boolean found = false;
@@ -107,12 +111,12 @@ public class ComputerPlayer extends Player{
 			}
 		}
 		
+		// Logic for picking random unseen card or random card
 		if (unseenWeapons.size() > 0) {
 			Collections.shuffle(unseenWeapons);
 			weaponCard = unseenWeapons.get(0);
 		} else {
-			Collections.shuffle(weapons);
-			
+			Collections.shuffle(weapons);			
 			weaponCard = new Card(weapons.get(0), Card.CardType.WEAPON);
 		}
 		

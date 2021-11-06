@@ -56,8 +56,7 @@ public class GameSolutionTests {
 		orangeCard = new Card("Officer Orange",Card.CardType.PERSON);
 		maroonCard = new Card("Mrs. Maroon",Card.CardType.PERSON);
 		blueCard = new Card("Professor Prizmarine",Card.CardType.PERSON);
-		
-		
+			
 	}
 	@Test
 	public void checkAccusationTests() {

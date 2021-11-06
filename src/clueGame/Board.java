@@ -47,6 +47,8 @@ public class Board {
 	
 	// create 6 players;
 	public static ArrayList<Player> players = new ArrayList<Player>();
+	
+	public boolean alreadyInitialized = false;
 
 
 	// Singleton object
@@ -62,6 +64,7 @@ public class Board {
 	 * initialize the board (since we are using singleton pattern)
 	 */
 	public void initialize() {
+		
 		// Using try catch to handle exceptions from loadSetupConfig and loadLayoutConfig
 		try {
 			loadSetupConfig();
@@ -87,17 +90,20 @@ public class Board {
 		for (ArrayList<String> row : setupStrings) {
 			String type = row.get(0);
 			System.out.println(type);
-			if (!type.equals("Space")) {
-				deck.add(new Card(row.get(1)));
-			}
 			if(type.equals("Room") || type.equals("Space")) {
+				if (!type.equals("Space")) {
+					deck.add(new Card(row.get(1), Card.CardType.ROOM));
+				}
 				initialRoom(row);
 			} else if (type.equals("Weapon")) {
 				initialWeapon(row);
+				deck.add(new Card(row.get(1), Card.CardType.WEAPON));
 			} else if (type.equals("Player")) {
 				initialPlayer(row);
+				deck.add(new Card(row.get(1), Card.CardType.PERSON));
 			} else if (type.equals("Computer")) {
 				initialComputer(row);
+				deck.add(new Card(row.get(1), Card.CardType.PERSON));
 			}
 		}
 		
@@ -197,23 +203,29 @@ public class Board {
 	}
 	
 	public void initialWeapon(ArrayList<String> row) {
-		weapons.add(row.get(1));
+		if (weapons.size() < 6) {
+			weapons.add(row.get(1));
+		}
 	}
 	
 	public void initialPlayer(ArrayList<String> row) {
-		String[] coords = row.get(3).split("-");
-		Integer y = Integer.valueOf(coords[0]);
-		Integer x = Integer.valueOf(coords[1]);
-		HumanPlayer player = new HumanPlayer(row.get(1), row.get(2),  y, x);
-		players.add(player);
+		if (players.size() < 6) {
+			String[] coords = row.get(3).split("-");
+			Integer y = Integer.valueOf(coords[0]);
+			Integer x = Integer.valueOf(coords[1]);
+			HumanPlayer player = new HumanPlayer(row.get(1), row.get(2),  y, x);
+			players.add(player);
+		}
 	}
 	
 	public void initialComputer(ArrayList<String> row) {
-		String[] coords = row.get(3).split("-");
-		Integer y = Integer.valueOf(coords[0]);
-		Integer x = Integer.valueOf(coords[1]);
-		ComputerPlayer player = new ComputerPlayer(row.get(1), row.get(2),  y, x);
-		players.add(player);
+		if (players.size() < 6) {
+			String[] coords = row.get(3).split("-");
+			Integer y = Integer.valueOf(coords[0]);
+			Integer x = Integer.valueOf(coords[1]);
+			ComputerPlayer player = new ComputerPlayer(row.get(1), row.get(2),  y, x);
+			players.add(player);
+		}
 	}
 
 	public void initialCells() {

@@ -3,6 +3,7 @@ package tests;
 import static org.junit.Assert.assertEquals;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,7 +14,7 @@ import clueGame.Board;
 import clueGame.Card;
 import clueGame.Player;
 
-public class gameSetupTests {
+public class GameSetupTests {
 	
 	private static Board board;
 	
@@ -31,6 +32,7 @@ public class gameSetupTests {
 	
 	@Test
 	public void testWeaponSetup() {
+		ArrayList<String> a = board.weapons;
 		assert board.weapons.size() == 6;
 		assert board.weapons.contains("Wrench");
 		assert board.weapons.contains("Laser Gun");
@@ -39,6 +41,7 @@ public class gameSetupTests {
 	
 	@Test
 	public void testPlayerSetup() {
+		ArrayList<Player> players = board.players;
 		assert board.players.size() == 6;
 		assert board.players.get(0).getName().equals("Dr. Dandelion");
 		assert board.players.get(2).getColor().equals("Gray");
@@ -47,6 +50,7 @@ public class gameSetupTests {
 	
 	@Test
 	public void testDeckSetup() {
+		ArrayList<Card> d = board.deck;
 		assert board.deck.size() == 21;
 		boolean foundWrench = false;
 		boolean foundMine = false;
@@ -69,6 +73,7 @@ public class gameSetupTests {
 	
 	@Test
 	public void testDeal() {
+		ArrayList<Player> players = board.players;
 		for (Player p : board.players) {
 			assert p.getCards().size() == 3;
 		}

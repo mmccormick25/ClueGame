@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
@@ -8,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
@@ -23,20 +25,21 @@ public class GameControlPanel extends JPanel {
 	 */
 	public GameControlPanel()  {
 		// set the whole panel to top and bottom.
-		setLayout(new GridLayout(2,1,10,10));
+		setLayout(new GridLayout(2,0,10,10));
 	// create the top panel by 1x4
 		JPanel top = new JPanel(new GridLayout(1,4,5,50));
 	// create the contents for uppderleft1 panel
 		JPanel upperLeft1 = new JPanel(new GridLayout(2,1));
-		whoseTurn = new JLabel("      Whose turn?");
-		turn = new JTextField(100);
+		whoseTurn = new JLabel("Whose turn?",SwingConstants.CENTER);
+		turn = new JTextField();
 		upperLeft1.add(whoseTurn);
 		upperLeft1.add(turn);
 
 		// create the contents for uppderleft2 panel
 		JPanel upperLeft2 = new JPanel(new GridLayout(1,2));
-		Roll = new JLabel("         Roll:");
-		roll = new JTextField(30);
+		Roll = new JLabel("Roll:",SwingConstants.RIGHT);
+		roll = new JTextField();
+		roll.setSize(new Dimension(10,20));
 		upperLeft2.add(Roll);
 		upperLeft2.add(roll);
 
@@ -51,7 +54,7 @@ public class GameControlPanel extends JPanel {
 		top.add(next);
 		
 // create the bottoom panel and fill the contents.
-		JPanel bottom = new JPanel(new GridLayout(1,2));
+		JPanel bottom = new JPanel(new GridLayout(0,2));
 		guess = new JTextField();
 		guess.setBorder(new TitledBorder (new EtchedBorder(),"Guess"));
 		bottom.add(guess);

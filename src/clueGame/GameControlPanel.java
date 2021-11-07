@@ -1,0 +1,113 @@
+package clueGame;
+
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.Border;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
+
+public class GameControlPanel extends JPanel {
+	private JLabel whoseTurn,Roll;
+	private JTextField turn,roll,guess,guessResult;
+	private JButton accusation,next;
+	
+
+	/**
+	 * Constructor for the panel, it does 90% of the work
+	 */
+	public GameControlPanel()  {
+		// set the whole panel to top and bottom.
+		setLayout(new GridLayout(2,1,10,10));
+	// create the top panel by 1x4
+		JPanel top = new JPanel(new GridLayout(1,4,5,50));
+	// create the contents for uppderleft1 panel
+		JPanel upperLeft1 = new JPanel(new GridLayout(2,1));
+		whoseTurn = new JLabel("      Whose turn?");
+		turn = new JTextField(100);
+		upperLeft1.add(whoseTurn);
+		upperLeft1.add(turn);
+
+		// create the contents for uppderleft2 panel
+		JPanel upperLeft2 = new JPanel(new GridLayout(1,2));
+		Roll = new JLabel("         Roll:");
+		roll = new JTextField(30);
+		upperLeft2.add(Roll);
+		upperLeft2.add(roll);
+
+		
+		
+		// create 2 buttons
+		accusation = new JButton("Make Accusation");
+		next = new JButton("NEXT!");
+		top.add(upperLeft1);
+		top.add(upperLeft2);
+		top.add(accusation);
+		top.add(next);
+		
+// create the bottoom panel and fill the contents.
+		JPanel bottom = new JPanel(new GridLayout(1,2));
+		guess = new JTextField();
+		guess.setBorder(new TitledBorder (new EtchedBorder(),"Guess"));
+		bottom.add(guess);
+	
+		
+		
+		guessResult = new JTextField();
+		guessResult.setBorder(new TitledBorder (new EtchedBorder(),"Guess Result"));
+		bottom.add(guessResult);
+		
+		add(top);
+		add(bottom);
+		
+		
+	
+
+	}
+	
+
+	
+	/**
+	 * Main to test the panel
+	 * 
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		GameControlPanel panel = new GameControlPanel();  // create the panel
+		JFrame frame = new JFrame();  // create the frame 
+		frame.setContentPane(panel); // put the panel in the frame
+		frame.setSize(750, 180);  // size the frame
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
+		frame.setVisible(true); // make it visible
+		
+		// test filling in the data
+		panel.setTurn(new ComputerPlayer( "Col. Mustard","orange",0, 0),5);
+		panel.setGuess( "I have no guess!");
+		panel.setGuessResult( "So you have nothing?");
+	}
+
+
+
+
+// set the content of guess text box 
+	public void setGuess(String s) {
+		guess.setText(s);
+		
+	}
+	// set the content of guess result text box 
+	public void setGuessResult(String gResult) {
+		guessResult.setText(gResult);
+		
+	}
+	// set the content of computer player and roll text box 
+	public void setTurn(ComputerPlayer computerPlayer, int i) {
+		turn.setText(computerPlayer.getName());	
+		roll.setText(String.valueOf(i));
+		
+	}
+}

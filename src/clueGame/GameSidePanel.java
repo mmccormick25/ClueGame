@@ -2,6 +2,7 @@ package clueGame;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,7 +17,7 @@ import javax.swing.border.TitledBorder;
 public class GameSidePanel extends JPanel {
 	JLabel peopleLabelHand,peopleLabelSeen,roomLabelHand,roomLabelSeen,weaponLabelHand,weaponLabelSeen;
 	private JTextField peopleInHand,peopleSeen,roomInHand,roomSeen,weaponInHand,weaponSeen;
-	
+	ComputerPlayer testPlayer= new ComputerPlayer( "Test Player","orange",1, 0);
 	
 
 
@@ -24,7 +25,9 @@ public class GameSidePanel extends JPanel {
 		// set the whole panel to top and bottom.
 		setLayout(new GridLayout(3,1,30,10));
 	// create the top panel by 1x4
-		JPanel top = new JPanel(new GridLayout(4,0,5,20));
+		ArrayList<Card> playerInHand =  testPlayer.getSeenPersons();
+		int length = playerInHand.size();
+		JPanel top = new JPanel(new GridLayout(2+ ComputerPlayer.getSeenPersons(),0,5,20));
 		JPanel middle = new JPanel(new GridLayout(4,0,5,20));
 		JPanel bottom = new JPanel(new GridLayout(4,0,5,20));
 		peopleLabelHand = new JLabel("In Hand:");
@@ -66,6 +69,13 @@ public class GameSidePanel extends JPanel {
 	
 
 	
+	private ArrayList<Card> getSeenPersons() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
 	/**
 	 * Main to test the panel
 	 * 
@@ -78,22 +88,33 @@ public class GameSidePanel extends JPanel {
 		frame.setSize(200, 700);  // size the frame
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
 		frame.setVisible(true); // make it visible
-	/*	
+		
 		// test filling in the data
-		panel.setTurn(new ComputerPlayer( "Col. Mustard","orange",0, 0),5);
-		panel.setGuess( "I have no guess!");
-		panel.setGuessResult( "So you have nothing?");
-		*/
-	}
-
-
-
-/*
-// set the content of guess text box 
-	public void setGuess(String s) {
-		guess.setText(s);
+		
+		panel.setPeopleInHand(new ComputerPlayer( "Col. Mustard","orange",0, 0));
+//		panel.setGuess( "I have no guess!");
+//		panel.setGuessResult( "So you have nothing?");
 		
 	}
+
+
+
+
+// set the content of guess text box 
+	public void setPeopleInHand(ComputerPlayer Player) {
+		peopleInHand.setText(Player.getName());
+		
+	}
+	public void setPeopleSeen(ArrayList<Card> persons) {
+		for (Card c:persons) {
+			JTextField cSeen = new JTextField();
+			cSeen.setText(c.getCardName());
+			
+		}
+		
+		
+	}
+	
 	// set the content of guess result text box 
 	public void setGuessResult(String gResult) {
 		guessResult.setText(gResult);
@@ -106,5 +127,5 @@ public class GameSidePanel extends JPanel {
 		
 	}
 	
-	*/
+	
 }

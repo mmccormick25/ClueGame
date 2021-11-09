@@ -2,6 +2,8 @@
 
 package clueGame;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -13,7 +15,9 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
-public class Board {
+import javax.swing.JPanel;
+
+public class Board extends JPanel {
 	private static int numRows;
 	private static int numCols;
 
@@ -63,6 +67,32 @@ public class Board {
 	/*
 	 * initialize the board (since we are using singleton pattern)
 	 */
+	
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+
+			int panelWidth = this.getWidth();
+			int panelHeight = this.getHeight();
+			int widthLimit = (int) panelWidth / 28;
+			int heightLimit = (int) panelHeight / 22;
+			int cellDim;
+			if (widthLimit > heightLimit) {
+				cellDim = heightLimit;
+			} else {
+				cellDim = widthLimit;
+			}
+			
+			if (grid != null) {
+				for (int x = 0; x < grid.length; x++) {
+					for (int y = 0; y < grid[0].length; y++) {
+						grid[x][y].draw(y * cellDim, x * cellDim, cellDim, g);
+					}
+				}
+			}
+		
+	}
+	
+	
 	public void initialize() {
 		
 		// Using try catch to handle exceptions from loadSetupConfig and loadLayoutConfig
@@ -115,6 +145,9 @@ public class Board {
 		if (weapons.size() > 0) {
 			dealCards();
 		}
+		
+		alreadyInitialized = true;
+		repaint();
 
 	}
 	

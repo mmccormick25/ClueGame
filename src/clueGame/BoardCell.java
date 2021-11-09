@@ -2,6 +2,8 @@
 
 package clueGame;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -23,6 +25,10 @@ public class BoardCell {
 		this.col = col;
 		this.layoutString = layoutString;
 		this.layoutStringLength = layoutString.length();
+	}
+	
+	public void draw(int x, int y, int d, Graphics g) {
+		g.drawRect(x, y, d, d);
 	}
 	
 	public int getRow() {

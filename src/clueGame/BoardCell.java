@@ -28,7 +28,20 @@ public class BoardCell {
 	}
 	
 	public void draw(int x, int y, int d, Graphics g) {
-		g.drawRect(x, y, d, d);
+		if (inRoom) {
+			g.setColor(Color.DARK_GRAY);
+			g.fillRect(x, y, d, d);
+		} else {
+			g.setColor(Color.yellow);
+			g.fillRect(x, y, d, d);
+			g.setColor(Color.black);
+			g.drawRect(x, y, d, d);
+		}
+		
+		if (layoutString.charAt(0) == (Board.closetChar)) {
+			g.setColor(Color.red);
+			g.fillRect(x, y, d, d);
+		}
 	}
 	
 	public int getRow() {

@@ -90,6 +90,14 @@ public class Board extends JPanel {
 				}
 			}
 			
+			if (grid != null) {
+				for (int x = 0; x < grid.length; x++) {
+					for (int y = 0; y < grid[0].length; y++) {
+						grid[x][y].drawSecond(y * cellDim, x * cellDim, cellDim, g);
+					}
+				}
+			}
+			
 			for (Player player : players) {
 				player.draw(cellDim, g);
 			}
@@ -463,7 +471,7 @@ public class Board extends JPanel {
 		return grid[row][col];
 	}
 
-	public Room getRoom(Character x) {
+	public static Room getRoom(Character x) {
 		return rooms.get(x);
 	}
 

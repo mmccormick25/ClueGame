@@ -3,6 +3,7 @@
 package clueGame;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.util.HashSet;
 import java.util.Map;
@@ -41,6 +42,28 @@ public class BoardCell {
 		if (layoutString.charAt(0) == (Board.closetChar)) {
 			g.setColor(Color.red);
 			g.fillRect(x, y, d, d);
+		}
+	}
+	
+	public void drawSecond(int x, int y, int d, Graphics g) {
+		g.setFont(new Font("TimesRoman", Font.PLAIN, 25));
+		if (isDoorway) {
+			g.setColor(Color.blue);
+			if (layoutString.charAt(1) == '<') {
+				g.fillRect(x - 5, y, 5, d);
+			} else if (layoutString.charAt(1) == '>') {
+				g.fillRect(x + d, y, 5, d);
+			} else if (layoutString.charAt(1) == 'v') {
+				g.fillRect(x, y + d, d, 5);
+			} else if (layoutString.charAt(1) == '^') {
+				g.fillRect(x, y - 5, d, 5);
+			}
+		} else if (layoutString.length() > 1) {
+			if (layoutString.charAt(1) == '#') {
+				g.setColor(Color.cyan);
+				Room room = Board.getInstance().getRoom(layoutString.charAt(0));
+				g.drawString(room.getName(), x, y);
+			}
 		}
 	}
 	

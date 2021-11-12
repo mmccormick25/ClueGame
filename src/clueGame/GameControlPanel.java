@@ -108,8 +108,8 @@ public class GameControlPanel extends JPanel {
 		
 	}
 	// set the content of computer player and roll text box 
-	public void setTurn(ComputerPlayer computerPlayer, int i) {
-		turn.setText(computerPlayer.getName());	
+	public void setTurn(Player player, int i) {
+		turn.setText(player.getName());	
 		roll.setText(String.valueOf(i));
 		
 	}

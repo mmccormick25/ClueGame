@@ -64,15 +64,26 @@ public class GameSidePanel extends JPanel {
 		// Filling in top panel
 		peopleLabelHand = new JLabel("In Hand:");
 		peopleLabelSeen= new JLabel("Seen:");
-		top.setBorder(new TitledBorder(new EtchedBorder(),"Peole"));
+		top.setBorder(new TitledBorder(new EtchedBorder(),"People"));
+		
 		top.add(peopleLabelHand);
+		if(handPlayerFields.size() ==0) {
+			JTextField field = new JTextField("None");
+			top.add(field);
+		}else {
 		for (JTextField field : handPlayerFields) {
 			top.add(field);
-		}
+		}}
+		
 		top.add(peopleLabelSeen);
+		if(seenPlayerFields.size() ==0) {
+			JTextField field = new JTextField("None");
+			top.add(field);
+		}else {
 		for (JTextField field : seenPlayerFields) {
 			top.add(field);
-		}		
+		}
+		}
 		add(top);
 		
 		// Filling in middle panel
@@ -80,29 +91,50 @@ public class GameSidePanel extends JPanel {
 		roomLabelSeen = new JLabel("Seen:");
 		middle.setBorder(new TitledBorder(new EtchedBorder(),"Rooms"));
 		middle.add(roomLabelHand);
+		if(handRoomFields.size() ==0) {
+			JTextField field = new JTextField("None");
+			middle.add(field);
+		}else {
 		for (JTextField field : handRoomFields) {
 			middle.add(field);
 		}
+		}
 		middle.add(roomLabelSeen);
+		if(seenRoomFields.size() ==0) {
+			JTextField field = new JTextField("None");
+			middle.add(field);
+		}else {
 		for (JTextField field : seenRoomFields) {
 			middle.add(field);
-		}		
+		}	
+		}
 		add(middle);
 
 		// Filling in bottom panel
 		weaponLabelHand = new JLabel("In Hand:");
 		weaponLabelSeen = new JLabel("Seen:");
 		bottom.add(weaponLabelHand);
+		if(handWeaponFields.size() ==0) {
+			JTextField field = new JTextField("None");
+			bottom.add(field);
+		}else {
 		for (JTextField field : handWeaponFields) {
 			bottom.add(field);
 		}
+		}
 		bottom.add(weaponLabelSeen);
+		if(seenWeaponFields.size() ==0) {
+			JTextField field = new JTextField("None");
+			bottom.add(field);
+		}else {
 		for (JTextField field : seenWeaponFields) {
 			bottom.add(field);
 		}	
+		}
 		bottom.setBorder(new TitledBorder(new EtchedBorder(),"Weapons"));
 		add(bottom);
 		setBorder(new TitledBorder(new EtchedBorder(),"Known Cards"));
+		
 	}
 
 	// Generates array of JTextFields that will display card names from array of cards

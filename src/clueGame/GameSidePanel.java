@@ -146,7 +146,7 @@ public class GameSidePanel extends JPanel {
 		frame.setSize(200, 700);  // size the frame
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
 		frame.setVisible(true); // make it visible
-		
+		 
 	}
 	
 	

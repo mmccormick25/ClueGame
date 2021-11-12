@@ -1,5 +1,8 @@
 package clueGame;
 
+import java.awt.Color;
+import java.awt.Graphics;
+import java.text.Format.Field;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -58,6 +61,11 @@ abstract public class Player {
 
 	public void setColor(String color) {
 		this.color = color;
+	}
+
+	public void draw(int cellDim, Graphics g) {
+		g.setColor(MyColor.getColor(color));
+		g.fillOval(cellDim * column, cellDim * row, cellDim, cellDim);
 	}
 	
 	

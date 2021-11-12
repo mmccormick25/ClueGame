@@ -32,7 +32,7 @@ public class BoardCell {
 			g.setColor(Color.DARK_GRAY);
 			g.fillRect(x, y, d, d);
 		} else {
-			g.setColor(Color.yellow);
+			g.setColor(Color.GRAY);
 			g.fillRect(x, y, d, d);
 			g.setColor(Color.black);
 			g.drawRect(x, y, d, d);

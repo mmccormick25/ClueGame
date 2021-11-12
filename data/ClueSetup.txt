@@ -19,9 +19,9 @@ Weapon, Wrench
 Weapon, Live Wire
 Weapon, Knife
 // players
-Player, Dr. Dandelion, Yellow, 6-0
-Computer, Bishop Brown, Brown, 12-0
-Computer, Sir Silver, Gray, 21-14
-Computer, Officer Orange, Orange, 15-27
-Computer, Mrs. Maroon, Maroon, 10-27
-Computer, Professor Prizmarine, Blue, 0-17
+Player, Dr. Dandelion, yellow, 6-0
+Computer, Bishop Brown, brown, 12-0
+Computer, Sir Silver, silver, 21-14
+Computer, Officer Orange, orange, 15-27
+Computer, Mrs. Maroon, magenta, 10-27
+Computer, Professor Prizmarine, cyan, 0-17

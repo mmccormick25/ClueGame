@@ -89,6 +89,10 @@ public class Board extends JPanel {
 					}
 				}
 			}
+			
+			for (Player player : players) {
+				player.draw(cellDim, g);
+			}
 		
 	}
 	

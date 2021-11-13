@@ -1,8 +1,11 @@
 package clueGame;
 
 import java.awt.BorderLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class ClueGame extends JFrame {
@@ -19,7 +22,9 @@ public class ClueGame extends JFrame {
 		board.initialize();
 			
 		JFrame frame = new JFrame();
-		ClueGame center	= new ClueGame();  
+		ClueGame center	= new ClueGame(); 
+		
+		JOptionPane.showMessageDialog(frame,"You are " + board.players.get(0).getName() + "\nCan you find the solution \nbefore the computer players?");
 		
 		GameControlPanel panel = new GameControlPanel(); 
 		panel.setTurn(board.players.get(0), 5);
@@ -34,17 +39,16 @@ public class ClueGame extends JFrame {
 
 		frame.setLayout(new BorderLayout());
 		frame.add(board,BorderLayout.CENTER);
-		
 	
 		frame.add(panel,BorderLayout.SOUTH);
-		
-	
 		frame.add(side,BorderLayout.EAST);
 		
 		side.setSize(frame.WIDTH-board.WIDTH,board.HEIGHT);
 		
+		Player currentPlayer = board.players.get(0);
+		
 		board.calcTargets(board.grid[6][6], 3);
-		
-		
+
 	}
+
 }

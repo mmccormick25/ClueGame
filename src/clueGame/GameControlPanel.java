@@ -3,6 +3,8 @@ package clueGame;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,8 +19,8 @@ import javax.swing.border.TitledBorder;
 public class GameControlPanel extends JPanel {
 	private JLabel whoseTurn,Roll;
 	private JTextField turn,roll,guess,guessResult;
-	private JButton accusation,next;
-	
+	private JButton accusation;
+	private static JButton next;
 
 	/**
 	 * Constructor for the panel, it does 90% of the work
@@ -46,14 +48,20 @@ public class GameControlPanel extends JPanel {
 		
 		
 		// create 2 buttons
+		Clicklistener click = new Clicklistener();
+		
 		accusation = new JButton("Make Accusation");
 		next = new JButton("NEXT!");
+		
+		next.addActionListener(click);
+		accusation.addActionListener(click);
+		
 		top.add(upperLeft1);
 		top.add(upperLeft2);
 		top.add(accusation);
 		top.add(next);
 		
-// create the bottoom panel and fill the contents.
+		// create the bottoom panel and fill the contents.
 		JPanel bottom = new JPanel(new GridLayout(0,2));
 		guess = new JTextField();
 		guess.setBorder(new TitledBorder (new EtchedBorder(),"Guess"));
@@ -71,6 +79,20 @@ public class GameControlPanel extends JPanel {
 		
 	
 
+	}
+	
+	private class Clicklistener implements ActionListener {
+		public void actionPerformed(ActionEvent e)
+		{
+			if (e.getSource() == next)
+			{
+				System.out.println("next pressed");
+			}
+			if (e.getSource() == accusation)
+			{
+				System.out.println("accusation pressed");
+			}
+		}
 	}
 	
 
@@ -92,6 +114,12 @@ public class GameControlPanel extends JPanel {
 		panel.setTurn(new ComputerPlayer( "Col. Mustard","orange",0, 0),5);
 		panel.setGuess( "I have no guess!");
 		panel.setGuessResult( "So you have nothing?");
+		
+		while (true) {
+			if(next.getModel().isArmed()) {
+		        System.out.println("the button is pressed");
+			}
+		}
 	}
 
 

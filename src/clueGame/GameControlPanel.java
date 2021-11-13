@@ -21,11 +21,14 @@ public class GameControlPanel extends JPanel {
 	private JTextField turn,roll,guess,guessResult;
 	private JButton accusation;
 	private static JButton next;
+	
+	Board board = Board.getInstance();
 
 	/**
 	 * Constructor for the panel, it does 90% of the work
 	 */
 	public GameControlPanel()  {
+		
 		// set the whole panel to top and bottom.
 		setLayout(new GridLayout(2,0,10,10));
 	// create the top panel by 1x4
@@ -86,7 +89,7 @@ public class GameControlPanel extends JPanel {
 		{
 			if (e.getSource() == next)
 			{
-				System.out.println("next pressed");
+				board.nextPressed();
 			}
 			if (e.getSource() == accusation)
 			{

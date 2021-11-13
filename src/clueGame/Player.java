@@ -50,6 +50,15 @@ abstract public class Player {
 	public void setRow(int row) {
 		this.row = row;
 	}
+	
+	public int getColumn() {
+		return column;
+	}
+
+	public void setColumn(int column) {
+		this.column = column;
+	}
+
 
 	public ArrayList<Card> getCards() {
 		return cards;
@@ -67,8 +76,6 @@ abstract public class Player {
 		g.setColor(MyColor.getColor(color));
 		g.fillOval(cellDim * column, cellDim * row, cellDim, cellDim);
 	}
-	
-	
 	
 
 }

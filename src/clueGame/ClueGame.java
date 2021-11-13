@@ -9,8 +9,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class ClueGame extends JFrame {
+	static boolean gameWon = false;
+	private static boolean nextPressed = false;
+	static GameControlPanel panel = new GameControlPanel(); 
+	
 	public ClueGame() {
-
 
 		
 	}
@@ -26,7 +29,6 @@ public class ClueGame extends JFrame {
 		
 		JOptionPane.showMessageDialog(frame,"You are " + board.players.get(0).getName() + "\nCan you find the solution \nbefore the computer players?");
 		
-		GameControlPanel panel = new GameControlPanel(); 
 		panel.setTurn(board.players.get(0), 5);
 		panel.setGuess( "I have no guess!");
 		panel.setGuessResult( "So you have nothing?");
@@ -45,10 +47,9 @@ public class ClueGame extends JFrame {
 		
 		side.setSize(frame.WIDTH-board.WIDTH,board.HEIGHT);
 		
-		Player currentPlayer = board.players.get(0);
-		
 		board.calcTargets(board.grid[6][6], 3);
-
+		
+		board.runTurn();
 	}
 
 }

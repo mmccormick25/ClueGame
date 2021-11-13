@@ -53,6 +53,10 @@ public class Board extends JPanel {
 	public static ArrayList<Player> players = new ArrayList<Player>();
 	
 	public boolean alreadyInitialized = false;
+	
+	public int currentPlayerIndex = 0;
+	
+	Random r = new Random();
 
 
 	// Singleton object
@@ -106,6 +110,27 @@ public class Board extends JPanel {
 				player.draw(cellDim, g);
 			}
 		
+	}
+	
+	public void runTurn() {
+		Player currentPlayer = players.get(currentPlayerIndex);
+		int roll = r.nextInt(6) + 1;
+		int col = currentPlayer.getColumn();
+		int row = currentPlayer.getRow();
+		if (currentPlayerIndex != 0) {
+			ComputerPlayer comp = (ComputerPlayer) currentPlayer;
+			BoardCell target = comp.selectTarget(grid[row][col], roll);
+			comp.setColumn(target.getCol());
+			comp.setRow(target.getRow());
+		}
+		//currentPlayer.setRow(currentPlayer.getRow() + 1);
+		ClueGame.panel.setTurn(currentPlayer, roll);
+		if (currentPlayerIndex == players.size() - 1) {
+			currentPlayerIndex = 0;
+		} else {
+			currentPlayerIndex++;
+		}
+		repaint();
 	}
 	
 	
@@ -168,7 +193,6 @@ public class Board extends JPanel {
 	}
 	
 	public void dealCards() {
-		Random r = new Random();
 		
 		// Getting random room string from map
 		int mapIndex = r.nextInt(rooms.size());
@@ -586,6 +610,10 @@ public class Board extends JPanel {
 	public void setSolution(Card room,Card weapon,Card player) {
 		soln = new Solution(room,weapon,player);
 		
+	}
+	
+	public void nextPressed() {
+		runTurn();
 	}
 
 

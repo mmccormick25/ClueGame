@@ -1,17 +1,35 @@
-commit af66202b6e6a8f1d45a80c089d846109ebf6874e
+commit 14e60bc6b7a5b4da147cd23784f9cd9e503bb002
 Author: mmccormick <mmccormick@mines.edu>
-Date:   Sun Nov 7 14:14:16 2021 -0700
+Date:   Fri Nov 12 16:47:13 2021 -0700
 
-    Driver: Zhen Liu, Navigator: Matthew McCormick - Added comments
+    Author: Zhen Liu, Navigator: Matthew McCormick -Fixed label positions on board and added info to bottom panel
 
-commit 77992b6b92fce48871aa9cfa911fcd69c65d9d0a
+commit e019cb65437cb42b4df31be7bea2180e6cce230e
 Author: Zhen Liu <zliu1@mines.edu>
-Date:   Sun Nov 7 13:31:07 2021 -0700
+Date:   Fri Nov 12 16:26:33 2021 -0700
 
-    Driver: Matthew McCormick, Navigator: Zhen Liu - Filled in side panel information
+    Author: Zhen Liu, Navigator: Matthew McCormick - turn the 3 panels into one frame and add blank Jtextfield for side panel
 
-commit d896cf35ebfc036f271670b837965b6c393a496d
-Author: Zhen Liu <zliu1@mines.edu>
-Date:   Sun Nov 7 13:09:48 2021 -0700
+commit 8fa74700b46aa90f1e0625a9d248bda52259cfe3
+Author: mmccormick <mmccormick@mines.edu>
+Date:   Fri Nov 12 15:35:30 2021 -0700
 
-    Driver: Zhen Liu, Navigator: Matthew McCormick - Added the skeleton for the side panel
+    Author: Matthew McCormick, Navigator: Zhen Liu - Doors and labls now drawn
+
+commit b96239c81dda63f207c9c995be6ce6a7c1d35be6
+Author: mmccormick <mmccormick@mines.edu>
+Date:   Fri Nov 12 15:11:50 2021 -0700
+
+    Author: Matthew McCormick, Navigator: Zhen Liu - Players now drawn on board
+
+commit fa849ae3dd3b54fb3fcea1df2a7499ce93e6ad3f
+Author: Matthew McCormick <mmccormick@mines.edu>
+Date:   Thu Nov 11 14:55:27 2021 -0700
+
+    Author: Zhen Liu, Navigator: Matthew McCormick - Rooms, walkways, and closets now painted in
+
+commit 0260a471b1b280230ad2438a6b47183e33010e75
+Author: Matthew McCormick <mmccormick@mines.edu>
+Date:   Tue Nov 9 15:03:05 2021 -0700
+
+    Author: Matthew McCormick, Navigator: Zhen Liu - Grid skeleton for board now displays and resizes properly

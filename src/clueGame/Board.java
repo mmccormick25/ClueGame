@@ -27,7 +27,7 @@ public class Board extends JPanel {
 	// Board single instance creation
 	public static Board theInstance = new Board();
 	// Blank array that will hold cells
-	private BoardCell[][] grid;
+	BoardCell[][] grid;
 	// Config files
 	private static File setupFile;
 	private static File layoutFile;
@@ -96,6 +96,10 @@ public class Board extends JPanel {
 						grid[x][y].drawSecond(y * cellDim, x * cellDim, cellDim, g);
 					}
 				}
+			}
+			
+			for (BoardCell targetCell : targets) {
+				targetCell.drawTarget(cellDim, g);
 			}
 			
 			for (Player player : players) {
@@ -337,6 +341,8 @@ public class Board extends JPanel {
 			}
 			visitedList.remove(adjCell);
 		}
+		repaint();
+			
 	}
 
 	public void calcTargets(BoardCell startCell, int pathlength) {

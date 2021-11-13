@@ -45,6 +45,11 @@ public class BoardCell {
 		}
 	}
 	
+	public void drawTarget(int d, Graphics g) {
+		g.setColor(Color.cyan);
+		g.fillRect(row * d, col * d, d, d);
+	}
+	
 	public void drawSecond(int x, int y, int d, Graphics g) {
 		g.setFont(new Font("TimesRoman", Font.PLAIN, 25));
 		if (isDoorway) {

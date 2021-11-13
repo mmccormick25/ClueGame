@@ -43,7 +43,7 @@ public class ClueGame extends JFrame {
 		
 		side.setSize(frame.WIDTH-board.WIDTH,board.HEIGHT);
 		
-
+		board.calcTargets(board.grid[6][6], 3);
 		
 		
 	}

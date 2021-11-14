@@ -46,8 +46,9 @@ public class BoardCell {
 	}
 	
 	public void drawTarget(int d, Graphics g) {
-		g.setColor(Color.cyan);
-		g.fillRect(row * d, col * d, d, d);
+		g.setColor(Color.white);
+		g.fillRect(col * d, row * d, d, d);
+		
 	}
 	
 	public void drawSecond(int x, int y, int d, Graphics g) {
@@ -154,11 +155,13 @@ public class BoardCell {
 		}
 		return (Character) null;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "BoardCell [row=" + row + ", col=" + col + "]";
 	}
+	
+	
 
 	public String getLayoutString() {
 		return layoutString;

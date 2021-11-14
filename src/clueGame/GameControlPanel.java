@@ -21,6 +21,7 @@ public class GameControlPanel extends JPanel {
 	private JTextField turn,roll,guess,guessResult;
 	private JButton accusation;
 	private static JButton next;
+	public boolean isFirstPlayer;
 	
 	Board board = Board.getInstance();
 
@@ -84,6 +85,17 @@ public class GameControlPanel extends JPanel {
 
 	}
 	
+	public String getTurn() {
+		return turn.getText();
+	}
+
+
+
+
+	public String getRoll() {
+		return roll.toString();
+	}
+
 	private class Clicklistener implements ActionListener {
 		public void actionPerformed(ActionEvent e)
 		{
@@ -144,4 +156,6 @@ public class GameControlPanel extends JPanel {
 		roll.setText(String.valueOf(i));
 		
 	}
+	
+	
 }

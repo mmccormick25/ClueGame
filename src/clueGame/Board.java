@@ -4,6 +4,9 @@ package clueGame;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Panel;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -15,9 +18,11 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class Board extends JPanel {
+public class Board extends JPanel implements MouseListener{
 	private static int numRows;
 	private static int numCols;
 
@@ -57,7 +62,7 @@ public class Board extends JPanel {
 	public int currentPlayerIndex = 0;
 	
 	Random r = new Random();
-
+	int roll = r.nextInt(6) + 1;
 
 	// Singleton object
 	// constructor is private to ensure only one can be created
@@ -102,21 +107,40 @@ public class Board extends JPanel {
 				}
 			}
 			
-			for (BoardCell targetCell : targets) {
-				targetCell.drawTarget(cellDim, g);
+
+			
+			
+			
+			if(ClueGame.panel.getTurn().equals(players.get(0).getName())) {
+				for(BoardCell target: targets) {
+					target.drawTarget(cellDim, g);
+				}
+				
+			}
+		
+			
+			for (int i=0;i<players.size();i++) {
+				players.get(i).draw(cellDim, g);
+			
 			}
 			
-			for (Player player : players) {
-				player.draw(cellDim, g);
-			}
+
 		
 	}
 	
 	public void runTurn() {
 		Player currentPlayer = players.get(currentPlayerIndex);
-		int roll = r.nextInt(6) + 1;
+
+		
+		
 		int col = currentPlayer.getColumn();
 		int row = currentPlayer.getRow();
+		if (currentPlayerIndex == 0) {
+			BoardCell start = grid[players.get(0).getRow()][players.get(0).getColumn()];
+			calcTargets(start,roll);	
+			
+		}
+		
 		if (currentPlayerIndex != 0) {
 			ComputerPlayer comp = (ComputerPlayer) currentPlayer;
 			BoardCell target = comp.selectTarget(grid[row][col], roll);
@@ -131,6 +155,7 @@ public class Board extends JPanel {
 			currentPlayerIndex++;
 		}
 		repaint();
+		
 	}
 	
 	
@@ -156,6 +181,8 @@ public class Board extends JPanel {
 		
 		// Making sure deck is empty for junit tests
 		deck.clear();
+		
+		addMouseListener(this);
 		
 		// Initializing objects based on their type
 		for (ArrayList<String> row : setupStrings) {
@@ -365,7 +392,6 @@ public class Board extends JPanel {
 			}
 			visitedList.remove(adjCell);
 		}
-		repaint();
 			
 	}
 
@@ -374,6 +400,7 @@ public class Board extends JPanel {
 		targets.clear();
 		visitedList.add(startCell);
 		findAllTargets(startCell,pathlength);
+		
 	}
 
 	// File init methods
@@ -615,7 +642,57 @@ public class Board extends JPanel {
 	public void nextPressed() {
 		runTurn();
 	}
-
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		boolean valid = false;
+		int x = e.getPoint().x;
+		int y = e.getPoint().y;
+		int panelWidth = this.getWidth();
+		int panelHeight = this.getHeight();
+		int widthLimit = (int) panelWidth / 28;
+		int heightLimit = (int) panelHeight / 22;
+		int cellDim;
+		if (widthLimit > heightLimit) {
+			cellDim = heightLimit;
+		} else {
+			cellDim = widthLimit;
+		}
+		for(BoardCell target: targets) {
+			if(y/cellDim == target.getRow() && x/cellDim == target.getCol()) {
+				players.get(0).setRow(target.getRow());
+				players.get(0).setColumn(target.getCol());
+				valid = true;
+				break;
+				
+			}
+		}
+		if (valid == false) {
+			JOptionPane.showMessageDialog(null, "Please click highlighted cell.");		
+		}
+		repaint();
+		
+	}
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 
 
 }

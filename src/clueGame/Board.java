@@ -62,7 +62,8 @@ public class Board extends JPanel implements MouseListener{
 	public int currentPlayerIndex = 0;
 	
 	Random r = new Random();
-	int roll = r.nextInt(6) + 1;
+	
+	boolean notClicked = true;
 
 	// Singleton object
 	// constructor is private to ensure only one can be created
@@ -131,7 +132,7 @@ public class Board extends JPanel implements MouseListener{
 	public void runTurn() {
 		Player currentPlayer = players.get(currentPlayerIndex);
 
-		
+		int roll = r.nextInt(6) + 1;
 		
 		int col = currentPlayer.getColumn();
 		int row = currentPlayer.getRow();
@@ -640,6 +641,7 @@ public class Board extends JPanel implements MouseListener{
 	}
 	
 	public void nextPressed() {
+		notClicked = true;
 		runTurn();
 	}
 	@Override
@@ -658,20 +660,19 @@ public class Board extends JPanel implements MouseListener{
 			cellDim = widthLimit;
 		}
 		for(BoardCell target: targets) {
-			if(y/cellDim == target.getRow() && x/cellDim == target.getCol()) {
+			if(y/cellDim == target.getRow() && x/cellDim == target.getCol() && notClicked) {
 				players.get(0).setRow(target.getRow());
 				players.get(0).setColumn(target.getCol());
 				valid = true;
-				break;
-				
+				notClicked = false;
 			}
 		}
 		if (valid == false) {
 			JOptionPane.showMessageDialog(null, "Please click highlighted cell.");		
 		}
 		repaint();
-		
 	}
+	
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub

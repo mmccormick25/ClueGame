@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -101,7 +102,11 @@ public class GameControlPanel extends JPanel {
 		{
 			if (e.getSource() == next)
 			{
-				board.nextPressed();
+				if (board.notClicked && board.currentPlayerIndex == 1) {
+					JOptionPane.showMessageDialog(null, "You must move before ending your turn.");	
+				} else {
+					board.nextPressed();
+				}
 			}
 			if (e.getSource() == accusation)
 			{

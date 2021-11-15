@@ -39,7 +39,6 @@ public class ClueGame extends JFrame {
 		panel.setGuessResult( "So you have nothing?");
 		
 		
-		
 		frame.setSize(800, 700);  // size the frame
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
 		frame.setVisible(true); // make it visible
@@ -51,12 +50,7 @@ public class ClueGame extends JFrame {
 		frame.add(side,BorderLayout.EAST);
 		frame.pack();
 		
-		
-	
-		
-	//	board.calcTargets(board.grid[6][6], 3);
-		
-	//	board.runTurn();
+		board.runTurn();
 	}
 
 }

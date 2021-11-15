@@ -44,7 +44,7 @@ public class GameSetupTests {
 		ArrayList<Player> players = board.players;
 		assert board.players.size() == 6;
 		assert board.players.get(0).getName().equals("Dr. Dandelion");
-		assert board.players.get(2).getColor().equals("Gray");
+		assert board.players.get(2).getColor().equals("silver");
 		assert board.players.get(5).getRow() == 0;
 	}
 	

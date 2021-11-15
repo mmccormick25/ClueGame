@@ -50,6 +50,7 @@ public class ClueGame extends JFrame {
 		frame.add(side,BorderLayout.EAST);
 		frame.pack();
 		
+		// Running first turn, this is usually done by pressing next button
 		board.runTurn();
 	}
 

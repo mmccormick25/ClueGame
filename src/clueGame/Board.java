@@ -59,11 +59,13 @@ public class Board extends JPanel implements MouseListener{
 	
 	public boolean alreadyInitialized = false;
 	
+	// Keeps track of where current player is in list
 	public int currentPlayerIndex = 0;
 	
 	Random r = new Random();
 	
-	boolean notClicked = true;
+	// Keeps track of if human player has moved yet
+	boolean notMoved = true;
 
 	// Singleton object
 	// constructor is private to ensure only one can be created
@@ -130,31 +132,37 @@ public class Board extends JPanel implements MouseListener{
 	}
 	
 	public void runTurn() {
+		// Updating current player
 		Player currentPlayer = players.get(currentPlayerIndex);
-
+		// Getting random dice roll
 		int roll = r.nextInt(6) + 1;
-		
+		// Getting current position
 		int col = currentPlayer.getColumn();
 		int row = currentPlayer.getRow();
+		
+		// This runs for the human player
 		if (currentPlayerIndex == 0) {
 			BoardCell start = grid[players.get(0).getRow()][players.get(0).getColumn()];
 			calcTargets(start,roll);	
-			
-		}
-		
-		if (currentPlayerIndex != 0) {
+		} else {
+			// This runs for the computer players
 			ComputerPlayer comp = (ComputerPlayer) currentPlayer;
 			BoardCell target = comp.selectTarget(grid[row][col], roll);
 			comp.setColumn(target.getCol());
 			comp.setRow(target.getRow());
 		}
-		//currentPlayer.setRow(currentPlayer.getRow() + 1);
+	
+		// Updating information on bottom panel for who is playing
 		ClueGame.panel.setTurn(currentPlayer, roll);
+		
+		// Logic to go to next player
 		if (currentPlayerIndex == players.size() - 1) {
 			currentPlayerIndex = 0;
 		} else {
 			currentPlayerIndex++;
 		}
+		
+		// Repainting board to update computer movement
 		repaint();
 		
 	}
@@ -641,7 +649,7 @@ public class Board extends JPanel implements MouseListener{
 	}
 	
 	public void nextPressed() {
-		notClicked = true;
+		notMoved = true;
 		runTurn();
 	}
 	@Override
@@ -659,17 +667,21 @@ public class Board extends JPanel implements MouseListener{
 		} else {
 			cellDim = widthLimit;
 		}
+		// Checking if mouse click matches where any highlighted targets are
 		for(BoardCell target: targets) {
-			if(y/cellDim == target.getRow() && x/cellDim == target.getCol() && notClicked) {
+			if(y/cellDim == target.getRow() && x/cellDim == target.getCol() && notMoved) {
 				players.get(0).setRow(target.getRow());
 				players.get(0).setColumn(target.getCol());
 				valid = true;
-				notClicked = false;
+				// Setting flag that player has moved
+				notMoved = false;
 			}
 		}
+		// Printing error message if invalid cell is clicked on
 		if (valid == false) {
 			JOptionPane.showMessageDialog(null, "Please click highlighted cell.");		
 		}
+		// Repainting to update player position
 		repaint();
 	}
 	

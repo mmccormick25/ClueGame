@@ -97,12 +97,14 @@ public class GameControlPanel extends JPanel {
 		return roll.toString();
 	}
 
+	// ClickListener listens to when next and accusation buttons are pressed
 	private class Clicklistener implements ActionListener {
 		public void actionPerformed(ActionEvent e)
 		{
 			if (e.getSource() == next)
 			{
-				if (board.notClicked && board.currentPlayerIndex == 1) {
+				// Checking if player hasn't moved and it is human players turn
+				if (board.notMoved && board.currentPlayerIndex == 1) {
 					JOptionPane.showMessageDialog(null, "You must move before ending your turn.");	
 				} else {
 					board.nextPressed();

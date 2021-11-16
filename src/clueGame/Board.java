@@ -124,7 +124,6 @@ public class Board extends JPanel implements MouseListener{
 			
 			for (int i=0;i<players.size();i++) {
 				players.get(i).draw(cellDim, g);
-			
 			}
 			
 

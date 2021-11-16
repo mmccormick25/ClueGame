@@ -11,7 +11,7 @@ abstract public class Player {
 	private String color;
 	private int row, column;
 	protected ArrayList<Card> cards = new ArrayList<Card>();
-	
+	Board board = Board.getInstance();
 	public Player(String name, String color, int row, int column) {
 		this.name = name;
 		this.setColor(color);
@@ -73,6 +73,12 @@ abstract public class Player {
 	}
 
 	public void draw(int cellDim, Graphics g) {
+		for (Player p : board.players) {
+			if (p.getRow() == this.getRow() && p.getColumn() == this.getColumn() && p != this) {
+				
+			}
+		}
+		
 		g.setColor(MyColor.getColor(color));
 		g.fillOval(cellDim * column, cellDim * row, cellDim, cellDim);
 	}

@@ -50,6 +50,7 @@ public class Room {
 	public boolean getSecretPath() {
 		return this.hasSecretPath;
 	}
+	
 	public BoardCell getSecretCell() {
 		return this.secretCell;
 	}

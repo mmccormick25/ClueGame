@@ -17,7 +17,6 @@ public class ClueGame extends JFrame {
 	private static boolean nextPressed = false;
 	public static GameControlPanel panel = new GameControlPanel(); 
 	public static GameSidePanel side= new GameSidePanel();
-	
 	public ClueGame() {
 
 		

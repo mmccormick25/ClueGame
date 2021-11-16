@@ -5,6 +5,8 @@ package clueGame;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -20,6 +22,7 @@ public class BoardCell {
 	// String that represents cell in layoutStrings 2d array
 	String layoutString;
 	private int layoutStringLength;
+	Board board = Board.getInstance();	
 	
 	public BoardCell(int row, int col, String layoutString) {
 		this.row = row;
@@ -28,9 +31,13 @@ public class BoardCell {
 		this.layoutStringLength = layoutString.length();
 	}
 	
+	// Draws in cell based on what kind it is on the board
 	public void draw(int x, int y, int d, Graphics g) {
 		if (inRoom) {
 			g.setColor(Color.DARK_GRAY);
+			g.fillRect(x, y, d, d);
+		} else if (layoutString.charAt(0) == (Board.closetChar)) {
+			g.setColor(Color.red);
 			g.fillRect(x, y, d, d);
 		} else {
 			g.setColor(Color.GRAY);
@@ -39,9 +46,11 @@ public class BoardCell {
 			g.drawRect(x, y, d, d);
 		}
 		
-		if (layoutString.charAt(0) == (Board.closetChar)) {
-			g.setColor(Color.red);
-			g.fillRect(x, y, d, d);
+		if (layoutString.length() > 1) {
+			if (!board.specialC.contains(String.valueOf(layoutString.charAt(1)))) {
+				g.setColor(Color.PINK);
+				g.fillRect(x, y, d, d);
+			}
 		}
 	}
 	
@@ -51,6 +60,7 @@ public class BoardCell {
 		
 	}
 	
+	// Second layer of drawing for things like doorways and labels
 	public void drawSecond(int x, int y, int d, Graphics g) {
 		g.setFont(new Font("TimesRoman", Font.PLAIN, 25));
 		if (isDoorway) {

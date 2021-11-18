@@ -143,16 +143,21 @@ public class Board extends JPanel implements MouseListener{
 		if (currentPlayerIndex == 0) {
 			BoardCell start = grid[players.get(0).getRow()][players.get(0).getColumn()];
 			calcTargets(start,roll);	
+			createSuggestion();
+
 		} else {
 			// This runs for the computer players
 			ComputerPlayer comp = (ComputerPlayer) currentPlayer;
 			BoardCell target = comp.selectTarget(grid[row][col], roll);
 			comp.setColumn(target.getCol());
 			comp.setRow(target.getRow());
+			createSuggestion();
+
 		}
 	
 		// Updating information on bottom panel for who is playing
 		ClueGame.panel.setTurn(currentPlayer, roll);
+		
 		
 		// Logic to go to next player
 		if (currentPlayerIndex == players.size() - 1) {
@@ -703,6 +708,18 @@ public class Board extends JPanel implements MouseListener{
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void createSuggestion(){
+		String playerName = ClueGame.panel.getTurn();
+		
+		for(Player player:players) {
+			int row = player.getRow();
+			int column= player.getColumn();
+			if(grid[row][column].isRoom() && player.getName().equals(playerName)) {
+				suggestionDialog one = new suggestionDialog();
+			}
+			}
 	}
 	
 

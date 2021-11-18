@@ -32,7 +32,7 @@ public class Board extends JPanel implements MouseListener{
 	// Board single instance creation
 	public static Board theInstance = new Board();
 	// Blank array that will hold cells
-	BoardCell[][] grid;
+	private BoardCell[][] grid;
 	// Config files
 	private static File setupFile;
 	private static File layoutFile;
@@ -710,6 +710,9 @@ public class Board extends JPanel implements MouseListener{
 		
 	}
 	
+	public BoardCell[][] getGrid(){
+		return grid;
+	}
 	public void createSuggestion(){
 		String playerName = ClueGame.panel.getTurn();
 		

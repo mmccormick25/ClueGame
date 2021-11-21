@@ -172,9 +172,11 @@ public class Board extends JPanel implements MouseListener{
 		ComputerPlayer comp = (ComputerPlayer) currentPlayer;
 		
 		if (comp.getAccusation() != null) {
+			
 			Card[] accCards = comp.getAccusation().getSolution();
 			String winMessage = "Player " + comp.getName() + " just won with solution  " + accCards[0].getCardName() + ", " + accCards[1].getCardName() + ", " + accCards[2].getCardName() + ". You Lose!";
 			JOptionPane.showMessageDialog(ClueGame.frame, winMessage);
+			ArrayList<Player> players2 = players;
 			System.out.println("hi");
 		}
 		
@@ -264,19 +266,7 @@ public class Board extends JPanel implements MouseListener{
 	
 	public void dealCards() {
 		
-		// Getting random room string from map
-		int mapIndex = r.nextInt(rooms.size());
-		String roomString = null;
-		int i = 0;
-		for (Character key : rooms.keySet()) {
-			if (i == mapIndex) {
-				roomString = rooms.get(key).getName();
-			}
-			i++;
-		}
-
-		String weaponString = weapons.get(r.nextInt(weapons.size()));
-		String playerString = players.get(r.nextInt(players.size())).getName();
+		Collections.shuffle(deck);
 		
 		Card roomCard = null;
 		Card weaponCard = null;
@@ -284,19 +274,20 @@ public class Board extends JPanel implements MouseListener{
 		
 		// Looking for card names that match solution strings
 		for (Card card : deck) {
-			if (card.getCardName().equals(roomString)) {
+			if (card.getCardType() == Card.CardType.ROOM) {
 				roomCard = card;
 			}
-			if (card.getCardName().equals(weaponString)) {
+			if (card.getCardType() == Card.CardType.WEAPON) {
 				weaponCard = card;
 			}
-			if (card.getCardName().equals(playerString)) {
+			if (card.getCardType() == Card.CardType.PERSON) {
 				playerCard = card;
 			}
 		}
 		
 		// Removing solution cards from deck so rest of deck can be dealed
 		deck.remove(roomCard);
+		System.out.println(roomCard.getCardName());
 		deck.remove(weaponCard);
 		deck.remove(playerCard);
 		

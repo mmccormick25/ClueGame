@@ -31,13 +31,14 @@ public class accusationDialog extends JDialog{
 		JLabel weapon = new JLabel("Weapon");
 		roomChoice = new JComboBox<String>();
 		personChoice = new JComboBox<String>();
-		for(Room r: Board.getInstance().rooms.values()) {			
+		for(Room r: Board.getInstance().rooms.values()) {		
+			System.out.println(r.getName());
 				roomChoice.addItem(r.getName());
 
 		}
 		
 		
-		// create click for menus.
+		// create click for buttons
 		Clicklistener click = new Clicklistener();
 		submit.addActionListener(click);
 		cancel.addActionListener(click);
@@ -72,6 +73,7 @@ public class accusationDialog extends JDialog{
 		accusation.setVisible(true);
 		
 		accusation.add(room);
+		accusation.add(roomChoice);
 		
 		accusation.add(person);
 		accusation.add(personChoice);
@@ -102,14 +104,12 @@ public class accusationDialog extends JDialog{
 				System.out.println("submit pressed");
 				 newAccusation = new Solution(room,weapon,player);
 				 ClueGame.panel.setGuess(room.getCardName() + "," + weapon.getCardName() + "," + player.getCardName());
-	//			 Board.getInstance().handleSuggestion(null, newSuggestion, null);
-				 Board.getInstance().one.dispose();
-				 Board.getInstance().one.setVisible(false);
+
+		
 			}
 			if (e.getSource() == cancel)
 			{
-				 Board.getInstance().one.dispose();
-				setVisible(false);
+
 			}
 			
 		}

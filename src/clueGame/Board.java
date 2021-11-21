@@ -143,7 +143,6 @@ public class Board extends JPanel implements MouseListener{
 		if (currentPlayerIndex == 0) {
 			BoardCell start = grid[players.get(0).getRow()][players.get(0).getColumn()];
 			calcTargets(start,roll);	
-			createSuggestion();
 
 		} else {
 			// This runs for the computer players
@@ -151,7 +150,6 @@ public class Board extends JPanel implements MouseListener{
 			BoardCell target = comp.selectTarget(grid[row][col], roll);
 			comp.setColumn(target.getCol());
 			comp.setRow(target.getRow());
-			createSuggestion();
 
 		}
 	
@@ -679,6 +677,7 @@ public class Board extends JPanel implements MouseListener{
 				valid = true;
 				// Setting flag that player has moved
 				notMoved = false;
+				createSuggestion();
 			}
 		}
 		// Printing error message if invalid cell is clicked on
@@ -722,7 +721,7 @@ public class Board extends JPanel implements MouseListener{
 			if(grid[row][column].isRoom() && player.getName().equals(playerName)) {
 				suggestionDialog one = new suggestionDialog();
 			}
-			}
+		}
 	}
 	
 

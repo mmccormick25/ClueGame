@@ -1,35 +1,35 @@
-commit 14e60bc6b7a5b4da147cd23784f9cd9e503bb002
+commit b31f064f07a999e9c0137c5fdfe37e31dad58d8c
 Author: mmccormick <mmccormick@mines.edu>
-Date:   Fri Nov 12 16:47:13 2021 -0700
+Date:   Mon Nov 15 14:37:26 2021 -0700
 
-    Author: Zhen Liu, Navigator: Matthew McCormick -Fixed label positions on board and added info to bottom panel
+     Driver: Matthew McCormick, Navigator: Zhen Liu - Added comments
 
-commit e019cb65437cb42b4df31be7bea2180e6cce230e
+commit 1d3deefb9bba495da9678585dd0e1dc239cc6b84
+Author: mmccormick <mmccormick@mines.edu>
+Date:   Mon Nov 15 14:29:34 2021 -0700
+
+    Driver: Zhen Liu, Navigator: Matthew McCormick - Made it player can only move once per turn, added error message when player tries to end turn without moving.
+
+commit 10022cb58f477926605cdd6220177706b2ec30a8
 Author: Zhen Liu <zliu1@mines.edu>
-Date:   Fri Nov 12 16:26:33 2021 -0700
+Date:   Sun Nov 14 09:35:04 2021 -0700
 
-    Author: Zhen Liu, Navigator: Matthew McCormick - turn the 3 panels into one frame and add blank Jtextfield for side panel
+    Driver: Zhen Liu, Navigator: Matthew McCormick - targets of human player are highlighted correctly, human player moves when mouse clicks, and error message shows when wrong place is clicked. Bug is that human player can move around when the mouse clicks at different cells
 
-commit 8fa74700b46aa90f1e0625a9d248bda52259cfe3
+commit 81f7fd1b89690a634b25154f97395b8d3fd85a8a
 Author: mmccormick <mmccormick@mines.edu>
-Date:   Fri Nov 12 15:35:30 2021 -0700
+Date:   Sat Nov 13 16:14:26 2021 -0700
 
-    Author: Matthew McCormick, Navigator: Zhen Liu - Doors and labls now drawn
+    Driver: Matthew McCormick, Navigator: Zhen Liu - AIs now move on board when next button is clicked. Game panel updates with new roll and player name.
 
-commit b96239c81dda63f207c9c995be6ce6a7c1d35be6
+commit 8d7c92161596f88e3ac242bb1d05b6a6bcd72025
 Author: mmccormick <mmccormick@mines.edu>
-Date:   Fri Nov 12 15:11:50 2021 -0700
+Date:   Sat Nov 13 15:28:05 2021 -0700
 
-    Author: Matthew McCormick, Navigator: Zhen Liu - Players now drawn on board
+    Driver: Zhen Liu, Navigator: Matthew McCormick - Buttons on game control panel can now be pressed
 
-commit fa849ae3dd3b54fb3fcea1df2a7499ce93e6ad3f
-Author: Matthew McCormick <mmccormick@mines.edu>
-Date:   Thu Nov 11 14:55:27 2021 -0700
+commit 94a8e1f1f4dca44226243e46d32d8ce8b02f62fd
+Author: mmccormick <mmccormick@mines.edu>
+Date:   Sat Nov 13 14:58:00 2021 -0700
 
-    Author: Zhen Liu, Navigator: Matthew McCormick - Rooms, walkways, and closets now painted in
-
-commit 0260a471b1b280230ad2438a6b47183e33010e75
-Author: Matthew McCormick <mmccormick@mines.edu>
-Date:   Tue Nov 9 15:03:05 2021 -0700
-
-    Author: Matthew McCormick, Navigator: Zhen Liu - Grid skeleton for board now displays and resizes properly
+    Driver: Matthew McCormick, Navigator: Zhen Liu - Targets can now be drawn on board.

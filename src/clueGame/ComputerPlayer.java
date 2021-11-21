@@ -12,6 +12,18 @@ public class ComputerPlayer extends Player{
 	private ArrayList<Card> seenWeapons = new ArrayList<Card>();
 	private ArrayList<Card> seenPersons = new ArrayList<Card>();
 	
+	private Solution accusation;
+	
+	public void addSeenCard(Card card) {
+		if (card.getCardType() == Card.CardType.ROOM) {
+			setSeenRooms(card);
+		} else if (card.getCardType() == Card.CardType.WEAPON) {
+			setSeenWeapons(card);
+		} if (card.getCardType() == Card.CardType.PERSON) {
+			setSeenPersons(card);
+		}
+	}
+	
 	public ArrayList<Card> getSeenWeapons() {
 		return seenWeapons;
 	}
@@ -41,6 +53,7 @@ public class ComputerPlayer extends Player{
 	@Override
 	public void updatehand(Card card) {
 		super.cards.add(card);
+		addSeenCard(card);
 	}
 	
 	public BoardCell selectTarget(BoardCell currentLocation, int dice) {
@@ -129,6 +142,14 @@ public class ComputerPlayer extends Player{
 		}
 		
 		return new Solution(roomCard, weaponCard, personCard);
+	}
+
+	public Solution getAccusation() {
+		return accusation;
+	}
+
+	public void setAccusation(Solution accusation) {
+		this.accusation = accusation;
 	}
 	
 }

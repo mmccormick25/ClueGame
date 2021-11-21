@@ -103,7 +103,7 @@ public class BoardCell {
 		inRoom = room;
 	}
 	
-	public boolean isRoom( ) {
+	public boolean inRoom( ) {
 		return inRoom;
 	}
 	

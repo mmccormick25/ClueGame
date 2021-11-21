@@ -12,6 +12,8 @@ public class ComputerPlayer extends Player{
 	private ArrayList<Card> seenWeapons = new ArrayList<Card>();
 	private ArrayList<Card> seenPersons = new ArrayList<Card>();
 	
+	private Solution accusation;
+	
 	public void addSeenCard(Card card) {
 		if (card.getCardType() == Card.CardType.ROOM) {
 			setSeenRooms(card);
@@ -140,6 +142,14 @@ public class ComputerPlayer extends Player{
 		}
 		
 		return new Solution(roomCard, weaponCard, personCard);
+	}
+
+	public Solution getAccusation() {
+		return accusation;
+	}
+
+	public void setAccusation(Solution accusation) {
+		this.accusation = accusation;
 	}
 	
 }

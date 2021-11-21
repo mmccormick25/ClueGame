@@ -170,6 +170,14 @@ public class Board extends JPanel implements MouseListener{
 	}
 	private void runCompTurn(Player currentPlayer, int roll, int col, int row) {
 		ComputerPlayer comp = (ComputerPlayer) currentPlayer;
+		
+		if (comp.getAccusation() != null) {
+			Card[] accCards = comp.getAccusation().getSolution();
+			String winMessage = "Player " + comp.getName() + " just won with solution  " + accCards[0].getCardName() + ", " + accCards[1].getCardName() + ", " + accCards[2].getCardName() + ". You Lose!";
+			JOptionPane.showMessageDialog(ClueGame.frame, winMessage);
+			System.out.println("hi");
+		}
+		
 		BoardCell target = comp.selectTarget(grid[row][col], roll);
 		comp.setColumn(target.getCol());
 		comp.setRow(target.getRow());
@@ -186,6 +194,9 @@ public class Board extends JPanel implements MouseListener{
 				ClueGame.panel.setGuessResult("Suggestion disproven!");
 			} else {
 				ClueGame.panel.setGuessResult("Suggestion can't be disproven!");
+				if (!comp.getSeenRooms().contains(solArr[0])) {
+					comp.setAccusation(compSugg);
+				}
 			}
 		}
 	}

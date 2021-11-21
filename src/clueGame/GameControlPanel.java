@@ -147,11 +147,11 @@ public class GameControlPanel extends JPanel {
 
 
 
-// set the content of guess text box 
+	// set the content of guess text box 
 	public void setGuess(String s) {
 		guess.setText(s);
-		
 	}
+	
 	// set the content of guess result text box 
 	public void setGuessResult(String gResult) {
 		guessResult.setText(gResult);

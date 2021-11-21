@@ -139,6 +139,10 @@ public class Board extends JPanel implements MouseListener{
 		int col = currentPlayer.getColumn();
 		int row = currentPlayer.getRow();
 		
+		// Resetting info panels to be blank
+		ClueGame.panel.setGuess("");
+		ClueGame.panel.setGuessResult("");
+		
 		// This runs for the human player
 		if (currentPlayerIndex == 0) {
 			BoardCell start = grid[players.get(0).getRow()][players.get(0).getColumn()];
@@ -146,11 +150,7 @@ public class Board extends JPanel implements MouseListener{
 
 		} else {
 			// This runs for the computer players
-			ComputerPlayer comp = (ComputerPlayer) currentPlayer;
-			BoardCell target = comp.selectTarget(grid[row][col], roll);
-			comp.setColumn(target.getCol());
-			comp.setRow(target.getRow());
-
+			runCompTurn(currentPlayer, roll, col, row);
 		}
 	
 		// Updating information on bottom panel for who is playing
@@ -167,6 +167,27 @@ public class Board extends JPanel implements MouseListener{
 		// Repainting board to update computer movement
 		repaint();
 		
+	}
+	private void runCompTurn(Player currentPlayer, int roll, int col, int row) {
+		ComputerPlayer comp = (ComputerPlayer) currentPlayer;
+		BoardCell target = comp.selectTarget(grid[row][col], roll);
+		comp.setColumn(target.getCol());
+		comp.setRow(target.getRow());
+		if (target.inRoom()) {
+			Solution compSugg = comp.createSuggestion(target);
+			Card[] solArr = compSugg.getSolution();
+			ClueGame.panel.setGuess(solArr[0].getCardName() + ", " + solArr[1].getCardName() + ", " + solArr[2].getCardName());
+			Player[] suggPlayers = new Player[players.size()];
+		    suggPlayers = players.toArray(suggPlayers);
+			Card shownCard = this.handleSuggestion(suggPlayers, compSugg, comp);
+			
+			if (shownCard != null) {
+				comp.addSeenCard(shownCard);
+				ClueGame.panel.setGuessResult("Suggestion disproven!");
+			} else {
+				ClueGame.panel.setGuessResult("Suggestion can't be disproven!");
+			}
+		}
 	}
 	
 	
@@ -392,11 +413,11 @@ public class Board extends JPanel implements MouseListener{
 
 	public void findAllTargets(BoardCell cell, int length) {
 		for (BoardCell adjCell: getAdjList(cell)) {
-			if(visitedList.contains(adjCell) || (adjCell.getOccupied() && (!adjCell.isRoom()))) {
+			if(visitedList.contains(adjCell) || (adjCell.getOccupied() && (!adjCell.inRoom()))) {
 				continue;
 			}
 			visitedList.add(adjCell);
-			if(length == 1 || adjCell.isRoom()) {
+			if(length == 1 || adjCell.inRoom()) {
 				targets.add(adjCell);
 			} else {
 				findAllTargets(adjCell,length-1);
@@ -718,7 +739,7 @@ public class Board extends JPanel implements MouseListener{
 		for(Player player:players) {
 			int row = player.getRow();
 			int column= player.getColumn();
-			if(grid[row][column].isRoom() && player.getName().equals(playerName)) {
+			if(grid[row][column].inRoom() && player.getName().equals(playerName)) {
 				suggestionDialog one = new suggestionDialog();
 			}
 		}

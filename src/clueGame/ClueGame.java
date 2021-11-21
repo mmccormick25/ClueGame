@@ -34,8 +34,6 @@ public class ClueGame extends JFrame {
 		
 		
 		panel.setTurn(board.players.get(0), 5);
-		panel.setGuess( "I have no guess!");
-		panel.setGuessResult( "So you have nothing?");
 		
 		
 		frame.setSize(800, 700);  // size the frame

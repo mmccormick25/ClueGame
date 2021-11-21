@@ -23,6 +23,7 @@ public class GameControlPanel extends JPanel {
 	private JButton accusation;
 	private static JButton next;
 	public boolean isFirstPlayer;
+	private accusationDialog a;
 	
 	Board board = Board.getInstance();
 
@@ -113,6 +114,7 @@ public class GameControlPanel extends JPanel {
 			if (e.getSource() == accusation)
 			{
 				System.out.println("accusation pressed");
+				a = new accusationDialog();
 			}
 		}
 	}

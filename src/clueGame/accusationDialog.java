@@ -15,31 +15,26 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-public class suggestionDialog extends JDialog{
-	private JComboBox<String> personChoice,weaponChoice;
+public class accusationDialog extends JDialog{
+	private JComboBox<String> roomChoice,personChoice,weaponChoice;
 	JButton submit,cancel;
-	JTextField roomName;
-	Solution newSuggestion;
+	Solution newAccusation;
+	JDialog accusation;
+
 	
-	public void setRoomName(String name) {
-		roomName.setText(name);
-		
-	}
-	
-	public suggestionDialog() {
-		JDialog suggestion = new JDialog(ClueGame.frame,"Make a suggestion");
+	public accusationDialog() {
+		accusation = new JDialog(ClueGame.frame,"Make an Accusation");
 		 submit= new JButton("Submit");
 		cancel = new JButton("Cancel");
-		JLabel room = new JLabel("Current Room");
-		
-		// display the room name in JTextField
-		roomName = new JTextField();
-		
-		
-		
+		JLabel room = new JLabel("Room");		
 		JLabel person = new JLabel("Person");
 		JLabel weapon = new JLabel("Weapon");
+		roomChoice = new JComboBox<String>();
 		personChoice = new JComboBox<String>();
+		for(Room r: Board.getInstance().rooms.values()) {			
+				roomChoice.addItem(r.getName());
+
+		}
 		
 		
 		// create click for menus.
@@ -55,10 +50,7 @@ public class suggestionDialog extends JDialog{
 				
 				personChoice.addItem(player.getName());
 				
-			} else {
-				BoardCell temp = Board.getInstance().getGrid()[player.getRow()][player.getColumn()];
-				setRoomName(Board.getInstance().getRoom(temp).getName());
-			}
+			} 
 		}
 		
 		
@@ -75,20 +67,20 @@ public class suggestionDialog extends JDialog{
 		
 		
 		
-		suggestion.setLayout(new GridLayout(4,2));
-		suggestion.setSize(200, 300);
-		suggestion.setVisible(true);
+		accusation.setLayout(new GridLayout(4,2));
+		accusation.setSize(200, 200);
+		accusation.setVisible(true);
 		
-		suggestion.add(room);
-		suggestion.add(roomName);
-		suggestion.add(person);
-		suggestion.add(personChoice);
+		accusation.add(room);
 		
-		suggestion.add(weapon);
-		suggestion.add(weaponChoice);
+		accusation.add(person);
+		accusation.add(personChoice);
 		
-		suggestion.add(submit);
-		suggestion.add(cancel);
+		accusation.add(weapon);
+		accusation.add(weaponChoice);
+		
+		accusation.add(submit);
+		accusation.add(cancel);
 		
 	}
 
@@ -99,15 +91,16 @@ public class suggestionDialog extends JDialog{
 		{
 			String playerName = personChoice.getSelectedItem().toString();
 			String weaponName = weaponChoice.getSelectedItem().toString();
+			String roomName = roomChoice.getSelectedItem().toString();
 			Card player = new Card(playerName,Card.CardType.PERSON);
 			Card weapon = new Card(weaponName,Card.CardType.WEAPON);
-			Card room = new Card(roomName.getText(), Card.CardType.ROOM);
+			Card room = new Card(roomName, Card.CardType.ROOM);
 			
 			
 			if (e.getSource() == submit)
 			{
 				System.out.println("submit pressed");
-				 newSuggestion = new Solution(room,weapon,player);
+				 newAccusation = new Solution(room,weapon,player);
 				 ClueGame.panel.setGuess(room.getCardName() + "," + weapon.getCardName() + "," + player.getCardName());
 	//			 Board.getInstance().handleSuggestion(null, newSuggestion, null);
 				 Board.getInstance().one.dispose();

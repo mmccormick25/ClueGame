@@ -66,6 +66,8 @@ public class Board extends JPanel implements MouseListener{
 	
 	// Keeps track of if human player has moved yet
 	boolean notMoved = true;
+	
+	public suggestionDialog one;
 
 	// Singleton object
 	// constructor is private to ensure only one can be created
@@ -719,7 +721,7 @@ public class Board extends JPanel implements MouseListener{
 			int row = player.getRow();
 			int column= player.getColumn();
 			if(grid[row][column].isRoom() && player.getName().equals(playerName)) {
-				suggestionDialog one = new suggestionDialog();
+				one = new suggestionDialog();
 			}
 		}
 	}

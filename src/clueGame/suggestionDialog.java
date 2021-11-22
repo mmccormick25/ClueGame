@@ -20,6 +20,7 @@ public class suggestionDialog extends JDialog{
 	JButton submit,cancel;
 	JTextField roomName;
 	Solution newSuggestion;
+	JDialog suggestion;
 	
 	public void setRoomName(String name) {
 		roomName.setText(name);
@@ -27,7 +28,7 @@ public class suggestionDialog extends JDialog{
 	}
 	
 	public suggestionDialog() {
-		JDialog suggestion = new JDialog(ClueGame.frame,"Make a suggestion");
+		suggestion = new JDialog(ClueGame.frame,"Make a suggestion");
 		 submit= new JButton("Submit");
 		cancel = new JButton("Cancel");
 		JLabel room = new JLabel("Current Room");
@@ -110,13 +111,13 @@ public class suggestionDialog extends JDialog{
 				 newSuggestion = new Solution(room,weapon,player);
 				 ClueGame.panel.setGuess(room.getCardName() + "," + weapon.getCardName() + "," + player.getCardName());
 	//			 Board.getInstance().handleSuggestion(null, newSuggestion, null);
-				 Board.getInstance().one.dispose();
-				 Board.getInstance().one.setVisible(false);
+				 suggestion.dispose();
+				 suggestion.setVisible(false);
 			}
 			if (e.getSource() == cancel)
 			{
-				 Board.getInstance().one.dispose();
-				setVisible(false);
+				 suggestion.dispose();
+				suggestion.setVisible(false);
 			}
 			
 		}

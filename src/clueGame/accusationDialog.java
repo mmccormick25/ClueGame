@@ -104,12 +104,14 @@ public class accusationDialog extends JDialog{
 				System.out.println("submit pressed");
 				 newAccusation = new Solution(room,weapon,player);
 				 ClueGame.panel.setGuess(room.getCardName() + "," + weapon.getCardName() + "," + player.getCardName());
-
+				 accusation.dispose();
+				 accusation.setVisible(false);
 		
 			}
 			if (e.getSource() == cancel)
 			{
-
+				accusation.dispose();
+				accusation.setVisible(false);
 			}
 			
 		}

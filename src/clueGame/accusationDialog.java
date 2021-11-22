@@ -20,6 +20,7 @@ public class accusationDialog extends JDialog{
 	JButton submit,cancel;
 	Solution newAccusation;
 	JDialog accusation;
+	Board board = Board.getInstance();
 
 	
 	public accusationDialog() {
@@ -37,7 +38,6 @@ public class accusationDialog extends JDialog{
 
 		}
 		
-		
 		// create click for buttons
 		Clicklistener click = new Clicklistener();
 		submit.addActionListener(click);
@@ -46,7 +46,7 @@ public class accusationDialog extends JDialog{
 		
 		// add the drop-down menu for players
 		for(Player player:Board.players) {
-			if(!player.getName().equals(ClueGame.panel.getTurn())) {
+			if(!player.getName().equals(ClueGame.controlPanel.getTurn())) {
 				
 				
 				personChoice.addItem(player.getName());
@@ -86,7 +86,6 @@ public class accusationDialog extends JDialog{
 		
 	}
 
-	
 	private class Clicklistener implements ActionListener {
 		public void actionPerformed(ActionEvent e)
 		
@@ -103,15 +102,18 @@ public class accusationDialog extends JDialog{
 			{
 				System.out.println("submit pressed");
 				 newAccusation = new Solution(room,weapon,player);
-				 ClueGame.panel.setGuess(room.getCardName() + "," + weapon.getCardName() + "," + player.getCardName());
+				 ClueGame.controlPanel.setGuess(room.getCardName() + "," + weapon.getCardName() + "," + player.getCardName());
 				 accusation.dispose();
 				 accusation.setVisible(false);
+				 board.accMade = true;
+				 board.handleAccusation(newAccusation);
 		
 			}
 			if (e.getSource() == cancel)
 			{
 				accusation.dispose();
 				accusation.setVisible(false);
+				board.accMade = true;
 			}
 			
 		}

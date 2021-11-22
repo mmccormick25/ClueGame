@@ -23,6 +23,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Board extends JPanel implements MouseListener{
+	// Random object
+	Random r = new Random();
+	
+	// Variables to define board size
 	private static int numRows;
 	private static int numCols;
 
@@ -51,22 +55,26 @@ public class Board extends JPanel implements MouseListener{
 	public static ArrayList<String> weapons = new ArrayList<String>();
 	// deck of all cards
 	public ArrayList<Card> deck = new ArrayList<Card>();
-	
+	// Character that represents spaces players can't go
 	public static Character closetChar;
-	
-	// create 6 players;
+
+	// Arraylist that holds players
 	public static ArrayList<Player> players = new ArrayList<Player>();
-	
-	public boolean alreadyInitialized = false;
-	
 	// Keeps track of where current player is in list
 	public int currentPlayerIndex = 0;
-	
-	Random r = new Random();
+
+	// Flags
 	
 	// Keeps track of if human player has moved yet
 	boolean notMoved = true;
+	// Keeps track of if player suggestion has been made
+	public boolean suggestMade = true;
+	// Keeps track of if board has already been created
+	public boolean alreadyInitialized = false;
+	// Keeps track of if player accusation had been made
+	boolean accMade = true;
 	
+	// Suggestion dialog object
 	public suggestionDialog one;
 
 	// Singleton object
@@ -78,136 +86,12 @@ public class Board extends JPanel implements MouseListener{
 	public static Board getInstance() {
 		return theInstance;
 	}
+	
 	/*
 	 * initialize the board (since we are using singleton pattern)
 	 */
-	
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-
-			int panelWidth = this.getWidth();
-			int panelHeight = this.getHeight();
-			int widthLimit = (int) panelWidth / 28;
-			int heightLimit = (int) panelHeight / 22;
-			int cellDim;
-			if (widthLimit > heightLimit) {
-				cellDim = heightLimit;
-			} else {
-				cellDim = widthLimit;
-			}
-			
-			if (grid != null) {
-				for (int x = 0; x < grid.length; x++) {
-					for (int y = 0; y < grid[0].length; y++) {
-						grid[x][y].draw(y * cellDim, x * cellDim, cellDim, g);
-					}
-				}
-			}
-			
-			if (grid != null) {
-				for (int x = 0; x < grid.length; x++) {
-					for (int y = 0; y < grid[0].length; y++) {
-						grid[x][y].drawSecond(y * cellDim, x * cellDim, cellDim, g);
-					}
-				}
-			}
-			
-
-			
-			
-			
-			if(ClueGame.panel.getTurn().equals(players.get(0).getName())) {
-				for(BoardCell target: targets) {
-					target.drawTarget(cellDim, g);
-				}
-				
-			}
-		
-			
-			for (int i=0;i<players.size();i++) {
-				players.get(i).draw(cellDim, g);
-			}
-			
-
-		
-	}
-	
-	public void runTurn() {
-		// Updating current player
-		Player currentPlayer = players.get(currentPlayerIndex);
-		// Getting random dice roll
-		int roll = r.nextInt(6) + 1;
-		// Getting current position
-		int col = currentPlayer.getColumn();
-		int row = currentPlayer.getRow();
-		
-		// Resetting info panels to be blank
-		ClueGame.panel.setGuess("");
-		ClueGame.panel.setGuessResult("");
-		
-		// This runs for the human player
-		if (currentPlayerIndex == 0) {
-			BoardCell start = grid[players.get(0).getRow()][players.get(0).getColumn()];
-			calcTargets(start,roll);	
-
-		} else {
-			// This runs for the computer players
-			runCompTurn(currentPlayer, roll, col, row);
-		}
-	
-		// Updating information on bottom panel for who is playing
-		ClueGame.panel.setTurn(currentPlayer, roll);
-		
-		
-		// Logic to go to next player
-		if (currentPlayerIndex == players.size() - 1) {
-			currentPlayerIndex = 0;
-		} else {
-			currentPlayerIndex++;
-		}
-		
-		// Repainting board to update computer movement
-		repaint();
-		
-	}
-	private void runCompTurn(Player currentPlayer, int roll, int col, int row) {
-		ComputerPlayer comp = (ComputerPlayer) currentPlayer;
-		
-		if (comp.getAccusation() != null) {
-			
-			Card[] accCards = comp.getAccusation().getSolution();
-			String winMessage = "Player " + comp.getName() + " just won with solution  " + accCards[0].getCardName() + ", " + accCards[1].getCardName() + ", " + accCards[2].getCardName() + ". You Lose!";
-			JOptionPane.showMessageDialog(ClueGame.frame, winMessage);
-			ArrayList<Player> players2 = players;
-			System.out.println("hi");
-		}
-		
-		BoardCell target = comp.selectTarget(grid[row][col], roll);
-		comp.setColumn(target.getCol());
-		comp.setRow(target.getRow());
-		if (target.inRoom()) {
-			Solution compSugg = comp.createSuggestion(target);
-			Card[] solArr = compSugg.getSolution();
-			ClueGame.panel.setGuess(solArr[0].getCardName() + ", " + solArr[1].getCardName() + ", " + solArr[2].getCardName());
-			Player[] suggPlayers = new Player[players.size()];
-		    suggPlayers = players.toArray(suggPlayers);
-			Card shownCard = this.handleSuggestion(suggPlayers, compSugg, comp);
-			
-			if (shownCard != null) {
-				comp.addSeenCard(shownCard);
-				ClueGame.panel.setGuessResult("Suggestion disproven!");
-			} else {
-				ClueGame.panel.setGuessResult("Suggestion can't be disproven!");
-				if (!comp.getSeenRooms().contains(solArr[0])) {
-					comp.setAccusation(compSugg);
-				}
-			}
-		}
-	}
-	
-	
 	public void initialize() {
-		
+
 		// Using try catch to handle exceptions from loadSetupConfig and loadLayoutConfig
 		try {
 			loadSetupConfig();
@@ -225,12 +109,12 @@ public class Board extends JPanel implements MouseListener{
 
 		// Initializing 2d list of cells to be same size as board
 		grid = new BoardCell[numRows][numCols]; 
-		
+
 		// Making sure deck is empty for junit tests
 		deck.clear();
-		
+
 		addMouseListener(this);
-		
+
 		// Initializing objects based on their type
 		for (ArrayList<String> row : setupStrings) {
 			String type = row.get(0);
@@ -250,30 +134,30 @@ public class Board extends JPanel implements MouseListener{
 				deck.add(new Card(row.get(1), Card.CardType.PERSON));
 			}
 		}
-		
+
 		// Creating board cells
 		initialCells();
 		// Running adjacenty on doors so rooms have proper adjacency
 		doorAdjList();
-		
+
 		// Only dealing cards if there are weapons in the setup file
 		if (weapons.size() > 0) {
 			dealCards();
 		}
-		
+
 		alreadyInitialized = true;
 		repaint();
 
 	}
-	
+
 	public void dealCards() {
-		
+
 		Collections.shuffle(deck);
-		
+
 		Card roomCard = null;
 		Card weaponCard = null;
 		Card playerCard = null;
-		
+
 		// Looking for card names that match solution strings
 		for (Card card : deck) {
 			if (card.getCardType() == Card.CardType.ROOM) {
@@ -286,18 +170,18 @@ public class Board extends JPanel implements MouseListener{
 				playerCard = card;
 			}
 		}
-		
+
 		// Removing solution cards from deck so rest of deck can be dealed
 		deck.remove(roomCard);
 		System.out.println(roomCard.getCardName());
 		deck.remove(weaponCard);
 		deck.remove(playerCard);
-		
+
 		soln = new Solution(roomCard, weaponCard, playerCard);
-		
+
 		// Shuffling deck
 		Collections.shuffle(deck);
-		
+
 		// Dealing cards one at a time to player
 		int playerIndex = 0;
 		for (Card card : deck) {
@@ -307,13 +191,13 @@ public class Board extends JPanel implements MouseListener{
 				playerIndex = 0;
 			}
 		}
-		
+
 		// Readding solution cards to deck so deck setup test passes
 		deck.add(roomCard);
 		deck.add(weaponCard);
 		deck.add(playerCard);
-		
-		
+
+
 	}
 	public void initialRoom(ArrayList<String> row) {
 		// create 11 rooms with constructors.
@@ -336,13 +220,13 @@ public class Board extends JPanel implements MouseListener{
 		// Adding room to map with key of character that represents it in layout file
 		rooms.put(c, room);
 	}
-	
+
 	public void initialWeapon(ArrayList<String> row) {
 		if (weapons.size() < 6) {
 			weapons.add(row.get(1));
 		}
 	}
-	
+
 	public void initialPlayer(ArrayList<String> row) {
 		if (players.size() < 6) {
 			String[] coords = row.get(3).split("-");
@@ -352,7 +236,7 @@ public class Board extends JPanel implements MouseListener{
 			players.add(player);
 		}
 	}
-	
+
 	public void initialComputer(ArrayList<String> row) {
 		if (players.size() < 6) {
 			String[] coords = row.get(3).split("-");
@@ -398,6 +282,130 @@ public class Board extends JPanel implements MouseListener{
 		}
 
 	}
+	
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+
+		int panelWidth = this.getWidth();
+		int panelHeight = this.getHeight();
+		int widthLimit = (int) panelWidth / 28;
+		int heightLimit = (int) panelHeight / 22;
+		int cellDim;
+		if (widthLimit > heightLimit) {
+			cellDim = heightLimit;
+		} else {
+			cellDim = widthLimit;
+		}
+
+		if (grid != null) {
+			for (int x = 0; x < grid.length; x++) {
+				for (int y = 0; y < grid[0].length; y++) {
+					grid[x][y].draw(y * cellDim, x * cellDim, cellDim, g);
+				}
+			}
+		}
+
+		if (grid != null) {
+			for (int x = 0; x < grid.length; x++) {
+				for (int y = 0; y < grid[0].length; y++) {
+					grid[x][y].drawSecond(y * cellDim, x * cellDim, cellDim, g);
+				}
+			}
+		}
+
+
+
+
+
+		if(ClueGame.controlPanel.getTurn().equals(players.get(0).getName())) {
+			for(BoardCell target: targets) {
+				target.drawTarget(cellDim, g);
+			}
+
+		}
+
+
+		for (int i=0;i<players.size();i++) {
+			players.get(i).draw(cellDim, g);
+		}
+
+
+
+	}
+	
+	public void runTurn() {
+		// Updating current player
+		Player currentPlayer = players.get(currentPlayerIndex);
+		// Getting random dice roll
+		int roll = r.nextInt(6) + 1;
+		// Getting current position
+		int col = currentPlayer.getColumn();
+		int row = currentPlayer.getRow();
+
+		// Resetting info panels to be blank
+		ClueGame.controlPanel.setGuess("");
+		ClueGame.controlPanel.setGuessResult("");
+
+		// This runs for the human player
+		if (currentPlayerIndex == 0) {
+			BoardCell start = grid[players.get(0).getRow()][players.get(0).getColumn()];
+			calcTargets(start,roll);	
+		} else {
+			// This runs for the computer players
+			runCompTurn(currentPlayer, roll, col, row);
+		}
+
+		// Updating information on bottom panel for who is playing
+		ClueGame.controlPanel.setTurn(currentPlayer, roll);
+
+		// Logic to go to next player
+		if (currentPlayerIndex == players.size() - 1) {
+			currentPlayerIndex = 0;
+		} else {
+			currentPlayerIndex++;
+		}
+
+		// Repainting board to update computer movement
+		repaint();
+
+	}
+	
+	public void runCompTurn(Player currentPlayer, int roll, int col, int row) {
+		ComputerPlayer comp = (ComputerPlayer) currentPlayer;
+
+		if (comp.getAccusation() != null) {
+
+			Card[] accCards = comp.getAccusation().getSolution();
+			String winMessage = "Player " + comp.getName() + " just won with solution  " + accCards[0].getCardName() + ", " + accCards[1].getCardName() + ", " + accCards[2].getCardName() + ". You Lose!";
+			JOptionPane.showMessageDialog(ClueGame.frame, winMessage);
+			ArrayList<Player> players2 = players;
+			System.out.println("hi");
+		}
+
+		BoardCell target = comp.selectTarget(grid[row][col], roll);
+		comp.setColumn(target.getCol());
+		comp.setRow(target.getRow());
+		if (target.inRoom()) {
+			Solution compSugg = comp.createSuggestion(target);
+			Card[] solArr = compSugg.getSolution();
+			ClueGame.controlPanel.setGuess(solArr[0].getCardName() + ", " + solArr[1].getCardName() + ", " + solArr[2].getCardName());
+			Player[] suggPlayers = new Player[players.size()];
+			suggPlayers = players.toArray(suggPlayers);
+			Card shownCard = handleSuggestion(suggPlayers, compSugg, comp);
+			
+			if (shownCard != null) {
+				comp.addSeenCard(shownCard);
+				ClueGame.controlPanel.setGuessResult("Suggestion disproven!");
+			} else {
+				ClueGame.controlPanel.setGuessResult("Suggestion can't be disproven!");
+				if (!comp.getSeenRooms().contains(solArr[0])) {
+					comp.setAccusation(compSugg);
+				}
+			}
+		}
+	}
+
+
 	// get the adjacent list for rooms by getting the adjacent list for the doors.
 	public void doorAdjList() {
 		for (BoardCell[] r : grid) {
@@ -428,7 +436,7 @@ public class Board extends JPanel implements MouseListener{
 			}
 			visitedList.remove(adjCell);
 		}
-			
+
 	}
 
 	public void calcTargets(BoardCell startCell, int pathlength) {
@@ -436,7 +444,7 @@ public class Board extends JPanel implements MouseListener{
 		targets.clear();
 		visitedList.add(startCell);
 		findAllTargets(startCell,pathlength);
-		
+
 	}
 
 	// File init methods
@@ -510,11 +518,11 @@ public class Board extends JPanel implements MouseListener{
 			// Checking if row starts with '//', if so it is not added to the 2d array
 			ArrayList<String> validTypes = new ArrayList<String>(Arrays.asList("Room", "Space", "Weapon", "Player", "Computer"));			
 			String type = row.get(0);
-			
+
 			if (!type.substring(0, 2).equals("//")) {
 				setupStrings.add(row);
 			}
-			
+
 			if (row.size() > 1) {
 				if (!validTypes.contains(type)) {
 					throw new BadConfigFormatException("Incorrect setup file format.");
@@ -523,15 +531,15 @@ public class Board extends JPanel implements MouseListener{
 		}
 		layoutReader.close();
 	}
-	
+
 	public boolean checkAccusation(Solution s) {
 		boolean result = false;
 		if(soln.getSolution()[0].getCardName().equals(s.getSolution()[0].getCardName()) && getSolution().getSolution()[1].getCardName().equals(s.getSolution()[1].getCardName()) && getSolution().getSolution()[2].getCardName().equals(s.getSolution()[2].getCardName()))
-		result = true;
-		
+			result = true;
+
 		return result;
 	}
-	
+
 	public Card handleSuggestion(Player[] suggPlayers, Solution suggestion, Player suggestPlayer) {
 		ArrayList<Player> playerArray = new ArrayList<>(Arrays.asList(suggPlayers));
 		int startIndex = playerArray.indexOf(suggestPlayer);
@@ -553,6 +561,15 @@ public class Board extends JPanel implements MouseListener{
 			}
 		}
 		return null;
+	}
+	
+	public void handleAccusation(Solution accusation) {
+		if (checkAccusation(accusation)) {
+			JOptionPane.showMessageDialog(null, "Congratulations, you got the correct solution! You win!");
+		} else {
+			JOptionPane.showMessageDialog(null, "Sorry but that's the wrong solution. You lose!");
+		}
+		System.exit(0);
 	}
 
 	// Getters
@@ -672,9 +689,9 @@ public class Board extends JPanel implements MouseListener{
 	}
 	public void setSolution(Card room,Card weapon,Card player) {
 		soln = new Solution(room,weapon,player);
-		
+
 	}
-	
+
 	public void nextPressed() {
 		notMoved = true;
 		runTurn();
@@ -702,6 +719,10 @@ public class Board extends JPanel implements MouseListener{
 				valid = true;
 				// Setting flag that player has moved
 				notMoved = false;
+				// Setting suggestMade to be false to indicate that suggestion must be addressed
+				if (target.inRoom) {
+					suggestMade = false;
+				}
 				createSuggestion();
 			}
 		}
@@ -712,34 +733,34 @@ public class Board extends JPanel implements MouseListener{
 		// Repainting to update player position
 		repaint();
 	}
-	
+
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 	public BoardCell[][] getGrid(){
 		return grid;
 	}
 	public void createSuggestion(){
-		String playerName = ClueGame.panel.getTurn();
-		
+		String playerName = ClueGame.controlPanel.getTurn();
+
 		for(Player player:players) {
 			int row = player.getRow();
 			int column= player.getColumn();
@@ -751,6 +772,21 @@ public class Board extends JPanel implements MouseListener{
 		}
 	}
 	
+	public void handleHumanSuggestion(Solution newSuggestion) {
+		Player humanPlayer = players.get(0);
+		
+		Player[] suggPlayers = new Player[players.size()];
+		suggPlayers = players.toArray(suggPlayers);
+		Card shownCard = handleSuggestion(suggPlayers, newSuggestion, humanPlayer);
+		
+		if (shownCard != null) {
+			humanPlayer.addSeenCard(shownCard);
+			ClueGame.controlPanel.setGuessResult("Suggestion disproven!");
+		} else {
+			ClueGame.controlPanel.setGuessResult("Suggestion can't be disproven!");
+		}
+	}
+
 
 
 }

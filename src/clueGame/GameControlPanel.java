@@ -23,7 +23,6 @@ public class GameControlPanel extends JPanel {
 	private JButton accusation;
 	private static JButton next;
 	public boolean isFirstPlayer;
-	private accusationDialog a;
 	
 	Board board = Board.getInstance();
 
@@ -99,21 +98,30 @@ public class GameControlPanel extends JPanel {
 	}
 
 	// ClickListener listens to when next and accusation buttons are pressed
-	private class Clicklistener implements ActionListener {
+	class Clicklistener implements ActionListener {
+		public accusationDialog a;
 		public void actionPerformed(ActionEvent e)
 		{
 			if (e.getSource() == next)
 			{
 				// Checking if player hasn't moved and it is human players turn
-				if (board.notMoved && board.currentPlayerIndex == 1) {
-					JOptionPane.showMessageDialog(null, "You must move before ending your turn.");	
+				if (board.currentPlayerIndex == 1) {
+					if (board.notMoved) {
+						JOptionPane.showMessageDialog(null, "You must move before ending your turn.");	
+					} else if (!board.suggestMade) {
+						JOptionPane.showMessageDialog(null, "You must make a suggestion or press cancel.");
+					} else if (!board.accMade) {
+						JOptionPane.showMessageDialog(null, "You must make an accusation or press cancel.");
+					} else {
+						board.nextPressed();
+					}
 				} else {
 					board.nextPressed();
 				}
 			}
 			if (e.getSource() == accusation)
 			{
-				System.out.println("accusation pressed");
+				board.accMade = false;
 				a = new accusationDialog();
 			}
 		}

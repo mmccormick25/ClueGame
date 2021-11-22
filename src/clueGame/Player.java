@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 abstract public class Player {
+	protected ArrayList<Card> seenRooms = new ArrayList<Card>();
+	protected ArrayList<Card> seenWeapons = new ArrayList<Card>();
+	protected ArrayList<Card> seenPersons = new ArrayList<Card>();
+	
 	private String name;
 	private String color;
 	private int row, column;
@@ -33,6 +37,28 @@ abstract public class Player {
 		}
 		return null;
 		
+	}
+	
+	public void addSeenCard(Card card) {
+		if (card.getCardType() == Card.CardType.ROOM) {
+			seenRooms.add(card);
+		} else if (card.getCardType() == Card.CardType.WEAPON) {
+			seenWeapons.add(card);
+		} if (card.getCardType() == Card.CardType.PERSON) {
+			seenPersons.add(card);
+		}
+	}
+	
+	public ArrayList<Card> getSeenWeapons() {
+		return seenWeapons;
+	}
+	
+	public ArrayList<Card> getSeenPersons() {
+		return seenPersons;
+	}
+	
+	public ArrayList<Card> getSeenRooms() {
+		return seenRooms;
 	}
 	
 	public String getName() {

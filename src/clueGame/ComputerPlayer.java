@@ -8,43 +8,8 @@ import java.util.Random;
 import java.util.Set;
 
 public class ComputerPlayer extends Player{
-	private ArrayList<Card> seenRooms = new ArrayList<Card>();
-	private ArrayList<Card> seenWeapons = new ArrayList<Card>();
-	private ArrayList<Card> seenPersons = new ArrayList<Card>();
 	
 	private Solution accusation;
-	
-	public void addSeenCard(Card card) {
-		if (card.getCardType() == Card.CardType.ROOM) {
-			setSeenRooms(card);
-		} else if (card.getCardType() == Card.CardType.WEAPON) {
-			setSeenWeapons(card);
-		} if (card.getCardType() == Card.CardType.PERSON) {
-			setSeenPersons(card);
-		}
-	}
-	
-	public ArrayList<Card> getSeenWeapons() {
-		return seenWeapons;
-	}
-	public void setSeenWeapons(Card c) {
-		seenWeapons.add(c);
-	}
-	public ArrayList<Card> getSeenPersons() {
-		return seenPersons;
-	}
-	public void setSeenPersons(Card c) {
-		seenPersons.add(c);
-	}
-
-	
-	public void setSeenRooms(Card card) {
-		seenRooms.add(card);
-	}
-	public ArrayList<Card> getSeenRooms() {
-		return seenRooms;
-	}
-
 
 	public ComputerPlayer(String name, String color, int row, int column) {
 		super(name, color, row, column);

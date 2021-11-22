@@ -10,13 +10,11 @@ import javax.swing.JPanel;
 
 public class ClueGame extends JFrame {
 
-
 	public static JFrame frame;
 	
 	static boolean gameWon = false;
 	private static boolean nextPressed = false;
-	public static GameControlPanel panel = new GameControlPanel(); 
-	public static GameSidePanel side= new GameSidePanel();
+	public static GameControlPanel controlPanel = new GameControlPanel(); 
 	public ClueGame() {
 
 		
@@ -27,24 +25,26 @@ public class ClueGame extends JFrame {
 		Board board = Board.getInstance();
 		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
 		board.initialize();
+		
+		GameSidePanel sidePanel = new GameSidePanel();
 			
-		frame = new JFrame("Welcome to Clue Game");
+		frame = new JFrame("Clue Game");
 		
 		JOptionPane.showMessageDialog(frame,"You are " + board.players.get(0).getName() + "\nCan you find the solution \nbefore the computer players?");
 		
+		controlPanel.setTurn(board.players.get(0), 5);
 		
-		panel.setTurn(board.players.get(0), 5);
+		sidePanel.setDisplayPlayer(board.players.get(0));
 		
-		
-		frame.setSize(800, 700);  // size the frame
+		frame.setSize(800, 600);  // size the frame
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
 		frame.setVisible(true); // make it visible
 
 		frame.setLayout(new BorderLayout());
 		frame.add(board,BorderLayout.CENTER);
 	
-		frame.add(panel,BorderLayout.SOUTH);
-		frame.add(side,BorderLayout.EAST);
+		frame.add(controlPanel,BorderLayout.SOUTH);
+		frame.add(sidePanel,BorderLayout.EAST);
 		frame.pack();
 		
 		// Running first turn, this is usually done by pressing next button

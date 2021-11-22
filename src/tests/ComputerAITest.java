@@ -78,7 +78,7 @@ public class ComputerAITest {
 		// test the situation for room in the target list and has been seen. 
 		ComputerPlayer aiThree = new ComputerPlayer("test player","black",13,20);
 		ArrayList<Card> testSeenCards = new ArrayList<Card>();
-		aiThree.setSeenRooms(bathroomCard);
+		aiThree.addSeenCard(bathroomCard);
 		testSeenCards = aiThree.getSeenRooms();
 		BoardCell targetCellThree = aiThree.selectTarget(board.getCell(13, 20), 3);
 		assert targetCellThree != board.getCell(14, 19);
@@ -95,22 +95,22 @@ public class ComputerAITest {
 		assert s.getSolution()[0].equals(labCard);
 		
 		//check if the card is selected, which is the only one weapon 		
-		aiOne.setSeenWeapons(laserGunCard);
-		aiOne.setSeenWeapons(knifeCard);
-		aiOne.setSeenWeapons(moonRockCard);
-		aiOne.setSeenWeapons(lightsaberCard);
-		aiOne.setSeenWeapons(wrenchCard);
+		aiOne.addSeenCard(laserGunCard);
+		aiOne.addSeenCard(knifeCard);
+		aiOne.addSeenCard(moonRockCard);
+		aiOne.addSeenCard(lightsaberCard);
+		aiOne.addSeenCard(wrenchCard);
 		Solution s1 = aiOne.createSuggestion(board.getCell(9, 2));
 		assert s1.getSolution()[1].equals(liveWireCard);
 		
 		
 		
 		//check if the card is selected, which is the only one person 	
-		aiOne.setSeenPersons(yellowCard);
-		aiOne.setSeenPersons(blueCard);
-		aiOne.setSeenPersons(maroonCard);
-		aiOne.setSeenPersons(brownCard);
-		aiOne.setSeenPersons(grayCard);
+		aiOne.addSeenCard(yellowCard);
+		aiOne.addSeenCard(blueCard);
+		aiOne.addSeenCard(maroonCard);
+		aiOne.addSeenCard(brownCard);
+		aiOne.addSeenCard(grayCard);
 		Solution s2 = aiOne.createSuggestion(board.getCell(9, 2));
 		assert s2.getSolution()[2].equals(orangeCard);
 		
@@ -119,8 +119,8 @@ public class ComputerAITest {
 		//check if the card is randomly selected, when multiple persons not seen 
 		
 		ComputerPlayer aiTwo = new ComputerPlayer("Sir Silver","Gray",9,2);
-		aiTwo.setSeenWeapons(liveWireCard);
-		aiTwo.setSeenPersons(orangeCard);
+		aiTwo.addSeenCard(liveWireCard);
+		aiTwo.addSeenCard(orangeCard);
 		Solution s3 = aiTwo.createSuggestion(board.getCell(9, 2));
 		assert !s3.getSolution()[1].equals(liveWireCard);
 		assert !s3.getSolution()[2].equals(orangeCard);

@@ -175,7 +175,9 @@ public class Board extends JPanel implements MouseListener{
 		deck.remove(roomCard);
 		System.out.println(roomCard.getCardName());
 		deck.remove(weaponCard);
+		System.out.println(weaponCard.getCardName());
 		deck.remove(playerCard);
+		System.out.println(playerCard.getCardName());
 
 		soln = new Solution(roomCard, weaponCard, playerCard);
 
@@ -389,9 +391,7 @@ public class Board extends JPanel implements MouseListener{
 			Solution compSugg = comp.createSuggestion(target);
 			Card[] solArr = compSugg.getSolution();
 			ClueGame.controlPanel.setGuess(solArr[0].getCardName() + ", " + solArr[1].getCardName() + ", " + solArr[2].getCardName());
-			Player[] suggPlayers = new Player[players.size()];
-			suggPlayers = players.toArray(suggPlayers);
-			Card shownCard = handleSuggestion(suggPlayers, compSugg, comp);
+			Card shownCard = handleSuggestion(players, compSugg, comp);
 			
 			if (shownCard != null) {
 				comp.addSeenCard(shownCard);
@@ -540,21 +540,21 @@ public class Board extends JPanel implements MouseListener{
 		return result;
 	}
 
-	public Card handleSuggestion(Player[] suggPlayers, Solution suggestion, Player suggestPlayer) {
-		ArrayList<Player> playerArray = new ArrayList<>(Arrays.asList(suggPlayers));
-		int startIndex = playerArray.indexOf(suggestPlayer);
+	public Card handleSuggestion(ArrayList<Player> suggPlayers, Solution suggestion, Player suggestPlayer) {
+		int startIndex = suggPlayers.indexOf(suggestPlayer);
 		int i;
-		if (startIndex != playerArray.size() - 1) {
+		if (startIndex != suggPlayers.size() - 1) {
 			i = startIndex + 1;
 		} else {
 			i = 0;
 		}
 		while (i != startIndex) {
-			Card suggestResult = playerArray.get(i).checkSuggestion(suggestion);
+			Card suggestResult = suggPlayers.get(i).checkSuggestion(suggestion);
 			if (suggestResult != null) {
+				System.out.println(suggestResult.getCardName());
 				return suggestResult;
 			}
-			if (i != playerArray.size() - 1) {
+			if (i != suggPlayers.size() - 1) {
 				i++;
 			} else {
 				i = 0;
@@ -774,10 +774,7 @@ public class Board extends JPanel implements MouseListener{
 	
 	public void handleHumanSuggestion(Solution newSuggestion) {
 		Player humanPlayer = players.get(0);
-		
-		Player[] suggPlayers = new Player[players.size()];
-		suggPlayers = players.toArray(suggPlayers);
-		Card shownCard = handleSuggestion(suggPlayers, newSuggestion, humanPlayer);
+		Card shownCard = handleSuggestion(players, newSuggestion, humanPlayer);
 		
 		if (shownCard != null) {
 			humanPlayer.addSeenCard(shownCard);

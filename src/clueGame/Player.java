@@ -30,7 +30,7 @@ abstract public class Player {
 		Collections.shuffle(cards);
 		for (Card playerCard : cards) {
 			for (Card suggestionCard : suggestion.getSolution()) {
-				if (playerCard == suggestionCard) {
+				if (playerCard.equals(suggestionCard)) {
 					return playerCard;
 				}
 			}

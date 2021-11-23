@@ -3,6 +3,8 @@ package tests;
 import static org.junit.Assert.assertEquals;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -75,6 +77,8 @@ public class GameSolutionTests {
 		ComputerPlayer testPlayer = new ComputerPlayer("testPlayer", "Black", 10, 10);
 		assert (testPlayer.checkSuggestion(suggestion) == null);
 		// Adding cards to player hand
+		testPlayer.updatehand(mineCard);
+		testPlayer.updatehand(knifeCard);
 		testPlayer.updatehand(labCard);
 		assert (testPlayer.checkSuggestion(suggestion) == labCard);
 	}
@@ -91,7 +95,7 @@ public class GameSolutionTests {
 		ComputerPlayer compPlayerTwo = new ComputerPlayer("testPlayerTwo", "Black", 10, 10);
 		compPlayerTwo.updatehand(laserGunCard);
 		
-		Player[] players = {humanPlayer, compPlayerOne, compPlayerTwo};
+		ArrayList<Player> players = new ArrayList<Player>(Arrays.asList(humanPlayer, compPlayerOne, compPlayerTwo));
 		
 		assert (board.handleSuggestion(players, suggestion, humanPlayer) == labCard);
 		assert (board.handleSuggestion(players, suggestion, compPlayerOne) == laserGunCard);

@@ -511,7 +511,8 @@ public class Board extends JPanel implements MouseListener{
 		
 		if (shownCard != null) {
 			humanPlayer.addSeenCard(shownCard);
-			ClueGame.controlPanel.setGuessResult("Suggestion disproven!");
+			ClueGame.controlPanel.setGuessResult("You were shown " + shownCard.getCardName() + ".");
+			ClueGame.sidePanel.makePanel();
 		} else {
 			ClueGame.controlPanel.setGuessResult("Suggestion can't be disproven!");
 		}
@@ -538,6 +539,9 @@ public class Board extends JPanel implements MouseListener{
 	public void calcTargets(BoardCell startCell, int pathlength) {
 		visitedList.clear();
 		targets.clear();
+		if (startCell.inRoom()) {
+			targets.add(startCell);
+		}
 		visitedList.add(startCell);
 		findAllTargets(startCell,pathlength);
 	}

@@ -26,6 +26,13 @@ public class GameSidePanel extends JPanel {
 
 		displayPlayer = board.players.get(0);
 
+		makePanel();
+		
+	}
+	
+	public void makePanel() {
+		removeAll();
+		
 		// set the whole panel to top, bottom, and middle
 		setLayout(new GridLayout(3,1,30,10));
 
@@ -61,9 +68,9 @@ public class GameSidePanel extends JPanel {
 		ArrayList<JTextField> handWeaponFields = getTextFields(weaponCards);
 
 		// Creating three panels
-		JPanel top = new JPanel(new GridLayout(2 + seenPlayerFields.size() + handPlayerFields.size(),0,5,1));
-		JPanel middle = new JPanel(new GridLayout(2 + seenRoomFields.size() + handRoomFields.size(),0,5,1));
-		JPanel bottom = new JPanel(new GridLayout(2 + seenWeaponFields.size() + handWeaponFields.size(),0,5,1));
+		JPanel top = new JPanel(new GridLayout(3 + seenPlayerFields.size() + handPlayerFields.size(),0,5,1));
+		JPanel middle = new JPanel(new GridLayout(3 + seenRoomFields.size() + handRoomFields.size(),0,5,1));
+		JPanel bottom = new JPanel(new GridLayout(3 + seenWeaponFields.size() + handWeaponFields.size(),0,5,1));
 
 		// Filling in top panel
 		peopleLabelHand = new JLabel("In Hand:");
@@ -139,7 +146,7 @@ public class GameSidePanel extends JPanel {
 		bottom.setBorder(new TitledBorder(new EtchedBorder(),"Weapons"));
 		add(bottom);
 		setBorder(new TitledBorder(new EtchedBorder(),"Known Cards"));
-
+		revalidate();
 	}
 
 	// Generates array of JTextFields that will display card names from array of cards

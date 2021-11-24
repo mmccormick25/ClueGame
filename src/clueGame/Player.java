@@ -40,11 +40,11 @@ abstract public class Player {
 	}
 	
 	public void addSeenCard(Card card) {
-		if (card.getCardType() == CardType.ROOM) {
+		if (card.getCardType() == CardType.ROOM && !seenRooms.contains(card)) {
 			seenRooms.add(card);
-		} else if (card.getCardType() == CardType.WEAPON) {
+		} else if (card.getCardType() == CardType.WEAPON && !seenWeapons.contains(card)) {
 			seenWeapons.add(card);
-		} if (card.getCardType() == CardType.PERSON) {
+		} if (card.getCardType() == CardType.PERSON && !seenPersons.contains(card)) {
 			seenPersons.add(card);
 		}
 	}

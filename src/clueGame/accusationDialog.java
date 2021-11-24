@@ -22,7 +22,7 @@ public class accusationDialog extends JDialog{
 	JDialog accusation;
 	Board board = Board.getInstance();
 
-	
+	// constructor for accusation dialog 
 	public accusationDialog() {
 		accusation = new JDialog(ClueGame.frame,"Make an Accusation");
 		 submit= new JButton("Submit");
@@ -67,20 +67,24 @@ public class accusationDialog extends JDialog{
 		
 		
 		
-		
+		// create the skeleton for the accusation dialog 
 		accusation.setLayout(new GridLayout(4,2));
 		accusation.setSize(200, 200);
 		accusation.setVisible(true);
 		
+		// add the components of room
 		accusation.add(room);
 		accusation.add(roomChoice);
 		
+		// add the components of person
 		accusation.add(person);
 		accusation.add(personChoice);
 		
+		// add the components of weapons
 		accusation.add(weapon);
 		accusation.add(weaponChoice);
 		
+		// add the two buttons 
 		accusation.add(submit);
 		accusation.add(cancel);
 		
@@ -89,7 +93,7 @@ public class accusationDialog extends JDialog{
 	private class Clicklistener implements ActionListener {
 		public void actionPerformed(ActionEvent e)
 		
-		{
+		{   // create variables to store the related cards
 			String playerName = personChoice.getSelectedItem().toString();
 			String weaponName = weaponChoice.getSelectedItem().toString();
 			String roomName = roomChoice.getSelectedItem().toString();
@@ -97,7 +101,8 @@ public class accusationDialog extends JDialog{
 			Card weapon = new Card(weaponName,CardType.WEAPON);
 			Card room = new Card(roomName, CardType.ROOM);
 			
-			
+			// when submit is clicked, the solution is created and showed in the control panel. 
+			// Then the dialog will close automatically.
 			if (e.getSource() == submit)
 			{
 				System.out.println("submit pressed");
@@ -109,6 +114,8 @@ public class accusationDialog extends JDialog{
 				 board.handleHumanAccusation(newAccusation);
 		
 			}
+			
+			// when cancel is clicked, the window will disappear automatically. 
 			if (e.getSource() == cancel)
 			{
 				accusation.dispose();

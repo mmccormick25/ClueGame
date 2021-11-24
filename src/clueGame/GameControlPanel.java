@@ -121,8 +121,12 @@ public class GameControlPanel extends JPanel {
 			}
 			if (e.getSource() == accusation)
 			{
-				board.accMade = false;
-				a = new accusationDialog();
+				if (board.currentPlayerIndex == 1) {
+					board.accMade = false;
+					a = new accusationDialog();
+				} else {
+					JOptionPane.showMessageDialog(null, "It's not your turn.");
+				}
 			}
 		}
 	}

@@ -14,12 +14,6 @@ public class ComputerPlayer extends Player{
 	public ComputerPlayer(String name, String color, int row, int column) {
 		super(name, color, row, column);
 	}
-
-	@Override
-	public void updatehand(Card card) {
-		super.cards.add(card);
-		addSeenCard(card);
-	}
 	
 	public BoardCell selectTarget(BoardCell currentLocation, int dice) {
 		BoardCell target = null;
@@ -28,6 +22,7 @@ public class ComputerPlayer extends Player{
 		targets = Board.getInstance().getTargets();
 		List<BoardCell> targetsList = new ArrayList<>();
 		targetsList.addAll(targets);
+		// Logic to try and select a room the computer hasn't seen before
 		for(BoardCell c: targetsList) {
 			String roomName = Board.getInstance().getRoom(c).getName();
 			boolean isSeenCards = seenRooms.contains(new Card(roomName,CardType.ROOM));
@@ -40,8 +35,7 @@ public class ComputerPlayer extends Player{
 				target = targetsList.get(index);
 			}
 		}	
-		
-		System.out.println(target);
+
 		return target;
 	}
 	
@@ -115,6 +109,12 @@ public class ComputerPlayer extends Player{
 
 	public void setAccusation(Solution accusation) {
 		this.accusation = accusation;
+	}
+	
+	@Override
+	public void updatehand(Card card) {
+		super.cards.add(card);
+		addSeenCard(card);
 	}
 	
 }

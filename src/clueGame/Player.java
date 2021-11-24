@@ -15,7 +15,9 @@ abstract public class Player {
 	private String color;
 	private int row, column;
 	protected ArrayList<Card> cards = new ArrayList<Card>();
+	
 	Board board = Board.getInstance();
+	
 	public Player(String name, String color, int row, int column) {
 		this.name = name;
 		this.setColor(color);
@@ -39,6 +41,7 @@ abstract public class Player {
 		
 	}
 	
+	// Adds card to correct array list based on card type
 	public void addSeenCard(Card card) {
 		if (card.getCardType() == CardType.ROOM && !seenRooms.contains(card)) {
 			seenRooms.add(card);
@@ -47,6 +50,11 @@ abstract public class Player {
 		} if (card.getCardType() == CardType.PERSON && !seenPersons.contains(card)) {
 			seenPersons.add(card);
 		}
+	}
+	
+	public void draw(int cellDim, int offSet, Graphics g) {
+		g.setColor(MyColor.getColor(color));
+		g.fillOval(cellDim * column + offSet, cellDim * row, cellDim, cellDim);
 	}
 	
 	public ArrayList<Card> getSeenWeapons() {
@@ -97,17 +105,5 @@ abstract public class Player {
 	public void setColor(String color) {
 		this.color = color;
 	}
-
-	public void draw(int cellDim, Graphics g) {
-		for (Player p : board.players) {
-			if (p.getRow() == this.getRow() && p.getColumn() == this.getColumn() && p != this) {
-				
-			}
-		}
-		
-		g.setColor(MyColor.getColor(color));
-		g.fillOval(cellDim * column, cellDim * row, cellDim, cellDim);
-	}
-	
 
 }

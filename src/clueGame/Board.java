@@ -340,10 +340,24 @@ public class Board extends JPanel implements MouseListener{
 				target.drawTarget(cellDim, g);
 			}
 		}
+		
+		// Array list that keeps track of where players have already been drawn
+		ArrayList<int[]> drawnCoordinates = new ArrayList<int[]>();
 
 		// Calling draw function for each player
 		for (int i=0;i<players.size();i++) {
-			players.get(i).draw(cellDim, g);
+			Player currPlayer = players.get(i);
+			int[] newPos = {currPlayer.getRow(), currPlayer.getColumn()};
+			int offSet = 0;
+			// If there is already a player in a position where a new one will be drawn, an offset is added
+			// to the x coordinate of where they will be drawn
+			for (int[] pos : drawnCoordinates) {
+				if (pos[0] == newPos[0] && pos[1] == newPos[1]){
+					offSet += 10;
+				}
+			}
+			players.get(i).draw(cellDim, offSet, g);
+			drawnCoordinates.add(newPos);
 		}
 		
 	}
@@ -539,7 +553,8 @@ public class Board extends JPanel implements MouseListener{
 	public void calcTargets(BoardCell startCell, int pathlength) {
 		visitedList.clear();
 		targets.clear();
-		if (startCell.inRoom()) {
+		// Letting human player stay in current room if they choose
+		if (startCell.inRoom() && currentPlayerIndex == 0 && ClueGame.notTesting) {
 			targets.add(startCell);
 		}
 		visitedList.add(startCell);

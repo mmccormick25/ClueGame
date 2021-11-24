@@ -30,7 +30,7 @@ public class ComputerPlayer extends Player{
 		targetsList.addAll(targets);
 		for(BoardCell c: targetsList) {
 			String roomName = Board.getInstance().getRoom(c).getName();
-			boolean isSeenCards = seenRooms.contains(new Card(roomName,Card.CardType.ROOM));
+			boolean isSeenCards = seenRooms.contains(new Card(roomName,CardType.ROOM));
 			if(c.inRoom && (isSeenCards == false)) {
 				target = c;
 				break;
@@ -60,14 +60,14 @@ public class ComputerPlayer extends Player{
 		ArrayList<Player> players = (ArrayList<Player>) Board.getInstance().players.clone();
 		
 		if(currentLocation.inRoom) {
-			roomCard = new Card(room.getName(), Card.CardType.ROOM);
+			roomCard = new Card(room.getName(), CardType.ROOM);
 		}
 		
 		// Checking if each card in deck has been seen, if not it is added to unseen list to pick from for a suggestion
 		for (Card card : Board.getInstance().deck) {
 			if (card != null) {
 				boolean found = false;
-				if (card.getCardType().equals(Card.CardType.WEAPON)) {
+				if (card.getCardType().equals(CardType.WEAPON)) {
 					for (Card seenWeapon : seenWeapons) {
 						if (seenWeapon.equals(card)) {
 							found = true;
@@ -76,7 +76,7 @@ public class ComputerPlayer extends Player{
 					if (!found) {
 						unseenWeapons.add(card);
 					}
-				} else if (card.getCardType().equals(Card.CardType.PERSON)) {
+				} else if (card.getCardType().equals(CardType.PERSON)) {
 					for (Card seenPerson : seenPersons) {
 						if (seenPerson.equals(card)) {
 							found = true;
@@ -95,7 +95,7 @@ public class ComputerPlayer extends Player{
 			weaponCard = unseenWeapons.get(0);
 		} else {
 			Collections.shuffle(weapons);			
-			weaponCard = new Card(weapons.get(0), Card.CardType.WEAPON);
+			weaponCard = new Card(weapons.get(0), CardType.WEAPON);
 		}
 		
 		if (unseenPersons.size() > 0) {
@@ -103,7 +103,7 @@ public class ComputerPlayer extends Player{
 			personCard = unseenPersons.get(0);
 		} else {
 			Collections.shuffle(players);
-			personCard = new Card(players.get(0).getName(), Card.CardType.WEAPON);
+			personCard = new Card(players.get(0).getName(), CardType.WEAPON);
 		}
 		
 		return new Solution(roomCard, weaponCard, personCard);

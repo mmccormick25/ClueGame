@@ -13,6 +13,7 @@ import clueGame.BadConfigFormatException;
 import clueGame.Board;
 import clueGame.BoardCell;
 import clueGame.Card;
+import clueGame.CardType;
 import clueGame.ComputerPlayer;
 import clueGame.HumanPlayer;
 import clueGame.Player;
@@ -33,31 +34,31 @@ public class ComputerAITest {
 		// Initialize will load BOTH config files
 		board.initialize();
 		// cards for rooms 
-		greenHouseCard = new Card("Green House",Card.CardType.ROOM);
-		mineCard = new Card("Mine",Card.CardType.ROOM);
-		infirmaryCard = new Card("Infirmary",Card.CardType.ROOM);
-		cafeteriaCard = new Card("Cafeteria",Card.CardType.ROOM);
-		officeCard = new Card("Office",Card.CardType.ROOM);
-		quartersCard = new Card("Quarters",Card.CardType.ROOM);
-		storageCard = new Card("Storage",Card.CardType.ROOM);
-		labCard = new Card("Lab",Card.CardType.ROOM);
-		bathroomCard = new Card("Bathroom",Card.CardType.ROOM);
+		greenHouseCard = new Card("Green House",CardType.ROOM);
+		mineCard = new Card("Mine",CardType.ROOM);
+		infirmaryCard = new Card("Infirmary",CardType.ROOM);
+		cafeteriaCard = new Card("Cafeteria",CardType.ROOM);
+		officeCard = new Card("Office",CardType.ROOM);
+		quartersCard = new Card("Quarters",CardType.ROOM);
+		storageCard = new Card("Storage",CardType.ROOM);
+		labCard = new Card("Lab",CardType.ROOM);
+		bathroomCard = new Card("Bathroom",CardType.ROOM);
 		
 		// cards for weapons 
-		laserGunCard = new Card("Laser Gun",Card.CardType.WEAPON);
-		moonRockCard = new Card("Moon Rock",Card.CardType.WEAPON);
-		lightsaberCard = new Card("Lightsaber",Card.CardType.WEAPON);
-		wrenchCard = new Card("Wrench",Card.CardType.WEAPON);
-		liveWireCard = new Card("Live Wire",Card.CardType.WEAPON);
-		knifeCard = new Card("Knife",Card.CardType.WEAPON);
+		laserGunCard = new Card("Laser Gun",CardType.WEAPON);
+		moonRockCard = new Card("Moon Rock",CardType.WEAPON);
+		lightsaberCard = new Card("Lightsaber",CardType.WEAPON);
+		wrenchCard = new Card("Wrench",CardType.WEAPON);
+		liveWireCard = new Card("Live Wire",CardType.WEAPON);
+		knifeCard = new Card("Knife",CardType.WEAPON);
 		
 		// six people
-		yellowCard = new Card("Dr. Dandelion",Card.CardType.PERSON);
-		brownCard = new Card("Bishop Brown",Card.CardType.PERSON);
-		grayCard = new Card("Sir Silver",Card.CardType.PERSON);
-		orangeCard = new Card("Officer Orange",Card.CardType.PERSON);
-		maroonCard = new Card("Mrs. Maroon",Card.CardType.PERSON);
-		blueCard = new Card("Professor Prizmarine",Card.CardType.PERSON);
+		yellowCard = new Card("Dr. Dandelion",CardType.PERSON);
+		brownCard = new Card("Bishop Brown",CardType.PERSON);
+		grayCard = new Card("Sir Silver",CardType.PERSON);
+		orangeCard = new Card("Officer Orange",CardType.PERSON);
+		maroonCard = new Card("Mrs. Maroon",CardType.PERSON);
+		blueCard = new Card("Professor Prizmarine",CardType.PERSON);
 		
 		
 	}

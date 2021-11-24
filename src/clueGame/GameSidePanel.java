@@ -37,11 +37,11 @@ public class GameSidePanel extends JPanel {
 
 		// Sorting cards in players hand by type
 		for (Card c : cards) {
-			if (c.getCardType() == Card.CardType.PERSON) {
+			if (c.getCardType() == CardType.PERSON) {
 				playerCards.add(c);
-			} else if (c.getCardType() == Card.CardType.ROOM) {
+			} else if (c.getCardType() == CardType.ROOM) {
 				roomCards.add(c);
-			} else if (c.getCardType() == Card.CardType.WEAPON) {
+			} else if (c.getCardType() == CardType.WEAPON) {
 				weaponCards.add(c);
 			}
 		}
@@ -167,19 +167,19 @@ public class GameSidePanel extends JPanel {
 	 */
 	public static void main(String[] args) {
 		// Filling in hand and seen cards for test player
-		displayPlayer.addSeenCard(new Card("player one", Card.CardType.PERSON));
-		displayPlayer.addSeenCard(new Card("player two", Card.CardType.PERSON));
-		displayPlayer.addSeenCard(new Card("room one", Card.CardType.ROOM));
-		displayPlayer.addSeenCard(new Card("room two", Card.CardType.ROOM));
-		displayPlayer.addSeenCard(new Card("weapon one", Card.CardType.WEAPON));
-		displayPlayer.addSeenCard(new Card("weapon two", Card.CardType.WEAPON));
+		displayPlayer.addSeenCard(new Card("player one", CardType.PERSON));
+		displayPlayer.addSeenCard(new Card("player two", CardType.PERSON));
+		displayPlayer.addSeenCard(new Card("room one", CardType.ROOM));
+		displayPlayer.addSeenCard(new Card("room two", CardType.ROOM));
+		displayPlayer.addSeenCard(new Card("weapon one", CardType.WEAPON));
+		displayPlayer.addSeenCard(new Card("weapon two", CardType.WEAPON));
 
-		displayPlayer.updatehand(new Card("player three", Card.CardType.PERSON));
-		displayPlayer.updatehand(new Card("player four", Card.CardType.PERSON));
-		displayPlayer.updatehand(new Card("room three", Card.CardType.ROOM));
-		displayPlayer.updatehand(new Card("room four", Card.CardType.ROOM));
-		displayPlayer.updatehand(new Card("weapon three", Card.CardType.WEAPON));
-		displayPlayer.updatehand(new Card("weapon four", Card.CardType.WEAPON));
+		displayPlayer.updatehand(new Card("player three", CardType.PERSON));
+		displayPlayer.updatehand(new Card("player four", CardType.PERSON));
+		displayPlayer.updatehand(new Card("room three", CardType.ROOM));
+		displayPlayer.updatehand(new Card("room four", CardType.ROOM));
+		displayPlayer.updatehand(new Card("weapon three", CardType.WEAPON));
+		displayPlayer.updatehand(new Card("weapon four", CardType.WEAPON));
 
 		GameSidePanel panel = new GameSidePanel();  // create the panel
 		JFrame frame = new JFrame();  // create the frame 

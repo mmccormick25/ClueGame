@@ -93,9 +93,9 @@ public class accusationDialog extends JDialog{
 			String playerName = personChoice.getSelectedItem().toString();
 			String weaponName = weaponChoice.getSelectedItem().toString();
 			String roomName = roomChoice.getSelectedItem().toString();
-			Card player = new Card(playerName,Card.CardType.PERSON);
-			Card weapon = new Card(weaponName,Card.CardType.WEAPON);
-			Card room = new Card(roomName, Card.CardType.ROOM);
+			Card player = new Card(playerName,CardType.PERSON);
+			Card weapon = new Card(weaponName,CardType.WEAPON);
+			Card room = new Card(roomName, CardType.ROOM);
 			
 			
 			if (e.getSource() == submit)

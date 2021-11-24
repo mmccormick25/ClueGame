@@ -101,9 +101,9 @@ public class suggestionDialog extends JDialog{
 		{
 			String playerName = personChoice.getSelectedItem().toString();
 			String weaponName = weaponChoice.getSelectedItem().toString();
-			Card player = new Card(playerName,Card.CardType.PERSON);
-			Card weapon = new Card(weaponName,Card.CardType.WEAPON);
-			Card room = new Card(roomName.getText(), Card.CardType.ROOM);
+			Card player = new Card(playerName,CardType.PERSON);
+			Card weapon = new Card(weaponName,CardType.WEAPON);
+			Card room = new Card(roomName.getText(), CardType.ROOM);
 
 
 			if (e.getSource() == submit)

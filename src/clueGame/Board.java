@@ -122,18 +122,18 @@ public class Board extends JPanel implements MouseListener{
 			String type = row.get(0);
 			if(type.equals("Room") || type.equals("Space")) {
 				if (!type.equals("Space")) {
-					deck.add(new Card(row.get(1), Card.CardType.ROOM));
+					deck.add(new Card(row.get(1), CardType.ROOM));
 				}
 				initialRoom(row);
 			} else if (type.equals("Weapon")) {
 				initialWeapon(row);
-				deck.add(new Card(row.get(1), Card.CardType.WEAPON));
+				deck.add(new Card(row.get(1), CardType.WEAPON));
 			} else if (type.equals("Player")) {
 				initialHumanPlayer(row);
-				deck.add(new Card(row.get(1), Card.CardType.PERSON));
+				deck.add(new Card(row.get(1), CardType.PERSON));
 			} else if (type.equals("Computer")) {
 				initialComputer(row);
-				deck.add(new Card(row.get(1), Card.CardType.PERSON));
+				deck.add(new Card(row.get(1), CardType.PERSON));
 			}
 		}
 
@@ -177,24 +177,21 @@ public class Board extends JPanel implements MouseListener{
 
 		// Getting first card of each type in deck
 		for (Card card : deck) {
-			if (card.getCardType() == Card.CardType.ROOM) {
+			if (card.getCardType() == CardType.ROOM) {
 				roomCard = card;
 			}
-			if (card.getCardType() == Card.CardType.WEAPON) {
+			if (card.getCardType() == CardType.WEAPON) {
 				weaponCard = card;
 			}
-			if (card.getCardType() == Card.CardType.PERSON) {
+			if (card.getCardType() == CardType.PERSON) {
 				playerCard = card;
 			}
 		}
 
 		// Removing solution cards from deck so rest of deck can be dealt
 		deck.remove(roomCard);
-		System.out.println(roomCard.getCardName());
 		deck.remove(weaponCard);
-		System.out.println(weaponCard.getCardName());
 		deck.remove(playerCard);
-		System.out.println(playerCard.getCardName());
 
 		soln = new Solution(roomCard, weaponCard, playerCard);
 

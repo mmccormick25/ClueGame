@@ -54,6 +54,7 @@ public class BoardCell {
 		}
 	}
 	
+	// Filling square with white to show where player can move
 	public void drawTarget(int d, Graphics g) {
 		g.setColor(Color.white);
 		g.fillRect(col * d, row * d, d, d);
@@ -165,16 +166,14 @@ public class BoardCell {
 		}
 		return (Character) null;
 	}
+	
+	public String getLayoutString() {
+		return layoutString;
+	}
 
 	@Override
 	public String toString() {
 		return "BoardCell [row=" + row + ", col=" + col + "]";
-	}
-	
-	
-
-	public String getLayoutString() {
-		return layoutString;
 	}
 
 }

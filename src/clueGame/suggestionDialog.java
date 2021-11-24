@@ -37,8 +37,6 @@ public class suggestionDialog extends JDialog{
 		// display the room name in JTextField
 		roomName = new JTextField();
 
-
-
 		JLabel person = new JLabel("Person");
 		JLabel weapon = new JLabel("Weapon");
 		personChoice = new JComboBox<String>();

@@ -15,9 +15,10 @@ public class ClueGame extends JFrame {
 	static boolean gameWon = false;
 	private static boolean nextPressed = false;
 	public static GameControlPanel controlPanel = new GameControlPanel(); 
+	public static GameSidePanel sidePanel;
+	
 	public ClueGame() {
-
-		
+		super();
 	}
 	
 	public static void main(String[] args) {
@@ -26,7 +27,7 @@ public class ClueGame extends JFrame {
 		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
 		board.initialize();
 		
-		GameSidePanel sidePanel = new GameSidePanel();
+		sidePanel = new GameSidePanel();
 			
 		frame = new JFrame("Clue Game");
 		

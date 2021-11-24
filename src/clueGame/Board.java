@@ -412,6 +412,9 @@ public class Board extends JPanel implements MouseListener{
 			// Getting card shown that disproves suggestion
 			Card shownCard = handleSuggestion(players, compSugg, comp);
 			
+			// Pulling suggested player into room
+			pullPlayer(target.getRow(), target.getCol(), solArr[2].getCardName());
+			
 			if (shownCard != null) {
 				comp.addSeenCard(shownCard);
 				ClueGame.controlPanel.setGuessResult("Suggestion disproven!");
@@ -421,6 +424,18 @@ public class Board extends JPanel implements MouseListener{
 					// Readying accusation if room hasn't been seen
 					comp.setAccusation(compSugg);
 				}
+			}
+		}
+	}
+	
+	// Method to pull player to position of other player, used for pulling players into rooms
+	public void pullPlayer(int row, int col, String name) {
+		for (Player player : players) {
+			if (player.getName().equals(name)) {
+				player.setColumn(col);
+				player.setRow(row);
+				repaint();
+				break;
 			}
 		}
 	}
@@ -490,6 +505,9 @@ public class Board extends JPanel implements MouseListener{
 	public void handleHumanSuggestion(Solution newSuggestion) {
 		Player humanPlayer = players.get(0);
 		Card shownCard = handleSuggestion(players, newSuggestion, humanPlayer);
+		
+		// Pulling suggested player into room
+		pullPlayer(humanPlayer.getRow(), humanPlayer.getColumn(), newSuggestion.getSolution()[2].getCardName());
 		
 		if (shownCard != null) {
 			humanPlayer.addSeenCard(shownCard);

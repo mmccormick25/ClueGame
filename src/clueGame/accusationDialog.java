@@ -106,7 +106,7 @@ public class accusationDialog extends JDialog{
 				 accusation.dispose();
 				 accusation.setVisible(false);
 				 board.accMade = true;
-				 board.handleAccusation(newAccusation);
+				 board.handleHumanAccusation(newAccusation);
 		
 			}
 			if (e.getSource() == cancel)

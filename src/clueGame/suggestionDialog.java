@@ -73,12 +73,13 @@ public class suggestionDialog extends JDialog{
 
 
 
-
+		// set the size and layout for the suggestion dialog. 
 
 		suggestion.setLayout(new GridLayout(4,2));
 		suggestion.setSize(200, 300);
 		suggestion.setVisible(true);
 
+		// add the components to the suggestion dialog. 
 		suggestion.add(room);
 		suggestion.add(roomName);
 		suggestion.add(person);
@@ -96,7 +97,7 @@ public class suggestionDialog extends JDialog{
 	private class Clicklistener implements ActionListener {
 		public void actionPerformed(ActionEvent e)
 
-		{
+		{	// // create variables to store the related cards
 			String playerName = personChoice.getSelectedItem().toString();
 			String weaponName = weaponChoice.getSelectedItem().toString();
 			Card player = new Card(playerName,CardType.PERSON);
@@ -105,7 +106,8 @@ public class suggestionDialog extends JDialog{
 
 
 			if (e.getSource() == submit)
-			{
+			{	// when submit is clicked, the solution is created and showed in the control panel. 
+				// Then the dialog will close automatically.
 				System.out.println("submit pressed");
 				newSuggestion = new Solution(room,weapon,player);
 				ClueGame.controlPanel.setGuess(room.getCardName() + ", " + weapon.getCardName() + ", " + player.getCardName());
@@ -117,7 +119,7 @@ public class suggestionDialog extends JDialog{
 				board.suggestMade = true;
 			}
 			if (e.getSource() == cancel)
-			{
+			{			// when cancel is clicked, the window will disappear automatically. 
 				suggestion.dispose();
 				suggestion.setVisible(false);
 				board.suggestMade = true;

@@ -1,35 +1,108 @@
-commit b31f064f07a999e9c0137c5fdfe37e31dad58d8c
-Author: mmccormick <mmccormick@mines.edu>
-Date:   Mon Nov 15 14:37:26 2021 -0700
+commit 025e31729c2086bc11cc335d7cbf640d4ffe2362
+Author: mmccormick21 <mmccormick@mymail.mines.edu>
+Date:   Wed Nov 24 16:47:20 2021 -0700
 
-     Driver: Matthew McCormick, Navigator: Zhen Liu - Added comments
+    Author: Matthew McCormick, Navigator: Zhen Liu - Error message displays when accusation is pressed and it is not human player's turn.
 
-commit 1d3deefb9bba495da9678585dd0e1dc239cc6b84
-Author: mmccormick <mmccormick@mines.edu>
-Date:   Mon Nov 15 14:29:34 2021 -0700
+commit bfe08c85d3909456c19d4b580399e510b93a7339
+Author: mmccormick21 <mmccormick@mymail.mines.edu>
+Date:   Wed Nov 24 12:26:40 2021 -0700
 
-    Driver: Zhen Liu, Navigator: Matthew McCormick - Made it player can only move once per turn, added error message when player tries to end turn without moving.
+    Author: Zhen Liu, Navigator: Matthew McCormick - Side panel now updates seen cards. You can now choose to stay in a room on your turn.
 
-commit 10022cb58f477926605cdd6220177706b2ec30a8
+commit 8a7d4957fbc2633be10fa7fcec705bd4df381975
 Author: Zhen Liu <zliu1@mines.edu>
-Date:   Sun Nov 14 09:35:04 2021 -0700
+Date:   Wed Nov 24 11:48:27 2021 -0700
 
-    Driver: Zhen Liu, Navigator: Matthew McCormick - targets of human player are highlighted correctly, human player moves when mouse clicks, and error message shows when wrong place is clicked. Bug is that human player can move around when the mouse clicks at different cells
+    Author: Zhen Liu, Navigator: Matthew McCormick - add comments
 
-commit 81f7fd1b89690a634b25154f97395b8d3fd85a8a
+commit c4b75c861c1ce82ba2b508de783d6042672e8faa
+Author: mmccormick21 <mmccormick@mymail.mines.edu>
+Date:   Tue Nov 23 20:43:23 2021 -0700
+
+    Author: Matthew McCormick, Navigator: Zhen Liu - Player now pulled into room after suggestion
+
+commit 8e627593b965f3399d6211aea0c483dcabb9ccc7
+Author: mmccormick21 <mmccormick@mymail.mines.edu>
+Date:   Tue Nov 23 20:23:37 2021 -0700
+
+    Author: Zhen Liu, Navigator: Matthew McCormick - Removed duplicate enum from card
+
+commit 24e50f1502564fa4bae16434ed9a95f2490daa29
+Author: mmccormick21 <mmccormick@mymail.mines.edu>
+Date:   Tue Nov 23 19:40:58 2021 -0700
+
+    Author: Matthew McCormick, Navigator: Zhen Liu - Board class functions organized and better commented
+
+commit 4375cd354fc8abd933b659b5f93ce7904df6f60a
+Author: Matthew McCormick <mmccormick@mines.edu>
+Date:   Tue Nov 23 14:34:16 2021 -0700
+
+    Author: Matthew McCormick, Navigator: Zhen Liu - Suggestions now disproved properly, computers make correct accusations.
+
+commit 15700e61fa2f9051413582db98c3e45804836513
 Author: mmccormick <mmccormick@mines.edu>
-Date:   Sat Nov 13 16:14:26 2021 -0700
+Date:   Mon Nov 22 16:44:54 2021 -0700
 
-    Driver: Matthew McCormick, Navigator: Zhen Liu - AIs now move on board when next button is clicked. Game panel updates with new roll and player name.
+    Author: Matthew McCormick, Navigator: Zhen Liu - Human accusation logic completed, human suggestion logic completed but has bugs, error messages for pressing next before completing dialogue added, lots of refactoring
 
-commit 8d7c92161596f88e3ac242bb1d05b6a6bcd72025
+commit cd84aaffa77740be3784ca0e04da8a05d706f9ae
+Author: Zhen Liu <zliu1@mines.edu>
+Date:   Sun Nov 21 17:05:51 2021 -0700
+
+    Author: Zhen Liu, Navigator: Matthew McCormick - dialog window now closes
+
+commit 6c2c5fe298aed24d58993c99eaa20293a4baab64
+Author: Zhen Liu <zliu1@mines.edu>
+Date:   Sun Nov 21 16:58:20 2021 -0700
+
+    Author: Zhen Liu, Navigator: Matthew McCormick - accusation dialog works now except the window can't be closed.
+
+commit a1ed4d77f884586bdb4e50d3d8e211f69f01d7c3
+Merge: 22ecb26 1cd47bd
+Author: Zhen Liu <zliu1@mines.edu>
+Date:   Sun Nov 21 16:06:12 2021 -0700
+
+    Author: Zhen Liu, Navigator: Matthew McCormick - fix conflicts
+
+commit 22ecb264ab2ffed8400c0b39a322e7871b4eaa0b
+Author: Zhen Liu <zliu1@mines.edu>
+Date:   Sun Nov 21 16:03:31 2021 -0700
+
+    Author: Zhen Liu, Navigator: Matthew McCormick - two class added for dialogs
+
+commit 1cd47bddf618dad153ec33e7d144dbe6dd528c01
 Author: mmccormick <mmccormick@mines.edu>
-Date:   Sat Nov 13 15:28:05 2021 -0700
+Date:   Sun Nov 21 15:27:36 2021 -0700
 
-    Driver: Zhen Liu, Navigator: Matthew McCormick - Buttons on game control panel can now be pressed
+    Author: Matthew McCormick, Navigator: Zhen Liu - Computers now make accusations, room is wrong.
 
-commit 94a8e1f1f4dca44226243e46d32d8ce8b02f62fd
+commit d7bf66588e71c77bbc6fc0abaf8fc8560d62b62b
 Author: mmccormick <mmccormick@mines.edu>
-Date:   Sat Nov 13 14:58:00 2021 -0700
+Date:   Sun Nov 21 15:06:20 2021 -0700
 
-    Driver: Matthew McCormick, Navigator: Zhen Liu - Targets can now be drawn on board.
+    Author: Matthew McCormick, Navigator: Zhen Liu - Computers now make suggestions when they enter room.
+
+commit f8499191a52ccbd4167c46e9802151b2259b21ed
+Author: mmccormick <mmccormick@mines.edu>
+Date:   Sun Nov 21 14:20:05 2021 -0700
+
+    Author: Zhen Liu, Navigator: Matthew McCormick - Create suggestion now only appears when player enters room.
+
+commit 22831a77fa1f186145241fed54d93c3a85809c3e
+Author: Zhen Liu <zliu1@mines.edu>
+Date:   Thu Nov 18 14:56:56 2021 -0700
+
+    Author: Zhen Liu, Navigator: Matthew McCormick - set the romm name in suggestion correctly
+
+commit f7237f47559c8fac12416253d2625cd7db594088
+Author: Zhen Liu <zliu1@mines.edu>
+Date:   Wed Nov 17 21:01:25 2021 -0700
+
+    Author: Zhen Liu, Navigator: Matthew McCormick - create the dialog successfully with different components
+
+commit 67a4a56373f5c6c64df444d9336f15f5976fd834
+Author: Matthew McCormick <mmccormick@mines.edu>
+Date:   Tue Nov 16 15:00:37 2021 -0700
+
+    Author: Matthew McCormick, Navigator: Zhen Liu - Secret passageways now show up on board, started on logic to draw players in different places if they occupy same room
